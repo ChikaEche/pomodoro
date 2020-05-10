@@ -11,7 +11,6 @@ export class Timer {
     this.seconds = secs;
   }
 
-  // TODO
   start() {
     this.pause$ = new Subject<void>();
     this.countDownTimer$ = timer(0, 1000).pipe(
