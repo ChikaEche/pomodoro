@@ -1,19 +1,40 @@
-export class Timer {
-  private seconds: number;
+import { Observable, Subject, timer } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
 
-  // Add more instace variables / methods as you see fit, just keep the code clean
-  // expose observables for key event such as time end / pause
+export class Timer {
+  private countDownTimer$: Observable<number>;
+  countDownEnd$: Subject<string>;
+  private pause$: Subject<void>;
+  private seconds: number;
 
   constructor(readonly secs: number) {
     this.seconds = secs;
   }
 
   // TODO
-  start() {}
+  start() {
+    this.pause$ = new Subject<void>();
+    this.countDownTimer$ = timer(0, 1000).pipe(
+      takeUntil(this.pause$),
+      tap((time) => {
+        if (this.seconds === 0) {
+          stop();
+        } else {
+          this.seconds = this.seconds - 1;
+        }
+      })
+    );
+    this.countDownTimer$.subscribe({ error: (err) => console.log(err) });
+  }
 
-  // TODO
-  pause() {}
+  pause() {
+    this.pause$.next();
+    this.pause$.complete();
+  }
 
-  // TODO
-  getDisplayTime() {}
+  stop() {
+    this.countDownEnd$.next('finished');
+    this.pause$.next();
+    this.pause$.complete();
+  }
 }
