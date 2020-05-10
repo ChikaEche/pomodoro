@@ -27,7 +27,7 @@ export class Timer {
     this.pause$ = new Subject<void>();
     this.countDownTimer$ = timer(0, 1000).pipe(
       takeUntil(this.pause$),
-      tap((time) => {
+      tap(() => {
         if (this.seconds === 0) {
           stop();
         } else {
