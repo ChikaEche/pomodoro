@@ -3,9 +3,21 @@ import { takeUntil, tap } from 'rxjs/operators';
 
 export class Timer {
   private countDownTimer$: Observable<number>;
-  countDownEnd$: Subject<string>;
+  private _countDownEnd$: Subject<void>;
   private pause$: Subject<void>;
   private seconds: number;
+
+  public get countDownEnd$() {
+    return this._countDownEnd$;
+  }
+
+  public set coundDownEnd$(countDownEnd$: Subject<void>) {
+    if (!this._countDownEnd$) {
+      this._countDownEnd$ = countDownEnd$;
+    } else {
+      throw new Error('Unable to reinitialize this value');
+    }
+  }
 
   constructor(readonly secs: number) {
     this.seconds = secs;
@@ -32,7 +44,8 @@ export class Timer {
   }
 
   stop() {
-    this.countDownEnd$.next('finished');
+    this.countDownEnd$.next();
+    this.coundDownEnd$.complete();
     this.pause$.next();
     this.pause$.complete();
   }
