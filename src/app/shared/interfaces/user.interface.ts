@@ -6,4 +6,5 @@ export interface User {
   photoURL?: string;
   displayName: string;
   roles: UserRole[];
+  profileId?: string;
 }
