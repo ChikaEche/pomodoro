@@ -24,7 +24,7 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles/main.scss"],
+            "styles": ["src/styles/main.scss", "src/style.scss"],
             "stylePreprocessorOptions": {
               "includePaths": ["src/styles"]
             },
@@ -119,5 +119,8 @@
       }
     }
   },
-  "defaultProject": "pomodoro"
+  "defaultProject": "pomodoro",
+  "cli": {
+    "analytics": "a4283aa8-56c1-42c5-b5fa-d8ad7618be19"
+  }
 }
