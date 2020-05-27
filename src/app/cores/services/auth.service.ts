@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+/**import { Injectable, NgZone } from '@angular/core';
 import { Observable, of, from } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 import { User } from 'src/app/shared/interfaces/user.interface';
@@ -9,7 +9,10 @@ import { AngularFirestoreDocument } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import { UserRole } from 'src/app/shared/enums/user-role.enum';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
+
 export class AuthService {
   readonly user$: Observable<User>;
 
@@ -27,11 +30,13 @@ export class AuthService {
       })
     );
   }
+  */
 
-  /**
-   * TODO -> look for compromise for browswers that
-   * block this method out by default
-   */
+/**
+ * TODO -> look for compromise for browswers that
+ * block this method out by default
+ */
+/** 
   googleLogin() {
     from(this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider()))
       .pipe(switchMap(({ user }) => this.refreshUserData(user)))
@@ -68,3 +73,4 @@ export class AuthService {
     );
   }
 }
+*/

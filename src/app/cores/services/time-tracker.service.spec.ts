@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AuthService } from './auth.service';
+import { TimeTrackerService } from './time-tracker.service';
 
-describe('AuthService', () => {
-  let service: AuthService;
+describe('TimeTrackerService', () => {
+  let service: TimeTrackerService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(AuthService);
+    service = TestBed.inject(TimeTrackerService);
   });
 
   it('should be created', () => {

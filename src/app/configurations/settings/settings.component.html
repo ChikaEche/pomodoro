@@ -1,0 +1,43 @@
+<div class="settings__wrapper">
+  <h1>Settings</h1>
+  <div class="session">
+    <p class="form_name">Session length</p>
+    <mat-form-field appearance="outline">
+      <mat-label> Session length(minutes)</mat-label>
+      <input matInput [(ngModel)]="sessionLength" placeholder="sessionLength" />
+    </mat-form-field>
+  </div>
+
+  <div class="break">
+    <p class="form_name">Break length</p>
+    <mat-form-field appearance="outline" color="primary">
+      <mat-label> Break length(minutes)</mat-label>
+      <input matInput [(ngModel)]="breakLength" />
+    </mat-form-field>
+  </div>
+
+  <div class="additional_break">
+    <p class="form_name">Additional break length</p>
+    <mat-form-field appearance="outline">
+      <mat-label> Additional break length(minutes)</mat-label>
+      <input matInput [(ngModel)]="additionalBreakLength" />
+    </mat-form-field>
+  </div>
+
+  <div class="long_break_interval">
+    <p class="form_name">Long break interval</p>
+    <mat-form-field appearance="outline">
+      <mat-label> Long break interval</mat-label>
+      <input matInput [(ngModel)]="longBreakInterval" />
+    </mat-form-field>
+  </div>
+
+  <div class="autoplay">
+    <p class="form_name">Auto play</p>
+    <mat-slide-toggle [(ngModel)]="autoplay">Autoplay</mat-slide-toggle>
+  </div>
+
+  <div>
+    <button mat-button color="primary" (click)="apply()">Apply</button>
+  </div>
+</div>

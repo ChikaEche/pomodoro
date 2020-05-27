@@ -1,0 +1,62 @@
+import { Injectable } from '@angular/core';
+import { Timer } from 'src/app/shared/timer';
+import { tap } from 'rxjs/operators';
+import Configuration from 'src/app/configurations/default-config';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class TimeTrackerService {
+  public timerClass: Timer;
+  sessionDuration = Configuration.sessionTime;
+  breakDuration = Configuration.breakTime;
+  additionalBreak = Configuration.additionalBreakTime;
+  longBreakInterval = Configuration.longBreakInterval;
+  autoPlay = Configuration.autoplay;
+  sessionCount = 0;
+  timer = 0;
+  currentState = 'break';
+
+  constructor() {
+    this.timerClass = new Timer();
+    this.timerClass.seconds = this.sessionDuration;
+    this.timerClass.countDownEnd$
+      .pipe(tap(() => this.stateToggle()))
+      .subscribe({ error: (err) => console.error('error occured') });
+  }
+
+  timerStart() {
+    this.timerClass.start();
+  }
+
+  stateToggle() {
+    if (this.currentState === 'session') {
+      if (this.sessionCount % this.longBreakInterval === 0) {
+        this.timer = this.breakDuration + this.additionalBreak;
+        this.timerClass.seconds = this.timer;
+      } else {
+        this.timer = this.breakDuration;
+        this.timerClass.seconds = this.timer;
+      }
+      this.currentState = 'break';
+    } else if (this.currentState === 'break') {
+      this.timer = this.sessionDuration;
+      this.timerClass.seconds = this.timer;
+      ++this.sessionCount;
+      this.currentState = 'session';
+    }
+    this.timerStart();
+  }
+
+  timerPause() {
+    this.timerClass.pause();
+  }
+
+  timerRestart() {
+    this.timerClass.seconds = this.timer;
+  }
+
+  onDestroy() {
+    this.timerClass.onDestroy();
+  }
+}

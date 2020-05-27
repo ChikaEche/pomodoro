@@ -1,0 +1,58 @@
+.timer__container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #e71d36;
+}
+
+.time {
+  font-family: 'Play', sans-serif;
+  font-size: 10vw;
+  height: 30%;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+h2 {
+  margin-top: 10px;
+  font-family: 'Play', sans-serif;
+  font-size: 10vw;
+  height: 30%;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  60% {
+    opacity: 0.4;
+  }
+  80% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0.05;
+  }
+}
+
+.icon {
+  fill: aqua;
+  height: 58%;
+  width: 8%;
+}
+
+.icon__wrap {
+  display: flex;
+  justify-content: center;
+}

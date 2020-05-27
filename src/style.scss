@@ -1,0 +1,16 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+@import './styles/themes/light';
+
+$pomodoro-app-primary: mat-palette($md-primary);
+$pomodoro-app-accent: mat-palette($md-accent);
+$pomodoro-app-warn: mat-palette($md-warn);
+
+$pomodoro-app-theme: mat-light-theme(
+  $pomodoro-app-primary,
+  $pomodoro-app-accent,
+  $pomodoro-app-warn
+);
+
+@include angular-material-theme($pomodoro-app-theme);
