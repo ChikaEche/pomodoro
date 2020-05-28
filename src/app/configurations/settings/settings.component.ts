@@ -9,7 +9,6 @@ import { Subject } from 'rxjs';
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
-  configChange$: Subject<void>;
   defaultConfig = Configuration;
   sessionLength = this.defaultConfig.sessionTime;
   breakLength = this.defaultConfig.breakTime;

@@ -9,7 +9,7 @@ import { Subject } from 'rxjs';
 })
 export class TimeTrackerService {
   public timerClass: Timer;
-  configurationChange = new Subject();
+  configurationChange$ = new Subject();
   sessionDuration = Configuration.sessionTime;
   breakDuration = Configuration.breakTime;
   additionalBreak = Configuration.additionalBreakTime;
@@ -17,7 +17,7 @@ export class TimeTrackerService {
   autoPlay = Configuration.autoplay;
   sessionCount = 0;
   timer = 0;
-  currentState = 'break';
+  currentState = 'session';
 
   constructor() {
     this.timerClass = new Timer();
@@ -34,6 +34,7 @@ export class TimeTrackerService {
 
   stateToggle() {
     if (this.currentState === 'session') {
+      ++this.sessionCount;
       if (this.sessionCount % this.longBreakInterval === 0) {
         this.timer = this.breakDuration + this.additionalBreak;
         this.timerClass.seconds = this.timer;
@@ -45,22 +46,18 @@ export class TimeTrackerService {
     } else if (this.currentState === 'break') {
       this.timer = this.sessionDuration;
       this.timerClass.seconds = this.timer;
-      ++this.sessionCount;
       this.currentState = 'session';
     }
-    console.log(this.autoPlay);
     this.autoPlay ? this.timerStart() : '';
   }
 
   timerPause() {
-    console.log('p');
     this.timerClass.pause();
   }
 
   timerRestart() {
-    this.timerPause();
     this.timerClass.seconds = this.timer;
-    this.timerStart();
+    this.timerPause();
   }
 
   configChange() {
@@ -73,6 +70,7 @@ export class TimeTrackerService {
     } else if (this.currentState === 'break') {
       this.timer = this.sessionDuration;
     }
+    this.configurationChange$.next();
     this.timerRestart();
   }
 

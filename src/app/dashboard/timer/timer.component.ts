@@ -15,28 +15,46 @@ export class TimerComponent implements OnInit {
     animation: `blink ${0}s infinte alternate`,
   };
 
-  constructor(private timeTracker: TimeTrackerService) {}
+  constructor(public timeTracker: TimeTrackerService) {}
 
   ngOnInit(): void {
-    this.timerDisplay$ = this.timeTracker.timerClass.remainingSeconds$;
-    this.timeTracker.timerClass.countDownEnd$.pipe(
-      tap(() => (this.timeTracker.autoPlay ? (this.toggle = !this.toggle) : ''))
-    );
+    this.timeTracker.configurationChange$
+      .pipe(
+        tap(() => {
+          this.animations.animation = `blink ${0}s infinite alternate`;
+          this.toggle = true;
+        })
+      )
+      .subscribe({ error: (err) => console.error('error occured') });
+
+    this.timeTracker.timerClass.countDownEnd$
+      .pipe(
+        tap(() => {
+          console.log('df');
+          this.timeTracker.autoPlay ? '' : (this.toggle = true);
+          this.timeTracker.autoPlay
+            ? ''
+            : (this.animations.animation = `blink ${0}s infinite alternate`);
+        })
+      )
+      .subscribe({ error: (err) => console.error('error occured') });
   }
 
   pause() {
     this.animations.animation = `blink ${0}s infinite alternate`;
-    this.toggle = !this.toggle;
+    this.toggle = true;
     this.timeTracker.timerPause();
   }
 
   start() {
     this.animations.animation = `blink ${1}s infinite alternate`;
-    this.toggle = !this.toggle;
+    this.toggle = false;
     this.timeTracker.timerStart();
   }
 
   restart() {
+    this.animations.animation = `blink ${0}s infinite alternate`;
+    this.toggle = true;
     this.timeTracker.timerRestart();
   }
 

@@ -1,8 +1,8 @@
 <div class="timer__container">
   <div class="time">
-    {{ timerDisplay$ | async | convertToMinutes }}
+    {{ timeTracker.timerClass.seconds | convertToMinutes }}
     <h2 [ngStyle]="{ animation: animations.animation }">:</h2>
-    {{ timerDisplay$ | async | convertToSeconds }}
+    {{ timeTracker.timerClass.seconds | convertToSeconds }}
   </div>
   <div class="icon__wrap">
     <div>
