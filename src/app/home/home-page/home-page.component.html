@@ -1,13 +1,33 @@
 <div class="ripple__wrapper">
-  <div
-    class="ripple mat-elevation-z4"
-    matRipple
-    matRippleColor="#cc0000"
-    matRippleUnbounded="unbounded"
-    matRippleRadius="500"
-    matRippleCentered="centered"
-    (click)="goToDashboard()"
-  >
-    <p>Start Your Timer Experience</p>
-  </div>
+  <ng-container
+    *ngTemplateOutlet="(breakpoint | async) ? small : normal"
+  ></ng-container>
+
+  <ng-template #small>
+    <div
+      class="ripple small mat-elevation-z4"
+      matRipple
+      matRippleColor="#cc0000"
+      matRippleUnbounded="unbounded"
+      matRippleRadius="500"
+      matRippleCentered="centered"
+      (click)="goToDashboard()"
+    >
+      <p>Start Your Timer Experience</p>
+    </div>
+  </ng-template>
+
+  <ng-template #normal>
+    <div
+      class="ripple normal mat-elevation-z4"
+      matRipple
+      matRippleColor="#cc0000"
+      matRippleUnbounded="unbounded"
+      matRippleRadius="500"
+      matRippleCentered="centered"
+      (click)="goToDashboard()"
+    >
+      <p>Start Your Timer Experience</p>
+    </div>
+  </ng-template>
 </div>

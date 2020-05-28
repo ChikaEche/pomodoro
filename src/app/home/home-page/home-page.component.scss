@@ -14,25 +14,45 @@
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  width: 300px;
-  height: 100px;
   line-height: 300px;
   border-radius: 40px;
   color: white;
   background-color: #cc0000;
-  animation-name: expand;
-  animation-duration: 1s;
+  animation-duration: 0.8s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
 }
 
-@keyframes expand {
+@keyframes expand-small {
   from {
     width: 300px;
-    height: 100px;
+    height: 80px;
   }
   to {
     width: 315px;
-    height: 110px;
+    height: 100px;
   }
+}
+
+@keyframes expand-normal {
+  from {
+    width: 500px;
+    height: 120px;
+  }
+  to {
+    width: 515px;
+    height: 130px;
+  }
+}
+
+.small {
+  width: 300px;
+  height: 180px;
+  animation-name: expand-small;
+}
+
+.normal {
+  width: 500px;
+  height: 120px;
+  animation-name: expand-normal;
 }
