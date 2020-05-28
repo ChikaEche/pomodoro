@@ -8,8 +8,4 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   constructor(private router: Router) {}
-
-  goToDashboard() {
-    this.router.navigate(['/dashboard']);
-  }
 }
