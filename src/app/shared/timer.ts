@@ -32,9 +32,9 @@ export class Timer {
   }
 
   stop() {
-    this.countDownEnd$.next();
     this.pause$.next();
     this.pause$.complete();
+    this.countDownEnd$.next();
   }
 
   onDestroy() {

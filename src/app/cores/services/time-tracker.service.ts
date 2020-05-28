@@ -53,6 +53,7 @@ export class TimeTrackerService {
   }
 
   timerPause() {
+    console.log('p');
     this.timerClass.pause();
   }
 
