@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Configuration from '../default-config';
 import { TimeTrackerService } from 'src/app/cores/services/time-tracker.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-settings',
@@ -8,6 +9,7 @@ import { TimeTrackerService } from 'src/app/cores/services/time-tracker.service'
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
+  configChange$: Subject<void>;
   defaultConfig = Configuration;
   sessionLength = this.defaultConfig.sessionTime;
   breakLength = this.defaultConfig.breakTime;
@@ -25,5 +27,6 @@ export class SettingsComponent implements OnInit {
     this.timeTracker.sessionDuration = this.sessionLength;
     this.timeTracker.autoPlay = this.autoplay;
     this.timeTracker.longBreakInterval = this.longBreakInterval;
+    this.timeTracker.configChange();
   }
 }

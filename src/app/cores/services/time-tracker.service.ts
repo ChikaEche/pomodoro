@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { Timer } from 'src/app/shared/timer';
 import { tap } from 'rxjs/operators';
 import Configuration from 'src/app/configurations/default-config';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TimeTrackerService {
   public timerClass: Timer;
+  configurationChange = new Subject();
   sessionDuration = Configuration.sessionTime;
   breakDuration = Configuration.breakTime;
   additionalBreak = Configuration.additionalBreakTime;
@@ -46,7 +48,8 @@ export class TimeTrackerService {
       ++this.sessionCount;
       this.currentState = 'session';
     }
-    this.timerStart();
+    console.log(this.autoPlay);
+    this.autoPlay ? this.timerStart() : '';
   }
 
   timerPause() {
@@ -57,6 +60,19 @@ export class TimeTrackerService {
     this.timerPause();
     this.timerClass.seconds = this.timer;
     this.timerStart();
+  }
+
+  configChange() {
+    if (this.currentState === 'session') {
+      if (this.sessionCount % this.longBreakInterval === 0) {
+        this.timer = this.breakDuration + this.additionalBreak;
+      } else {
+        this.timer = this.breakDuration;
+      }
+    } else if (this.currentState === 'break') {
+      this.timer = this.sessionDuration;
+    }
+    this.timerRestart();
   }
 
   onDestroy() {
