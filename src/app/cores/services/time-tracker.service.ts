@@ -19,7 +19,8 @@ export class TimeTrackerService {
 
   constructor() {
     this.timerClass = new Timer();
-    this.timerClass.seconds = this.sessionDuration;
+    this.timer = this.sessionDuration;
+    this.timerClass.seconds = this.timer;
     this.timerClass.countDownEnd$
       .pipe(tap(() => this.stateToggle()))
       .subscribe({ error: (err) => console.error('error occured') });
@@ -53,7 +54,9 @@ export class TimeTrackerService {
   }
 
   timerRestart() {
+    this.timerPause();
     this.timerClass.seconds = this.timer;
+    this.timerStart();
   }
 
   onDestroy() {

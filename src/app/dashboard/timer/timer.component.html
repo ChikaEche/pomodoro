@@ -10,7 +10,7 @@
         *ngTemplateOutlet="toggle ? startToggle : pauseToggle"
       ></ng-container>
     </div>
-    <mat-icon class="icon">replay</mat-icon>
+    <mat-icon class="icon" (click)="restart()">replay</mat-icon>
   </div>
 
   <ng-template #startToggle>
