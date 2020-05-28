@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { TimerComponent } from './timer/timer.component';
 import { DashboardRoutingModule } from './dashboard-router';
 import {
@@ -8,8 +7,7 @@ import {
 } from 'src/app/cores/pipe/seconds-converter.pipe';
 import { ConfigurationsModule } from '../configurations/configurations.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatIconModule } from '@angular/material/icon';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -18,12 +16,6 @@ import { MatIconModule } from '@angular/material/icon';
     SecondsConverterPipe,
     DashboardComponent,
   ],
-  imports: [
-    CommonModule,
-    DashboardRoutingModule,
-    ConfigurationsModule,
-    MatTabsModule,
-    MatIconModule,
-  ],
+  imports: [DashboardRoutingModule, ConfigurationsModule, SharedModule],
 })
 export class DashboardModule {}
