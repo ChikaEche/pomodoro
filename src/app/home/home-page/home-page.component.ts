@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BreakpointService } from 'src/app/cores/services/breakpoint.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -8,10 +9,14 @@ import { Observable } from 'rxjs';
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-  constructor(private breakPoint: BreakpointService) {}
+  constructor(private breakPoint: BreakpointService, private router: Router) {}
   breakpoint: Observable<any>;
 
   ngOnInit(): void {
     this.breakpoint = this.breakPoint.isPalm$;
+  }
+
+  goToDashboard() {
+    this.router.navigate(['/dashboard']);
   }
 }

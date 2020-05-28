@@ -10,16 +10,13 @@
         *ngTemplateOutlet="toggle ? startToggle : pauseToggle"
       ></ng-container>
     </div>
-
-    <mat-icon class="icon" (click)="restart()" svgIcon="restart"
-      >restart</mat-icon
-    >
+    <mat-icon class="icon">replay</mat-icon>
   </div>
 
   <ng-template #startToggle>
-    <mat-icon class="icon" (click)="start()" svgIcon="play">play</mat-icon>
+    <mat-icon class="icon" (click)="start()">play_circle_filled</mat-icon>
   </ng-template>
   <ng-template #pauseToggle>
-    <mat-icon class="icon" (click)="pause()" svgIcon="pause">pause</mat-icon>
+    <mat-icon class="icon" (click)="pause()">pause_circle_filled</mat-icon>
   </ng-template>
 </div>

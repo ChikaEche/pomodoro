@@ -1,5 +1,13 @@
-<div class="ripple__wraper mat-elevation-z4" matRipple matRippleColor="red">
-  Goto
+<div class="ripple__wrapper">
+  <div
+    class="ripple mat-elevation-z4"
+    matRipple
+    matRippleColor="#cc0000"
+    matRippleUnbounded="unbounded"
+    matRippleRadius="500"
+    matRippleCentered="centered"
+    (click)="goToDashboard()"
+  >
+    <p>Start Your Timer Experience</p>
+  </div>
 </div>
-
-<div>{{ breakpoint | async | json }}</div>
