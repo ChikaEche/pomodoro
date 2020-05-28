@@ -3,9 +3,9 @@
 
 @import './styles/themes/light';
 
-$pomodoro-app-primary: mat-palette($md-primary);
-$pomodoro-app-accent: mat-palette($md-accent);
-$pomodoro-app-warn: mat-palette($md-warn);
+$pomodoro-app-primary: mat-palette($mat-primary);
+$pomodoro-app-accent: mat-palette($mat-accent);
+$pomodoro-app-warn: mat-palette($mat-warn);
 
 $pomodoro-app-theme: mat-light-theme(
   $pomodoro-app-primary,
