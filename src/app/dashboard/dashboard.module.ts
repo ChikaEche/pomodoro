@@ -9,6 +9,7 @@ import { ConfigurationsModule } from '../configurations/configurations.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { TaskComponent } from './task/task.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
     SecondsConverterPipe,
     DashboardComponent,
     StatisticsComponent,
+    TaskComponent,
   ],
   imports: [DashboardRoutingModule, ConfigurationsModule, SharedModule],
 })

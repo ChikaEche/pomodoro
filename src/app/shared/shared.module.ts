@@ -11,6 +11,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { ChartsModule } from 'ng2-charts';
+import { MatDialogModule } from '@angular/material/dialog';
+import { TaskDialogService } from '../cores/services/task-dialog.service';
 
 const modules = [
   CommonModule,
@@ -25,11 +27,13 @@ const modules = [
   ReactiveFormsModule,
   MatCardModule,
   ChartsModule,
+  MatDialogModule,
 ];
 
 @NgModule({
   declarations: [LayoutComponent],
   imports: [...modules],
   exports: [...modules],
+  providers: [TaskDialogService],
 })
 export class SharedModule {}

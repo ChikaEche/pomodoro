@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TimeTrackerService } from 'src/app/cores/services/time-tracker.service';
 import { Subject } from 'rxjs';
 import { tap, takeUntil } from 'rxjs/operators';
+import { TaskDialogService } from 'src/app/cores/services/task-dialog.service';
 
 @Component({
   selector: 'app-timer',
@@ -17,7 +18,10 @@ export class TimerComponent implements OnInit, OnDestroy {
     animation: `blink ${0}s infinte alternate`,
   };
 
-  constructor(public timeTrackerService: TimeTrackerService) {}
+  constructor(
+    public timeTrackerService: TimeTrackerService,
+    public taskDialogService: TaskDialogService
+  ) {}
 
   ngOnInit(): void {
     this.timeTrackerService.configurationChange$
@@ -61,6 +65,10 @@ export class TimerComponent implements OnInit, OnDestroy {
     this.animations.animation = `blink ${0}s infinite alternate`;
     this.toggle = true;
     this.timeTrackerService.timerRestart();
+  }
+
+  openDiaglog() {
+    this.taskDialogService.openDialog();
   }
 
   ngOnDestroy() {
