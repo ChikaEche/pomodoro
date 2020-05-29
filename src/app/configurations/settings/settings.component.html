@@ -4,7 +4,14 @@
     <p class="form_name">Session length</p>
     <mat-form-field appearance="outline">
       <mat-label> Session length(minutes)</mat-label>
-      <input matInput [(ngModel)]="sessionLength" placeholder="sessionLength" />
+      <input
+        matInput
+        [formControl]="patternCheck"
+        [placeholder]="sessionLength"
+        maxlength="2"
+        required
+      />
+      <mat-error>number is required</mat-error>
     </mat-form-field>
   </div>
 
@@ -12,7 +19,14 @@
     <p class="form_name">Break length</p>
     <mat-form-field appearance="outline" color="primary">
       <mat-label> Break length(minutes)</mat-label>
-      <input matInput [(ngModel)]="breakLength" />
+      <input
+        matInput
+        [formControl]="patternCheck"
+        [placeholder]="breakLength"
+        maxlength="2"
+        required
+      />
+      <mat-error>number is required</mat-error>
     </mat-form-field>
   </div>
 
@@ -20,7 +34,14 @@
     <p class="form_name">Additional break length</p>
     <mat-form-field appearance="outline">
       <mat-label> Additional break length(minutes)</mat-label>
-      <input matInput [(ngModel)]="additionalBreakLength" />
+      <input
+        matInput
+        [formControl]="patternCheck"
+        [placeholder]="additionalBreakLength"
+        maxlength="2"
+        required
+      />
+      <mat-error *ngIf="patternCheck.invalid">number is required</mat-error>
     </mat-form-field>
   </div>
 
@@ -28,16 +49,28 @@
     <p class="form_name">Long break interval</p>
     <mat-form-field appearance="outline">
       <mat-label> Long break interval</mat-label>
-      <input matInput [(ngModel)]="longBreakInterval" />
+      <input
+        matInput
+        [formControl]="patternCheck"
+        [placeholder]="longBreakInterval"
+        maxlength="1"
+        required
+      />
+      <mat-error>number is required</mat-error>
     </mat-form-field>
   </div>
-
   <div class="autoplay">
     <p class="form_name">Auto play</p>
     <mat-slide-toggle [(ngModel)]="autoplay">Autoplay</mat-slide-toggle>
   </div>
-
   <div>
-    <button mat-button color="primary" (click)="apply()">Apply</button>
+    <button
+      mat-button
+      color="primary"
+      (click)="apply()"
+      [disabled]="patternCheck.errors"
+    >
+      Apply
+    </button>
   </div>
 </div>

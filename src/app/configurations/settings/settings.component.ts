@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Configuration from '../default-config';
 import { TimeTrackerService } from 'src/app/cores/services/time-tracker.service';
-import { Subject } from 'rxjs';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-settings',
@@ -15,6 +15,10 @@ export class SettingsComponent implements OnInit {
   additionalBreakLength = this.defaultConfig.additionalBreakTime;
   longBreakInterval = this.defaultConfig.longBreakInterval;
   autoplay = this.defaultConfig.autoplay;
+  patternCheck = new FormControl('', [
+    Validators.required,
+    Validators.pattern('^[1-9][0-9]*$'),
+  ]);
 
   constructor(private timeTracker: TimeTrackerService) {}
 
@@ -27,5 +31,9 @@ export class SettingsComponent implements OnInit {
     this.timeTracker.autoPlay = this.autoplay;
     this.timeTracker.longBreakInterval = this.longBreakInterval;
     this.timeTracker.configChange();
+  }
+
+  error() {
+    console.log(this.patternCheck.errors);
   }
 }
