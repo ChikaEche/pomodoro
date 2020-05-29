@@ -7,7 +7,7 @@ import { TimeTrackerService } from 'src/app/cores/services/time-tracker.service'
   styleUrls: ['./statistics.component.scss'],
 })
 export class StatisticsComponent implements OnInit {
-  constructor(private timeTrackerService: TimeTrackerService) {}
+  constructor(private readonly timeTrackerService: TimeTrackerService) {}
 
   ngOnInit(): void {}
 }
