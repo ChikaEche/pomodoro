@@ -19,7 +19,7 @@ export class TimeTrackerService {
     longBreakInterval: defaultConfiguration.longBreakInterval,
     autoPlay: defaultConfiguration.autoplay,
   };
-  sessionCount = 1;
+  sessionCount = 0;
   breakCount = 0;
   timer = 0;
   currentState = 'session';
@@ -43,7 +43,7 @@ export class TimeTrackerService {
 
   stateToggle() {
     if (this.currentState === 'session') {
-      this.sessionCount++;
+      ++this.sessionCount;
       if (this.sessionCount % this.configuration.longBreakInterval === 0) {
         this.timer =
           this.configuration.breakDuration + this.configuration.additionalBreak;
@@ -78,18 +78,22 @@ export class TimeTrackerService {
     longBreakInterval,
     autoPlay
   ) {
-    console.log(this.currentState);
     this.configuration.sessionDuration = session;
     this.configuration.breakDuration = breakLength;
     this.configuration.additionalBreak = additionalBreak;
     this.configuration.longBreakInterval = longBreakInterval;
     this.configuration.autoPlay = autoPlay;
+
     if (this.currentState === 'break') {
-      if (this.sessionCount % this.configuration.longBreakInterval === 0) {
+      if (this.sessionCount === 0) {
+        this.timer = this.configuration.breakDuration;
+      } else if (
+        this.sessionCount % this.configuration.longBreakInterval ===
+        0
+      ) {
         this.timer =
           +this.configuration.breakDuration +
           +this.configuration.additionalBreak;
-        console.log(this.timer);
       } else {
         this.timer = this.configuration.breakDuration;
       }

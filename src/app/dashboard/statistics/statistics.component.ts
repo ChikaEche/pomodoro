@@ -1,28 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import { StatisticsService } from 'src/app/cores/services/statistics.service';
-import { map, min } from 'rxjs/operators';
-import { tick } from '@angular/core/testing';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { TimeTrackerService } from 'src/app/cores/services/time-tracker.service';
+import { takeUntil, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.scss'],
 })
-export class StatisticsComponent implements OnInit {
-  constructor(private readonly statisticsService: StatisticsService) {}
-  sessionCount = this.statisticsService.sessionCount;
-  breakCount = this.statisticsService.breakCount;
+export class StatisticsComponent implements OnInit, OnDestroy {
+  constructor(private readonly timeTrackerService: TimeTrackerService) {}
+  destroy$ = new Subject<void>();
+  sessionCount = this.timeTrackerService.sessionCount;
+  breakCount = this.timeTrackerService.breakCount;
   ngOnInit() {
-    this.statisticsService.statPropagation$
+    this.timeTrackerService.timerClass.countDownEnd$
       .pipe(
-        map((statistics) => {
-          this.breakCount = statistics[1];
-          this.sessionCount = statistics[0];
-          this.barChartData[0].data = [statistics[0], statistics[1]];
-          console.log(statistics[1]);
+        takeUntil(this.destroy$),
+        tap(() => {
+          this.barChartData[0].data = [
+            this.timeTrackerService.sessionCount,
+            this.timeTrackerService.breakCount,
+          ];
         })
       )
-      .subscribe();
+      .subscribe({ error: (err) => console.error('error occured') });
   }
 
   barChartOptions = {
@@ -45,6 +47,12 @@ export class StatisticsComponent implements OnInit {
   barChartData = [
     {
       data: [this.sessionCount, this.breakCount],
+      label: 'Pomodoro Stats',
     },
   ];
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }

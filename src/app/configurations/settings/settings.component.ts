@@ -37,7 +37,7 @@ export class SettingsComponent {
       this.settings.get('sessionLength').value * 60,
       this.settings.get('breakLength').value * 60,
       this.settings.get('additionalBreak').value * 60,
-      this.settings.get('longBreakInterval').value * 60,
+      this.settings.get('longBreakInterval').value,
       this.defaultConfig.autoplay
     );
   }

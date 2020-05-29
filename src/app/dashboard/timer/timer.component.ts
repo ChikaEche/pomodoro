@@ -10,7 +10,7 @@ import { tap, takeUntil } from 'rxjs/operators';
 })
 export class TimerComponent implements OnInit, OnDestroy {
   destroy$ = new Subject<void>();
-  sessionCount = 1;
+  sessionCount = 0;
   breakCount = 0;
   toggle = true;
   animations = {
