@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
+import { MatCardModule } from '@angular/material/card';
 
 const modules = [
   CommonModule,
@@ -21,6 +22,7 @@ const modules = [
   MatIconModule,
   MatRippleModule,
   ReactiveFormsModule,
+  MatCardModule,
 ];
 
 @NgModule({

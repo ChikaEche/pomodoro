@@ -10,6 +10,8 @@ import { tap } from 'rxjs/operators';
 })
 export class TimerComponent implements OnInit {
   timerDisplay$: BehaviorSubject<number>;
+  sessionCount = 1;
+  breakCount = 0;
   toggle = true;
   animations = {
     animation: `blink ${0}s infinte alternate`,
@@ -30,11 +32,12 @@ export class TimerComponent implements OnInit {
     this.timeTracker.timerClass.countDownEnd$
       .pipe(
         tap(() => {
-          console.log('df');
           this.timeTracker.autoPlay ? '' : (this.toggle = true);
           this.timeTracker.autoPlay
             ? ''
             : (this.animations.animation = `blink ${0}s infinite alternate`);
+          this.sessionCount = this.timeTracker.sessionCount;
+          this.breakCount = this.timeTracker.breakCount;
         })
       )
       .subscribe({ error: (err) => console.error('error occured') });

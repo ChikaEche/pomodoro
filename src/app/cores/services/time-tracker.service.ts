@@ -15,7 +15,8 @@ export class TimeTrackerService {
   additionalBreak = Configuration.additionalBreakTime;
   longBreakInterval = Configuration.longBreakInterval;
   autoPlay = Configuration.autoplay;
-  sessionCount = 0;
+  sessionCount = 1;
+  breakCount = 0;
   timer = 0;
   currentState = 'session';
 
@@ -34,7 +35,7 @@ export class TimeTrackerService {
 
   stateToggle() {
     if (this.currentState === 'session') {
-      ++this.sessionCount;
+      this.sessionCount++;
       if (this.sessionCount % this.longBreakInterval === 0) {
         this.timer = this.breakDuration + this.additionalBreak;
         this.timerClass.seconds = this.timer;
@@ -44,6 +45,7 @@ export class TimeTrackerService {
       }
       this.currentState = 'break';
     } else if (this.currentState === 'break') {
+      ++this.breakCount;
       this.timer = this.sessionDuration;
       this.timerClass.seconds = this.timer;
       this.currentState = 'session';
@@ -60,14 +62,28 @@ export class TimeTrackerService {
     this.timerPause();
   }
 
-  configChange() {
-    if (this.currentState === 'session') {
+  configChange(
+    session,
+    breakLength,
+    additionalBreak,
+    longBreakInterval,
+    autoPlay
+  ) {
+    console.log(this.currentState);
+    this.sessionDuration = session;
+    this.breakDuration = breakLength;
+    this.additionalBreak = additionalBreak;
+    this.longBreakInterval = longBreakInterval;
+    this.autoPlay = autoPlay;
+    console.log(session);
+    if (this.currentState === 'break') {
       if (this.sessionCount % this.longBreakInterval === 0) {
-        this.timer = this.breakDuration + this.additionalBreak;
+        this.timer = +this.breakDuration + +this.additionalBreak;
+        console.log(this.timer);
       } else {
         this.timer = this.breakDuration;
       }
-    } else if (this.currentState === 'break') {
+    } else if (this.currentState === 'session') {
       this.timer = this.sessionDuration;
     }
     this.configurationChange$.next();

@@ -14,3 +14,7 @@ $pomodoro-app-theme: mat-light-theme(
 );
 
 @include angular-material-theme($pomodoro-app-theme);
+
+body {
+  margin: 0;
+}

@@ -46,9 +46,18 @@ h2 {
 
 .icon {
   cursor: pointer;
+  color: white;
 }
 
 .icon__wrap {
   display: flex;
   justify-content: center;
+}
+
+.card {
+  position: absolute;
+  right: 10px;
+  top: 50px;
+  background-color: white;
+  border-radius: 60px;
 }
