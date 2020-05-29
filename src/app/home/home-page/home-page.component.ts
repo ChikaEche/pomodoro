@@ -15,8 +15,4 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     this.breakpoint = this.breakPoint.isPalm$;
   }
-
-  goToDashboard() {
-    this.router.navigate(['/dashboard']);
-  }
 }

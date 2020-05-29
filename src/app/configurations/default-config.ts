@@ -7,11 +7,11 @@ export interface DefaultConfiguration {
 }
 
 const Configuration: DefaultConfiguration = {
-  sessionTime: 60,
-  breakTime: 5,
+  sessionTime: 1500,
+  breakTime: 600,
   longBreakInterval: 4,
   autoplay: true,
-  additionalBreakTime: 20,
+  additionalBreakTime: 300,
 };
 
 export default Configuration;

@@ -13,12 +13,15 @@ export class SettingsComponent {
   validation = [Validators.required, Validators.pattern('^[1-9][0-9]*$')];
   settings = new FormGroup({
     sessionLength: new FormControl(
-      this.defaultConfig.sessionTime,
+      this.defaultConfig.sessionTime / 60,
       this.validation
     ),
-    breakLength: new FormControl(this.defaultConfig.breakTime, this.validation),
+    breakLength: new FormControl(
+      this.defaultConfig.breakTime / 60,
+      this.validation
+    ),
     additionalBreak: new FormControl(
-      this.defaultConfig.additionalBreakTime,
+      this.defaultConfig.additionalBreakTime / 60,
       this.validation
     ),
     longBreakInterval: new FormControl(
@@ -31,10 +34,10 @@ export class SettingsComponent {
 
   apply() {
     this.timeTracker.configChange(
-      this.settings.get('sessionLength').value,
-      this.settings.get('breakLength').value,
-      this.settings.get('additionalBreak').value,
-      this.settings.get('longBreakInterval').value,
+      this.settings.get('sessionLength').value * 60,
+      this.settings.get('breakLength').value * 60,
+      this.settings.get('additionalBreak').value * 60,
+      this.settings.get('longBreakInterval').value * 60,
       this.defaultConfig.autoplay
     );
   }

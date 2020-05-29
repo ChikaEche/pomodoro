@@ -1,15 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TimeTrackerService } from 'src/app/cores/services/time-tracker.service';
-import { BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { tap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-timer',
   templateUrl: './timer.component.html',
   styleUrls: ['./timer.component.scss'],
 })
-export class TimerComponent implements OnInit {
-  timerDisplay$: BehaviorSubject<number>;
+export class TimerComponent implements OnInit, OnDestroy {
+  destroy$ = new Subject<void>();
   sessionCount = 1;
   breakCount = 0;
   toggle = true;
@@ -22,6 +22,7 @@ export class TimerComponent implements OnInit {
   ngOnInit(): void {
     this.timeTracker.configurationChange$
       .pipe(
+        takeUntil(this.destroy$),
         tap(() => {
           this.animations.animation = `blink ${0}s infinite alternate`;
           this.toggle = true;
@@ -31,6 +32,7 @@ export class TimerComponent implements OnInit {
 
     this.timeTracker.timerClass.countDownEnd$
       .pipe(
+        takeUntil(this.destroy$),
         tap(() => {
           this.timeTracker.autoPlay ? '' : (this.toggle = true);
           this.timeTracker.autoPlay
@@ -61,7 +63,9 @@ export class TimerComponent implements OnInit {
     this.timeTracker.timerRestart();
   }
 
-  /**ngOnDestroy() {
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
     this.timeTracker.timerClass.onDestroy();
-  }*/
+  }
 }

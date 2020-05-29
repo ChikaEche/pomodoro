@@ -4,30 +4,30 @@
   ></ng-container>
 
   <ng-template #small>
-    <div
+    <a
       class="ripple small mat-elevation-z4"
       matRipple
       matRippleColor="#cc0000"
       matRippleUnbounded="unbounded"
       matRippleRadius="800"
       matRippleCentered="centered"
-      (click)="goToDashboard()"
+      routerLink="/dashboard"
     >
       <p>Start Your Timer Experience</p>
-    </div>
+    </a>
   </ng-template>
 
   <ng-template #normal>
-    <div
+    <a
       class="ripple normal mat-elevation-z4"
       matRipple
       matRippleColor="#cc0000"
       matRippleUnbounded="unbounded"
       matRippleRadius="800"
       matRippleCentered="centered"
-      (click)="goToDashboard()"
+      routerLink="/dashboard"
     >
       <p>Start Your Timer Experience</p>
-    </div>
+    </a>
   </ng-template>
 </div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Timer } from 'src/app/shared/timer';
-import { tap } from 'rxjs/operators';
+import { tap, takeUntil } from 'rxjs/operators';
 import Configuration from 'src/app/configurations/default-config';
 import { Subject } from 'rxjs';
 
@@ -9,6 +9,7 @@ import { Subject } from 'rxjs';
 })
 export class TimeTrackerService {
   public timerClass: Timer;
+  destroy$ = new Subject<void>();
   configurationChange$ = new Subject();
   sessionDuration = Configuration.sessionTime;
   breakDuration = Configuration.breakTime;
@@ -25,7 +26,10 @@ export class TimeTrackerService {
     this.timer = this.sessionDuration;
     this.timerClass.seconds = this.timer;
     this.timerClass.countDownEnd$
-      .pipe(tap(() => this.stateToggle()))
+      .pipe(
+        takeUntil(this.destroy$),
+        tap(() => this.stateToggle())
+      )
       .subscribe({ error: (err) => console.error('error occured') });
   }
 
@@ -91,6 +95,8 @@ export class TimeTrackerService {
   }
 
   onDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
     this.timerClass.onDestroy();
   }
 }

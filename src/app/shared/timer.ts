@@ -11,9 +11,8 @@ export class Timer {
   constructor() {}
 
   start() {
-    console.log(this.seconds);
     this.pause$ = new Subject<void>();
-    this.countDownTimer$ = timer(1000, 100).pipe(
+    this.countDownTimer$ = timer(1000, 1000).pipe(
       takeUntil(this.pause$),
       tap(() => {
         if (this.seconds === 0) {
@@ -41,7 +40,6 @@ export class Timer {
   }
 
   onDestroy() {
-    this.countDownEnd$.complete();
     this.pause$.next();
     this.pause$.complete();
   }
