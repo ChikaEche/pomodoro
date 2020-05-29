@@ -8,9 +8,10 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class TimeTrackerService {
-  public timerClass: Timer;
+  timerClass: Timer;
+  statistics$ = new Subject<number[]>();
   destroy$ = new Subject<void>();
-  configurationChange$ = new Subject();
+  configurationChange$ = new Subject<void>();
   configuration = {
     sessionDuration: defaultConfiguration.sessionTime,
     breakDuration: defaultConfiguration.breakTime,
@@ -30,7 +31,8 @@ export class TimeTrackerService {
     this.timerClass.countDownEnd$
       .pipe(
         takeUntil(this.destroy$),
-        tap(() => this.stateToggle())
+        tap(() => this.stateToggle()),
+        tap(() => this.statistics$.next([this.sessionCount, this.breakCount]))
       )
       .subscribe({ error: (err) => console.error('error occured') });
   }

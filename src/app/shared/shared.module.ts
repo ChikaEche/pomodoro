@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
+import { ChartsModule } from 'ng2-charts';
 
 const modules = [
   CommonModule,
@@ -23,6 +24,7 @@ const modules = [
   MatRippleModule,
   ReactiveFormsModule,
   MatCardModule,
+  ChartsModule,
 ];
 
 @NgModule({
