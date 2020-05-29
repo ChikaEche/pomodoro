@@ -10,9 +10,9 @@
     </mat-card>
   </div>
   <div class="time">
-    {{ timeTracker.timerClass.seconds | convertToMinutes }}
+    {{ timeTrackerService.timerClass.seconds | convertToMinutes }}
     <h2 [ngStyle]="{ animation: animations.animation }">:</h2>
-    {{ timeTracker.timerClass.seconds | convertToSeconds }}
+    {{ timeTrackerService.timerClass.seconds | convertToSeconds }}
   </div>
   <div class="icon__wrap">
     <div>

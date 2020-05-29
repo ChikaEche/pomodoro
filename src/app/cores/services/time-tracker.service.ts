@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Timer } from 'src/app/shared/timer';
 import { tap, takeUntil } from 'rxjs/operators';
-import Configuration from 'src/app/configurations/default-config';
+import defaultConfiguration from 'src/app/configurations/default-config';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -11,11 +11,13 @@ export class TimeTrackerService {
   public timerClass: Timer;
   destroy$ = new Subject<void>();
   configurationChange$ = new Subject();
-  sessionDuration = Configuration.sessionTime;
-  breakDuration = Configuration.breakTime;
-  additionalBreak = Configuration.additionalBreakTime;
-  longBreakInterval = Configuration.longBreakInterval;
-  autoPlay = Configuration.autoplay;
+  configuration = {
+    sessionDuration: defaultConfiguration.sessionTime,
+    breakDuration: defaultConfiguration.breakTime,
+    additionalBreak: defaultConfiguration.additionalBreakTime,
+    longBreakInterval: defaultConfiguration.longBreakInterval,
+    autoPlay: defaultConfiguration.autoplay,
+  };
   sessionCount = 1;
   breakCount = 0;
   timer = 0;
@@ -23,7 +25,7 @@ export class TimeTrackerService {
 
   constructor() {
     this.timerClass = new Timer();
-    this.timer = this.sessionDuration;
+    this.timer = this.configuration.sessionDuration;
     this.timerClass.seconds = this.timer;
     this.timerClass.countDownEnd$
       .pipe(
@@ -40,21 +42,22 @@ export class TimeTrackerService {
   stateToggle() {
     if (this.currentState === 'session') {
       this.sessionCount++;
-      if (this.sessionCount % this.longBreakInterval === 0) {
-        this.timer = this.breakDuration + this.additionalBreak;
+      if (this.sessionCount % this.configuration.longBreakInterval === 0) {
+        this.timer =
+          this.configuration.breakDuration + this.configuration.additionalBreak;
         this.timerClass.seconds = this.timer;
       } else {
-        this.timer = this.breakDuration;
+        this.timer = this.configuration.breakDuration;
         this.timerClass.seconds = this.timer;
       }
       this.currentState = 'break';
     } else if (this.currentState === 'break') {
       ++this.breakCount;
-      this.timer = this.sessionDuration;
+      this.timer = this.configuration.sessionDuration;
       this.timerClass.seconds = this.timer;
       this.currentState = 'session';
     }
-    this.autoPlay ? this.timerStart() : '';
+    this.configuration.autoPlay ? this.timerStart() : '';
   }
 
   timerPause() {
@@ -74,21 +77,22 @@ export class TimeTrackerService {
     autoPlay
   ) {
     console.log(this.currentState);
-    this.sessionDuration = session;
-    this.breakDuration = breakLength;
-    this.additionalBreak = additionalBreak;
-    this.longBreakInterval = longBreakInterval;
-    this.autoPlay = autoPlay;
-    console.log(session);
+    this.configuration.sessionDuration = session;
+    this.configuration.breakDuration = breakLength;
+    this.configuration.additionalBreak = additionalBreak;
+    this.configuration.longBreakInterval = longBreakInterval;
+    this.configuration.autoPlay = autoPlay;
     if (this.currentState === 'break') {
-      if (this.sessionCount % this.longBreakInterval === 0) {
-        this.timer = +this.breakDuration + +this.additionalBreak;
+      if (this.sessionCount % this.configuration.longBreakInterval === 0) {
+        this.timer =
+          +this.configuration.breakDuration +
+          +this.configuration.additionalBreak;
         console.log(this.timer);
       } else {
-        this.timer = this.breakDuration;
+        this.timer = this.configuration.breakDuration;
       }
     } else if (this.currentState === 'session') {
-      this.timer = this.sessionDuration;
+      this.timer = this.configuration.sessionDuration;
     }
     this.configurationChange$.next();
     this.timerRestart();

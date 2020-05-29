@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import Configuration from '../default-config';
+import defaultConfiguration from '../default-config';
 import { TimeTrackerService } from 'src/app/cores/services/time-tracker.service';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 
@@ -9,7 +9,7 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent {
-  defaultConfig = Configuration;
+  defaultConfig = defaultConfiguration;
   validation = [Validators.required, Validators.pattern('^[1-9][0-9]*$')];
   settings = new FormGroup({
     sessionLength: new FormControl(

@@ -1,4 +1,4 @@
-export interface DefaultConfiguration {
+export interface configuration {
   sessionTime: number;
   breakTime: number;
   longBreakInterval: number;
@@ -6,7 +6,7 @@ export interface DefaultConfiguration {
   additionalBreakTime: number;
 }
 
-const Configuration: DefaultConfiguration = {
+const defaultConfiguration: configuration = {
   sessionTime: 1500,
   breakTime: 600,
   longBreakInterval: 4,
@@ -14,4 +14,4 @@ const Configuration: DefaultConfiguration = {
   additionalBreakTime: 300,
 };
 
-export default Configuration;
+export default defaultConfiguration;

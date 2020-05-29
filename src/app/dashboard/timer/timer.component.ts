@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TimeTrackerService } from 'src/app/cores/services/time-tracker.service';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { tap, takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -34,10 +34,10 @@ export class TimerComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.destroy$),
         tap(() => {
-          this.timeTrackerService.autoPlay ? '' : (this.toggle = true);
-          this.timeTrackerService.autoPlay
-            ? ''
-            : (this.animations.animation = `blink ${0}s infinite alternate`);
+          if (!this.timeTrackerService.configuration.autoPlay) {
+            this.toggle = true;
+            this.animations.animation = `blink ${0}s infinite alternate`;
+          }
           this.sessionCount = this.timeTrackerService.sessionCount;
           this.breakCount = this.timeTrackerService.breakCount;
         })

@@ -18,7 +18,7 @@ export class BreakpointService {
     this.isPalm$ = this.breakpointObserver
       .observe([Breakpoints.Handset, Breakpoints.Small])
       .pipe(
-        map((state: BreakpointState) => (this.check = state.matches)),
+        map((state: BreakpointState) => state.matches),
         shareReplay()
       );
   }

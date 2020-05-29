@@ -11,7 +11,7 @@ export class MinutesConverterPipe implements PipeTransform {
 
   transform(seconds: number): string {
     this.minutes = Math.floor(seconds / 60);
-    this.minute = this.minutes < 10 ? '0' + this.minutes : '' + this.minutes;
+    this.minute = this.minutes < 10 ? `${0}` + this.minutes : '' + this.minutes;
     return this.minute;
   }
 }
@@ -25,7 +25,7 @@ export class SecondsConverterPipe implements PipeTransform {
 
   transform(seconds: number): string {
     this.seconds = seconds % 60;
-    this.second = this.seconds < 10 ? '0' + this.seconds : '' + this.seconds;
+    this.second = this.seconds < 10 ? `${0}` + this.seconds : '' + this.seconds;
     return this.second;
   }
 }

@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class HomePageComponent implements OnInit {
   constructor(private breakPoint: BreakpointService, private router: Router) {}
-  breakpoint: Observable<any>;
+  breakpoint: Observable<boolean>;
 
   ngOnInit(): void {
     this.breakpoint = this.breakPoint.isPalm$;

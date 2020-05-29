@@ -5,7 +5,6 @@ import { LayoutModule } from '@angular/cdk/layout';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MatRippleModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,7 +13,6 @@ import { MatRippleModule } from '@angular/material/core';
     BrowserAnimationsModule,
     AppRoutingModule,
     LayoutModule,
-    MatRippleModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
