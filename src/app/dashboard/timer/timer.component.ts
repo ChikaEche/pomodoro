@@ -17,10 +17,10 @@ export class TimerComponent implements OnInit, OnDestroy {
     animation: `blink ${0}s infinte alternate`,
   };
 
-  constructor(public timeTracker: TimeTrackerService) {}
+  constructor(public timeTrackerService: TimeTrackerService) {}
 
   ngOnInit(): void {
-    this.timeTracker.configurationChange$
+    this.timeTrackerService.configurationChange$
       .pipe(
         takeUntil(this.destroy$),
         tap(() => {
@@ -30,16 +30,16 @@ export class TimerComponent implements OnInit, OnDestroy {
       )
       .subscribe({ error: (err) => console.error('error occured') });
 
-    this.timeTracker.timerClass.countDownEnd$
+    this.timeTrackerService.timerClass.countDownEnd$
       .pipe(
         takeUntil(this.destroy$),
         tap(() => {
-          this.timeTracker.autoPlay ? '' : (this.toggle = true);
-          this.timeTracker.autoPlay
+          this.timeTrackerService.autoPlay ? '' : (this.toggle = true);
+          this.timeTrackerService.autoPlay
             ? ''
             : (this.animations.animation = `blink ${0}s infinite alternate`);
-          this.sessionCount = this.timeTracker.sessionCount;
-          this.breakCount = this.timeTracker.breakCount;
+          this.sessionCount = this.timeTrackerService.sessionCount;
+          this.breakCount = this.timeTrackerService.breakCount;
         })
       )
       .subscribe({ error: (err) => console.error('error occured') });
@@ -48,24 +48,24 @@ export class TimerComponent implements OnInit, OnDestroy {
   pause() {
     this.animations.animation = `blink ${0}s infinite alternate`;
     this.toggle = true;
-    this.timeTracker.timerPause();
+    this.timeTrackerService.timerPause();
   }
 
   start() {
     this.animations.animation = `blink ${1}s infinite alternate`;
     this.toggle = false;
-    this.timeTracker.timerStart();
+    this.timeTrackerService.timerStart();
   }
 
   restart() {
     this.animations.animation = `blink ${0}s infinite alternate`;
     this.toggle = true;
-    this.timeTracker.timerRestart();
+    this.timeTrackerService.timerRestart();
   }
 
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
-    this.timeTracker.timerClass.onDestroy();
+    this.timeTrackerService.timerClass.onDestroy();
   }
 }

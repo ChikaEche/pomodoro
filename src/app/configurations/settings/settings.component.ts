@@ -30,10 +30,10 @@ export class SettingsComponent {
     ),
   });
 
-  constructor(private timeTracker: TimeTrackerService) {}
+  constructor(private timeTrackerService: TimeTrackerService) {}
 
   apply() {
-    this.timeTracker.configChange(
+    this.timeTrackerService.configChange(
       this.settings.get('sessionLength').value * 60,
       this.settings.get('breakLength').value * 60,
       this.settings.get('additionalBreak').value * 60,
