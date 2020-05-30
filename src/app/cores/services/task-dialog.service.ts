@@ -32,7 +32,7 @@ export class TaskDialogService {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(TaskComponent, {
-      width: '25vw',
+      width: '50vw',
       data: { task: this.task, session: this.session },
     });
     dialogRef

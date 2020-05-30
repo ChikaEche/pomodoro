@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { dialogData } from 'src/app/cores/interface/dialogData.interface';
+import { DialogData } from 'src/app/cores/interface/dialog-data.interface';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -11,7 +11,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class TaskComponent {
   constructor(
     public dialogRef: MatDialogRef<TaskComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: dialogData
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {}
   taskForm = new FormGroup({
     session: new FormControl('', [

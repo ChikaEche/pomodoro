@@ -2,6 +2,7 @@
   <ng-container
     *ngTemplateOutlet="(breakPoint$ | async) ? noShrink : shrink"
   ></ng-container>
+
   <ng-template #shrink>
     <div class="task">
       <button mat-raised-button color="accent" (click)="openDiaglog()">
@@ -10,6 +11,7 @@
       </button>
     </div>
   </ng-template>
+
   <ng-template #noShrink>
     <div class="task">
       <button mat-raised-button color="accent" (click)="openDiaglog()">
@@ -38,6 +40,7 @@
       </mat-card-content>
     </mat-card>
   </div>
+
   <div class="time">
     {{ timeTrackerService.timerClass.seconds | convertToMinutes }}
     <h2 [ngStyle]="{ animation: animations.animation }">:</h2>

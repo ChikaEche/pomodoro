@@ -1,4 +1,4 @@
-export interface dialogData {
+export interface DialogData {
   task: string;
   sessionNumber: number;
 }
