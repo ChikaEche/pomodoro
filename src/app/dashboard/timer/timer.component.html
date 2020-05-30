@@ -12,6 +12,16 @@
         <p>Hey,</p>
         <p>You have completed {{ sessionCount }} sessions</p>
         <p>You had {{ breakCount }} breaks</p>
+        <ng-container
+          *ngTemplateOutlet="currentTask === '' ? noTask : task"
+        ></ng-container>
+        <ng-template #task>
+          <p>Current task: {{ currentTask }}</p>
+        </ng-template>
+        <ng-template #noTask>
+          <p>You don't have a task</p>
+          <p>Click on create new task</p>
+        </ng-template>
       </mat-card-content>
     </mat-card>
   </div>

@@ -11,6 +11,7 @@ import { TaskDialogService } from 'src/app/cores/services/task-dialog.service';
 })
 export class TimerComponent implements OnInit, OnDestroy {
   destroy$ = new Subject<void>();
+  currentTask = '';
   sessionCount = 0;
   breakCount = 0;
   toggle = true;
@@ -38,6 +39,7 @@ export class TimerComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.destroy$),
         tap(() => {
+          this.currentTask = this.taskDialogService.task;
           if (!this.timeTrackerService.configuration.autoPlay) {
             this.toggle = true;
             this.animations.animation = `blink ${0}s infinite alternate`;
@@ -69,6 +71,14 @@ export class TimerComponent implements OnInit, OnDestroy {
 
   openDiaglog() {
     this.taskDialogService.openDialog();
+    this.taskDialogService.taskPropagation$
+      .pipe(
+        takeUntil(this.destroy$),
+        tap(() => {
+          this.currentTask = this.taskDialogService.task;
+        })
+      )
+      .subscribe({ error: (err) => console.error('error occured') });
   }
 
   ngOnDestroy() {

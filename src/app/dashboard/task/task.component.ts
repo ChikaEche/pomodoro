@@ -24,6 +24,6 @@ export class TaskComponent {
   onClose() {
     this.data.task = this.taskForm.get('task').value;
     this.data.sessionNumber = this.taskForm.get('session').value;
-    this.dialogRef.close();
+    this.dialogRef.close([this.data.task, this.data.sessionNumber]);
   }
 }

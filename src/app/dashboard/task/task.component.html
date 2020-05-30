@@ -20,6 +20,7 @@
 <div mat-dialog-actions>
   <button
     color="primary"
+    [mat-dialog-close]="data.sessionNumber"
     mat-raised-button
     (click)="onClose()"
     [disabled]="taskForm.invalid"

@@ -64,6 +64,7 @@ export class TimeTrackerService {
 
   timerPause() {
     this.timerClass.pause();
+    this.configurationChange$.next();
   }
 
   timerRestart() {
