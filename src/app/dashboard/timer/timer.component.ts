@@ -3,6 +3,7 @@ import { TimeTrackerService } from 'src/app/cores/services/time-tracker.service'
 import { Subject } from 'rxjs';
 import { tap, takeUntil } from 'rxjs/operators';
 import { TaskDialogService } from 'src/app/cores/services/task-dialog.service';
+import { BreakpointService } from 'src/app/cores/services/breakpoint.service';
 
 @Component({
   selector: 'app-timer',
@@ -11,6 +12,7 @@ import { TaskDialogService } from 'src/app/cores/services/task-dialog.service';
 })
 export class TimerComponent implements OnInit, OnDestroy {
   destroy$ = new Subject<void>();
+  breakPoint$;
   currentTask = '';
   sessionCount = 0;
   breakCount = 0;
@@ -21,8 +23,11 @@ export class TimerComponent implements OnInit, OnDestroy {
 
   constructor(
     public timeTrackerService: TimeTrackerService,
-    public taskDialogService: TaskDialogService
-  ) {}
+    private taskDialogService: TaskDialogService,
+    private breakPointService: BreakpointService
+  ) {
+    this.breakPoint$ = this.breakPointService.isPalm$;
+  }
 
   ngOnInit(): void {
     this.timeTrackerService.configurationChange$

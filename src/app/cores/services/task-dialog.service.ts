@@ -39,9 +39,11 @@ export class TaskDialogService {
       .afterClosed()
       .pipe(
         map((result) => {
-          this.task = result[0];
-          this.session = result[1];
-          this.taskPropagation$.next();
+          if (result) {
+            this.task = result[0];
+            this.session = result[1];
+            this.taskPropagation$.next();
+          }
         })
       )
       .subscribe();
