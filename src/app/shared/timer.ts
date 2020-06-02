@@ -40,7 +40,9 @@ export class Timer {
   }
 
   onDestroy() {
-    this.pause$.next();
-    this.pause$.complete();
+    if (this.pause$) {
+      this.pause$.next();
+      this.pause$.complete();
+    }
   }
 }
