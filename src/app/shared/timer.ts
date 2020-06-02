@@ -12,7 +12,7 @@ export class Timer {
 
   start() {
     this.pause$ = new Subject<void>();
-    this.countDownTimer$ = timer(1000, 100).pipe(
+    this.countDownTimer$ = timer(1000, 1000).pipe(
       takeUntil(this.pause$),
       tap(() => {
         if (this.seconds === 0) {

@@ -13,19 +13,6 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   destroy$ = new Subject<void>();
   sessionCount = this.timeTrackerService.sessionCount;
   breakCount = this.timeTrackerService.breakCount;
-  ngOnInit() {
-    this.timeTrackerService.timerClass.countDownEnd$
-      .pipe(
-        takeUntil(this.destroy$),
-        tap(() => {
-          this.barChartData[0].data = [
-            this.timeTrackerService.sessionCount,
-            this.timeTrackerService.breakCount,
-          ];
-        })
-      )
-      .subscribe({ error: (err) => console.error('error occured') });
-  }
 
   barChartOptions = {
     scaleVerticalLines: false,
@@ -50,6 +37,20 @@ export class StatisticsComponent implements OnInit, OnDestroy {
       label: 'Pomodoro Stats',
     },
   ];
+
+  ngOnInit() {
+    this.timeTrackerService.timerClass.countDownEnd$
+      .pipe(
+        takeUntil(this.destroy$),
+        tap(() => {
+          this.barChartData[0].data = [
+            this.timeTrackerService.sessionCount,
+            this.timeTrackerService.breakCount,
+          ];
+        })
+      )
+      .subscribe({ error: (err) => console.error('error occured') });
+  }
 
   ngOnDestroy() {
     this.destroy$.next();

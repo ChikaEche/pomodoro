@@ -59,6 +59,7 @@ export class TimeTrackerService {
       this.timerClass.seconds = this.timer;
       this.currentState = 'session';
     }
+    // tslint:disable-next-line: no-unused-expression
     this.configuration.autoPlay ? this.timerStart() : '';
   }
 

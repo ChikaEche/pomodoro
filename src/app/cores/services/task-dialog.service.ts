@@ -18,7 +18,7 @@ export class TaskDialogService {
       .pipe(
         takeUntil(this.destroy$),
         tap(() => {
-          if (this.timeTrackerService.sessionCount === +this.session) {
+          if (this.timeTrackerService.sessionCount % +this.session === 0) {
             this.session = 0;
             this.task = '';
             this.taskStop();
