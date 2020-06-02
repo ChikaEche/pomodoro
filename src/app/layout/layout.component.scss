@@ -1,0 +1,46 @@
+.header {
+  height: 10vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgb(255, 87, 87);
+  font-family: museo-sans, 'Helvetica Neue', Helvetica, Aria, sans-serif;
+  font-size: 18px;
+}
+
+.nav {
+  display: flex;
+  list-style: none;
+  color: white;
+}
+
+li {
+  margin: 10px;
+}
+
+img {
+  width: 200px;
+}
+
+.nav__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  color: black;
+  font-family: museo-sans, 'Helvetica Neue', Helvetica, Aria, sans-serif;
+  font-size: 18px;
+}
+
+.side-nav__container {
+  height: 100vh;
+}
+
+.icon {
+  cursor: pointer;
+}

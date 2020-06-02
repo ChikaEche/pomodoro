@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
+import { BreakpointService } from '../cores/services/breakpoint.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-layout',
@@ -6,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent implements OnInit {
-  constructor() {}
+  @ViewChild('sidenav') sidenav: MatSidenav;
+
+  breakPoint$: Observable<boolean>;
+
+  constructor(private breakPointService: BreakpointService) {
+    this.breakPoint$ = this.breakPointService.isPalm$;
+  }
 
   ngOnInit(): void {}
 }

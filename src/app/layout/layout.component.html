@@ -1,2 +1,35 @@
-<p>layout works!</p>
-<ng-content></ng-content>
+<mat-sidenav-container class="side-nav__container">
+  <mat-sidenav #sidenav class="content" position="end">
+    <mat-icon class="icon" (click)="sidenav.close()">clear</mat-icon>
+    <div class="nav-content">
+      <ul class="nav-list">
+        <li>Login</li>
+        <li>Sign Up</li>
+        <li>Features</li>
+        <li>Learn about About Pomodoro</li>
+      </ul>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="header">
+      <div class="logo">
+        <img src="../assets/logo.PNG" />
+      </div>
+      <div class="nav__container">
+        <ul class="nav" *ngIf="(breakPoint$ | async) === false">
+          <li>
+            Login
+          </li>
+          <li>
+            Sign Up
+          </li>
+          <li>
+            Features
+          </li>
+        </ul>
+        <mat-icon class="icon" (click)="sidenav.open()">table_rows</mat-icon>
+      </div>
+    </div>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
