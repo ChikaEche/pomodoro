@@ -12,6 +12,7 @@ import { BreakpointService } from 'src/app/cores/services/breakpoint.service';
 })
 export class TimerComponent implements OnInit, OnDestroy {
   destroy$ = new Subject<void>();
+  cardToggle = false;
   breakPoint$;
   currentTask = '';
   sessionCount = 0;
@@ -84,6 +85,10 @@ export class TimerComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe({ error: (err) => console.error('error occured') });
+  }
+
+  toogleCard() {
+    this.cardToggle = !this.cardToggle;
   }
 
   ngOnDestroy() {

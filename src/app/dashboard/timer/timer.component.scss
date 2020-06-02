@@ -1,5 +1,5 @@
 .timer__container {
-  height: 95vh;
+  height: 83vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -66,4 +66,14 @@ h2 {
   top: 50px;
   background-color: white;
   border-radius: 60px;
+}
+
+.toogle-button {
+  position: absolute;
+  right: 10px;
+  top: 50px;
+}
+
+.close {
+  cursor: pointer;
 }

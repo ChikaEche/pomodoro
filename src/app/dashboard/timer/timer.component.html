@@ -13,15 +13,35 @@
   </ng-template>
 
   <ng-template #noShrink>
-    <div class="task">
+    <div class="task small">
       <button mat-raised-button color="accent" (click)="openDiaglog()">
         <mat-icon>add</mat-icon>
       </button>
     </div>
   </ng-template>
 
-  <div class="card">
+  <button
+    class="toogle-button"
+    mat-raised-button
+    color="accent"
+    (click)="toogleCard()"
+    *ngIf="cardToggle === false && (breakPoint$ | async) === true"
+  >
+    Show Daily stats
+  </button>
+
+  <div
+    class="card"
+    *ngIf="cardToggle === true || (breakPoint$ | async) === false"
+  >
     <mat-card>
+      <mat-icon
+        class="close"
+        (click)="toogleCard()"
+        *ngIf="breakPoint$ | async"
+      >
+        clear
+      </mat-icon>
       <mat-card-title color="accent">Daily Statistics</mat-card-title>
       <mat-card-content>
         <p>Hey,</p>
