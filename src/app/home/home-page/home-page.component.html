@@ -1,33 +1,72 @@
-<div class="ripple__wrapper">
-  <ng-container
-    *ngTemplateOutlet="(breakpoint | async) ? small : normal"
-  ></ng-container>
-
-  <ng-template #small>
+<div class="home-page__wrapper">
+  <div class="description__container">
+    <div class="description">
+      <h1>Manage your time with Pomodoro and make the most out of it</h1>
+    </div>
+  </div>
+  <div class="features__container">
+    <div class="feature">
+      <div class="feature-desc">
+        <h3>Create your tasks the easy way</h3>
+        <p>
+          Simple and easy way of creating your tasks just by the click of a
+          button
+        </p>
+        <p>Select the number of sessions you want in your task</p>
+      </div>
+      <div>
+        <img src="../assets/task.svg" />
+      </div>
+    </div>
+    <div class="feature">
+      <div>
+        <img src="../assets/timer.svg" />
+      </div>
+      <div class="feature-desc">
+        <h3>
+          Simple digital timer <mat-icon class="icon">query_builder</mat-icon>
+        </h3>
+        <p>Experience the power and simplicity of a digital timer</p>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-desc">
+        <h3>Monitor your progress with a provided statistics</h3>
+        <p>Compare your progress with other users worldwide</p>
+      </div>
+      <div>
+        <img src="../assets/timer.svg" />
+      </div>
+    </div>
+  </div>
+  <div class="start">
+    <h1>You wanna be productive with your time!!</h1>
     <a
-      class="ripple small mat-elevation-z4"
+      class="ripple mat-elevation-z4"
       matRipple
       matRippleColor="#cc0000"
       matRippleUnbounded="unbounded"
-      matRippleRadius="800"
+      matRippleRadius="900"
       matRippleCentered="centered"
       routerLink="/dashboard"
     >
-      <p>Start Your Timer Experience</p>
+      <p>Start Pomodoro</p>
     </a>
-  </ng-template>
-
-  <ng-template #normal>
-    <a
-      class="ripple normal mat-elevation-z4"
-      matRipple
-      matRippleColor="#cc0000"
-      matRippleUnbounded="unbounded"
-      matRippleRadius="800"
-      matRippleCentered="centered"
-      routerLink="/dashboard"
-    >
-      <p>Start Your Timer Experience</p>
-    </a>
-  </ng-template>
+  </div>
+  <div class="footer">
+    <div class="about">
+      <div>
+        <img class="image" src="../assets/logo.PNG" />
+      </div>
+      <div>
+        <p>Manage your time with Pomodoro and make the most out of it</p>
+      </div>
+    </div>
+    <div class="list">
+      <ul>
+        <li>About</li>
+        <li>Contact</li>
+      </ul>
+    </div>
+  </div>
 </div>

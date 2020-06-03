@@ -1,10 +1,52 @@
+.home-page__wrapper,
+.features__container {
+  display: flex;
+  flex-direction: column;
+  font-family: museo-sans, 'Helvetica Neue', Helvetica, Aria, sans-serif;
+}
+
+.feature {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 65vh;
+  flex-wrap: wrap;
+}
+
+.feature .feature-desc {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 20px;
+  background-color: #cee7e9;
+}
+
+.feature div {
+  height: 85%;
+  width: 45%;
+  margin: 10px;
+  font-size: 1em;
+  text-align: left;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
 .ripple__wrapper {
-  height: 80vh;
-  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.start {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.icon {
+  width: 30%;
 }
 
 a {
@@ -12,51 +54,54 @@ a {
 }
 
 .ripple {
-  font-family: 'Gloria Hallelujah', cursive;
   display: flex;
   flex-direction: column;
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  line-height: 300px;
   border-radius: 40px;
   color: white;
   background-color: #cc0000;
-  animation-duration: 0.8s;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+  width: 200px;
 }
 
-@keyframes expand-small {
-  from {
-    width: 300px;
-    height: 80px;
-  }
-  to {
-    width: 315px;
-    height: 100px;
-  }
+.description__container {
+  background-color: rgb(255, 87, 87);
+  //background-image: url("/src/assets/background.svg");
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1em;
+  text-align: center;
 }
 
-@keyframes expand-normal {
-  from {
-    width: 500px;
-    height: 120px;
-  }
-  to {
-    width: 515px;
-    height: 130px;
-  }
+img {
+  height: inherit;
 }
 
-.small {
-  width: 300px;
-  height: 180px;
-  animation-name: expand-small;
+.footer {
+  color: white;
+  margin-top: 10px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 30vh;
+  background-color: rgb(255, 87, 87);
 }
 
-.normal {
-  width: 500px;
-  height: 120px;
-  animation-name: expand-normal;
+.about {
+  display: flex;
+  flex-direction: column;
+}
+
+ul {
+  list-style: none;
+}
+
+.image {
+  width: 20%;
+  height: 20%;
 }
