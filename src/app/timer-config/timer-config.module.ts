@@ -9,4 +9,4 @@ import { SharedModule } from '../shared/shared.module';
   imports: [ConfigurationsRoutingModule, SharedModule],
   exports: [SettingsComponent],
 })
-export class ConfigurationsModule {}
+export class TimerConfigModule {}
