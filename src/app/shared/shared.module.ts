@@ -12,7 +12,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { ChartsModule } from 'ng2-charts';
 import { MatDialogModule } from '@angular/material/dialog';
-import { TaskDialogService } from '../cores/services/task-dialog.service';
+import { TaskDialogService } from '../core/services/task-dialog.service';
 
 const modules = [
   CommonModule,

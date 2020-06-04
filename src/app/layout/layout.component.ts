@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { BreakpointService } from '../cores/services/breakpoint.service';
+import { BreakpointService } from '../core/services/breakpoint.service';
 import { Observable } from 'rxjs';
 
 @Component({

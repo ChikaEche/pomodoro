@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { TimeTrackerService } from 'src/app/cores/services/time-tracker.service';
+import { TimeTrackerService } from 'src/app/core/services/time-tracker.service';
 import { Subject } from 'rxjs';
 import { tap, takeUntil } from 'rxjs/operators';
-import { TaskDialogService } from 'src/app/cores/services/task-dialog.service';
-import { BreakpointService } from 'src/app/cores/services/breakpoint.service';
+import { TaskDialogService } from 'src/app/core/services/task-dialog.service';
+import { BreakpointService } from 'src/app/core/services/breakpoint.service';
 
 @Component({
   selector: 'app-timer',

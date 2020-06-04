@@ -4,7 +4,7 @@ import { DashboardRoutingModule } from './dashboard-router';
 import {
   MinutesConverterPipe,
   SecondsConverterPipe,
-} from 'src/app/cores/pipe/seconds-converter.pipe';
+} from 'src/app/core/pipes/seconds-converter.pipe';
 import { ConfigurationsModule } from '../configurations/configurations.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';

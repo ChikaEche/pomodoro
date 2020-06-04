@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogData } from 'src/app/cores/interface/dialog-data.interface';
+import { DialogData } from 'src/app/core/interfaces/dialog-data.interface';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { TimeTrackerService } from 'src/app/cores/services/time-tracker.service';
+import { TimeTrackerService } from 'src/app/core/services/time-tracker.service';
 
 @Component({
   selector: 'app-task',

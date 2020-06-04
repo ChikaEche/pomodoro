@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BreakpointService } from 'src/app/cores/services/breakpoint.service';
+import { BreakpointService } from 'src/app/core/services/breakpoint.service';
 import { Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { screenResize } from 'src/assets/screen-resize';

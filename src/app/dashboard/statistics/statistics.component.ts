@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { TimeTrackerService } from 'src/app/cores/services/time-tracker.service';
+import { TimeTrackerService } from 'src/app/core/services/time-tracker.service';
 import { takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 

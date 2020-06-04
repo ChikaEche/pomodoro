@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BreakpointService } from 'src/app/cores/services/breakpoint.service';
+import { BreakpointService } from 'src/app/core/services/breakpoint.service';
 
 @Component({
   selector: 'app-layout',
