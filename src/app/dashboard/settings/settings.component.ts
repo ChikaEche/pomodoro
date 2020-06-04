@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import defaultConfiguration from '../../timer-config/default-config';
-import { TimeTrackerService } from './node_modules/src/app/core/services/time-tracker.service';
+import { TimeTrackerService } from 'src/app/core/services/time-tracker.service';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 
 @Component({
