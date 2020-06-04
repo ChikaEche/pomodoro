@@ -17,6 +17,12 @@ li {
   margin: 10px;
 }
 
+.logo {
+  width: 30%;
+  display: flex;
+  justify-content: start;
+}
+
 img {
   width: 150px;
 }
@@ -38,6 +44,7 @@ img {
 
 .side-nav__container {
   height: 100vh;
+  margin: 0;
 }
 
 .icon {
