@@ -1,0 +1,28 @@
+.logo-image {
+  width: 50%;
+}
+
+.footer {
+  color: white;
+  margin-top: 10px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 30vh;
+  background-color: rgb(255, 87, 87);
+}
+
+.about {
+  display: flex;
+  flex-direction: column;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}

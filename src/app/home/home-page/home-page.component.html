@@ -1,16 +1,18 @@
 <div class="home-page__wrapper">
   <div class="description__container">
-    <div [ngClass]="[description, descriptionResize]">
+    <div [ngClass]="[screen.description, screen.descriptionResize]">
       <h1>Manage your time with Pomodoro and make the most out of it</h1>
       <h4>let your time work for you!!!</h4>
     </div>
-    <div [ngClass]="[desktop, desktopResize]">
+    <div [ngClass]="[screen.desktop, screen.desktopResize]">
       <img class="desktop-image" src="../assets/desktop.svg" />
     </div>
   </div>
   <div class="features__container">
-    <div [ngClass]="[feature, featureResize]">
-      <div [ngClass]="[featureDescription, featureDescriptionResize]">
+    <div [ngClass]="[screen.feature, screen.featureResize]">
+      <div
+        [ngClass]="[screen.featureDescription, screen.featureDescriptionResize]"
+      >
         <h2>Create your tasks the easy way</h2>
         <h4>
           Simple and easy way of creating your tasks just by the click of a
@@ -20,15 +22,21 @@
 
         <h4>Select the number of sessions you want in your task</h4>
       </div>
-      <div [ngClass]="[task, taskResize]">
+      <div [ngClass]="[screen.task, screen.taskResize]">
         <img class="task-img" src="../assets/task.svg" />
       </div>
     </div>
-    <div [ngClass]="[featureChart, featureChartResize]">
-      <div [ngClass]="[chart, chartResize]">
+    <div [ngClass]="[screen.featureChart, screen.featureChartResize]">
+      <div [ngClass]="[screen.chart, screen.chartResize]">
         <img class="chart-img" src="../assets/chart.svg" />
       </div>
-      <div [ngClass]="[featureChartDesc, extra, featureChartDescResize]">
+      <div
+        [ngClass]="[
+          screen.featureChartDesc,
+          screen.extra,
+          screen.featureChartDescResize
+        ]"
+      >
         <h2>Monitor your progress with a provided statistics</h2>
         <h3>Get real time progress update</h3>
         <h3>Compare your progress with other users worldwide</h3>
@@ -49,20 +57,5 @@
       <p>Start Pomodoro</p>
     </a>
   </div>
-  <div class="footer">
-    <div class="about">
-      <div>
-        <img class="image" src="../assets/logo.PNG" />
-      </div>
-      <div>
-        <p>Manage your time with Pomodoro and make the most out of it</p>
-      </div>
-    </div>
-    <div class="list">
-      <ul>
-        <li>About</li>
-        <li>Contact</li>
-      </ul>
-    </div>
-  </div>
+  <app-footer></app-footer>
 </div>
