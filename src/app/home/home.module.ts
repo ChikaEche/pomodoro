@@ -6,8 +6,8 @@ import { SharedModule } from '../shared/shared.module';
 import { FooterComponent } from '../shared/components/footer/footer.component';
 
 @NgModule({
-  declarations: [HomePageComponent, FooterComponent],
+  declarations: [HomePageComponent],
   imports: [HomeRoutingModule, SharedModule],
-  exports: [FooterComponent],
+  exports: [],
 })
 export class HomeModule {}

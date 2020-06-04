@@ -21,7 +21,6 @@ export class HomePageComponent implements OnInit {
     this.breakpoint
       .pipe(
         map((x) => {
-          console.log(x);
           this.isSmall = x;
           this.onScreenResize();
         })
@@ -30,9 +29,7 @@ export class HomePageComponent implements OnInit {
   }
 
   onScreenResize() {
-    console.log('en');
     if (this.isSmall) {
-      console.log('tr');
       this.screen.chartResize = 'chart-resize';
       this.screen.featureChartResize = 'feature-chart-resize';
       this.screen.featureChartDescResize = 'chart-desc';

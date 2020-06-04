@@ -17,6 +17,7 @@ import { MinutesConverterPipe } from '../shared/pipes/minutes-converter.pipe';
 import { SecondsConverterPipe } from 'src/app/shared/pipes/seconds-converter.pipe';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
+import { FooterComponent } from './components/footer/footer.component';
 
 const modules = [
   CommonModule,
@@ -40,6 +41,7 @@ const declarations = [
   MinutesConverterPipe,
   SecondsConverterPipe,
   LayoutComponent,
+  FooterComponent,
 ];
 
 @NgModule({
