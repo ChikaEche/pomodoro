@@ -1,5 +1,5 @@
 <mat-sidenav-container class="side-nav__container">
-  <mat-sidenav #sidenav class="content" position="end">
+  <mat-sidenav #sidenav class="content">
     <mat-icon class="icon" (click)="sidenav.close()">clear</mat-icon>
     <div class="nav-content">
       <ul class="nav-list">
@@ -12,6 +12,12 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="header">
+      <mat-icon
+        class="icon"
+        *ngIf="(breakPoint$ | async) === true"
+        (click)="sidenav.open()"
+        >table_rows</mat-icon
+      >
       <div class="logo">
         <img src="../assets/logo.PNG" />
       </div>
@@ -27,7 +33,6 @@
             Features
           </li>
         </ul>
-        <mat-icon class="icon" (click)="sidenav.open()">table_rows</mat-icon>
       </div>
     </div>
     <ng-content></ng-content>
