@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { ConfigurationsRoutingModule } from './configurations-routing.module';
+import { ConfigurationsRoutingModule } from './timer-config-routing.module';
 import { SettingsComponent } from './settings/settings.component';
 import { SharedModule } from '../shared/shared.module';
 

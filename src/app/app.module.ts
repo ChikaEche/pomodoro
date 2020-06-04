@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LayoutComponent } from './layout/layout.component';
+import { LayoutComponent } from './shared/components/layout/layout.component';
 
 @NgModule({
   declarations: [AppComponent, LayoutComponent],
