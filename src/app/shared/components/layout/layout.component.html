@@ -18,8 +18,8 @@
         (click)="sidenav.open()"
         >table_rows</mat-icon
       >
-      <div class="logo">
-        <img routerLink="/" src="../assets/logo.svg" />
+      <div routerLink="/" class="logo">
+        <img src="../assets/logo.svg" />
       </div>
       <div class="nav__container">
         <ul class="nav" *ngIf="(breakPoint$ | async) === false">

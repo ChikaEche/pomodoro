@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Timer } from 'src/app/shared/timer';
+import { Timer } from 'src/app/shared/lib/timer';
 import { tap, takeUntil } from 'rxjs/operators';
-import defaultConfiguration from 'src/app/configurations/default-config';
+import defaultConfiguration from 'src/app/timer-config/default-config';
 import { Subject } from 'rxjs';
 
 @Injectable({
