@@ -2,7 +2,6 @@
 .features__container {
   display: flex;
   flex-direction: column;
-  font-family: museo-sans, 'Helvetica Neue', Helvetica, Aria, sans-serif;
 }
 
 .ripple__wrapper {
@@ -40,6 +39,7 @@
   font-size: 1em;
   text-align: center;
   flex-wrap: wrap;
+  margin: 0;
 }
 
 .description {
