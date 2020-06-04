@@ -1,16 +1,16 @@
 <div class="home-page__wrapper">
   <div class="description__container">
-    <div class="description">
+    <div [ngClass]="[description, descriptionResize]">
       <h1>Manage your time with Pomodoro and make the most out of it</h1>
       <h4>let your time work for you!!!</h4>
     </div>
-    <div class="desktop">
+    <div [ngClass]="[desktop, desktopResize]">
       <img class="desktop-image" src="../assets/desktop.svg" />
     </div>
   </div>
   <div class="features__container">
-    <div class="feature">
-      <div class="feature-desc">
+    <div [ngClass]="[feature, featureResize]">
+      <div [ngClass]="[featureDescription, featureDescriptionResize]">
         <h2>Create your tasks the easy way</h2>
         <h4>
           Simple and easy way of creating your tasks just by the click of a
@@ -20,15 +20,15 @@
 
         <h4>Select the number of sessions you want in your task</h4>
       </div>
-      <div class="task">
+      <div [ngClass]="[task, taskResize]">
         <img class="task-img" src="../assets/task.svg" />
       </div>
     </div>
-    <div class="feature">
-      <div class="chart">
+    <div [ngClass]="[featureChart, featureChartResize]">
+      <div [ngClass]="[chart, chartResize]">
         <img class="chart-img" src="../assets/chart.svg" />
       </div>
-      <div class="feature-desc extra">
+      <div [ngClass]="[featureChartDesc, extra, featureChartDescResize]">
         <h2>Monitor your progress with a provided statistics</h2>
         <h3>Get real time progress update</h3>
         <h3>Compare your progress with other users worldwide</h3>
@@ -36,7 +36,7 @@
     </div>
   </div>
   <div class="start">
-    <h1>You wanna be productive with your time?</h1>
+    <h2>You wanna be productive with your time?</h2>
     <a
       class="ripple mat-elevation-z4"
       matRipple

@@ -12,12 +12,24 @@ export class HomePageComponent implements OnInit {
   constructor(private breakPoint: BreakpointService) {}
   breakpoint: Observable<boolean>;
 
-  resizeNormal = 'resize-normal';
-  resizeSmall = '';
+  featureChartDesc = 'feature-desc';
+  extra = 'extra';
+  featureChartDescResize = '';
+  featureChart = 'feature-chart';
+  chart = 'chart';
+  featureChartResize = '';
+  chartResize = '';
+  description = 'description';
+  desktop = 'desktop';
+  desktopResize = '';
+  descriptionResize = '';
   isSmall = false;
-  featureDescription = 'feature-desc';
+  taskResize = '';
+  featureResize = '';
   feature = 'feature';
-  small = 'small';
+  featureDescriptionResize = '';
+  featureDescription = 'feature-desc';
+  task = 'task';
 
   ngOnInit(): void {
     this.breakpoint = this.breakPoint.isPalm$;
@@ -26,25 +38,37 @@ export class HomePageComponent implements OnInit {
         map((x) => {
           console.log(x);
           this.isSmall = x;
-          this.screenResize();
+          this.onScreenResize();
         })
       )
       .subscribe();
   }
 
-  screenResize() {
+  onScreenResize() {
     console.log('en');
     if (this.isSmall) {
       console.log('tr');
-      this.resizeNormal = '';
-      this.resizeSmall = 'resize-small';
-      this.small = '';
-      console.log(this.resizeSmall);
+      this.chartResize = 'chart-resize';
+      this.featureChartResize = 'feature-chart-resize';
+      this.featureChartDescResize = 'chart-desc';
+      this.extra = 'extra';
+      this.featureDescriptionResize = 'feature-desc-resize';
+      this.taskResize = 'task-resize';
+      this.featureResize = 'feature-resize';
+      this.descriptionResize = 'description-resize';
+      this.desktopResize = 'desktop-resize';
+      console.log(this.featureResize);
     } else {
-      console.log('el');
-      this.small = '';
-      this.resizeNormal = 'resize-normal';
-      this.resizeSmall = 'small';
+      this.featureChartResize = '';
+      this.chartResize = '';
+      this.featureChartDescResize = '';
+      this.extra = '';
+      this.taskResize = '';
+      this.featureResize = '';
+      this.featureDescriptionResize = '';
+      console.log(this.featureResize, 'el');
+      this.descriptionResize = '';
+      this.desktopResize = '';
     }
   }
 }

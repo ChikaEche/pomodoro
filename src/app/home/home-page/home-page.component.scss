@@ -32,8 +32,8 @@
 .description__container {
   background-color: rgb(255, 87, 87);
   //background-image: url("/src/assets/background.svg");
-  height: 90vh;
   display: flex;
+  padding: 30px;
   justify-content: center;
   align-items: center;
   color: white;
@@ -57,7 +57,7 @@
 }
 
 .chart {
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 .desktop-image {
@@ -90,11 +90,16 @@ ul {
 }
 
 .feature,
+.feature-chart,
 .start {
   display: flex;
   padding: 60px 80px 60px 80px;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.feature-chart {
+  align-items: center;
 }
 
 .feature-desc {
@@ -118,4 +123,30 @@ ul {
 
 a {
   text-decoration: none;
+}
+
+.desktop-resize,
+.task-resize,
+.chart-resize {
+  width: 70%;
+  justify-content: center;
+}
+
+.description-resize,
+.feature-desc-resize,
+.chart-desc {
+  text-align: center;
+  width: 90%;
+}
+
+.chart-desc {
+  padding-left: 0;
+}
+.feature-resize,
+.feature-chart-resize {
+  padding: 20px 0 20px 0;
+}
+
+.feature-chart-resize {
+  flex-wrap: wrap-reverse;
 }
