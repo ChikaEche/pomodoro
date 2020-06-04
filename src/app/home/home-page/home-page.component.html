@@ -1,0 +1,61 @@
+<div class="home-page__wrapper">
+  <div class="description__container mat-headline">
+    <div [ngClass]="[screen.description, screen.descriptionResize]">
+      <h1>Manage your time with Pomodoro and make the most out of it</h1>
+      <h4>let your time work for you!!!</h4>
+    </div>
+    <div [ngClass]="[screen.desktop, screen.desktopResize]">
+      <img class="desktop-image" src="../assets/desktop.svg" />
+    </div>
+  </div>
+  <div class="features__container mat-subheading-1">
+    <div [ngClass]="[screen.feature, screen.featureResize]">
+      <div
+        [ngClass]="[screen.featureDescription, screen.featureDescriptionResize]"
+      >
+        <h2>Create your tasks the easy way</h2>
+        <h4>
+          Simple and easy way of creating your tasks just by the click of a
+          button
+        </h4>
+        <h4>Focus on specific tasks for improved productivity</h4>
+
+        <h4>Select the number of sessions you want in your task</h4>
+      </div>
+      <div [ngClass]="[screen.task, screen.taskResize]">
+        <img class="task-img" src="../assets/task.svg" />
+      </div>
+    </div>
+    <div [ngClass]="[screen.featureChart, screen.featureChartResize]">
+      <div [ngClass]="[screen.chart, screen.chartResize]">
+        <img class="chart-img" src="../assets/chart.svg" />
+      </div>
+      <div
+        [ngClass]="[
+          screen.featureChartDesc,
+          screen.extra,
+          screen.featureChartDescResize
+        ]"
+      >
+        <h2>Monitor your progress with a provided statistics</h2>
+        <h3>Get real time progress update</h3>
+        <h3>Compare your progress with other users worldwide</h3>
+      </div>
+    </div>
+  </div>
+  <div class="start mat-subheading-1">
+    <h2>You wanna be productive with your time?</h2>
+    <a
+      class="ripple mat-elevation-z4"
+      matRipple
+      matRippleColor="#cc0000"
+      matRippleUnbounded="unbounded"
+      matRippleRadius="900"
+      matRippleCentered="centered"
+      routerLink="/dashboard"
+    >
+      <p>Start Pomodoro</p>
+    </a>
+  </div>
+  <app-footer></app-footer>
+</div>

@@ -1,0 +1,152 @@
+.home-page__wrapper,
+.features__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.ripple__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.features__container > div:nth-child(odd) {
+  background-color: rgb(216, 199, 199);
+  align-items: center;
+}
+
+.ripple {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 40px;
+  color: white;
+  background-color: #cc0000;
+  width: 200px;
+}
+
+.description__container {
+  background-color: rgb(255, 87, 87);
+  //background-image: url("/src/assets/background.svg");
+  display: flex;
+  padding: 30px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1em;
+  text-align: center;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.description {
+  text-align: left;
+  width: 45%;
+  padding: 20px;
+}
+
+.desktop,
+.task,
+.chart {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+}
+
+.chart {
+  justify-content: center;
+}
+
+.desktop-image {
+  width: 100%;
+}
+
+.footer {
+  color: white;
+  margin-top: 10px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 30vh;
+  background-color: rgb(255, 87, 87);
+}
+
+.about {
+  display: flex;
+  flex-direction: column;
+}
+
+ul {
+  list-style: none;
+}
+
+.image {
+  width: 20%;
+  height: 20%;
+}
+
+.feature,
+.feature-chart,
+.start {
+  display: flex;
+  padding: 60px 80px 60px 80px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.feature-chart {
+  align-items: center;
+}
+
+.feature-desc {
+  width: 60%;
+}
+
+.task-img,
+.chart-img {
+  width: 50%;
+}
+
+.extra {
+  padding-left: 40px;
+}
+
+.start {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+.desktop-resize,
+.task-resize,
+.chart-resize {
+  width: 70%;
+  justify-content: center;
+}
+
+.description-resize,
+.feature-desc-resize,
+.chart-desc {
+  text-align: center;
+  width: 90%;
+}
+
+.chart-desc {
+  padding-left: 0;
+}
+.feature-resize,
+.feature-chart-resize {
+  padding: 20px 0 20px 0;
+}
+
+.feature-chart-resize {
+  flex-wrap: wrap-reverse;
+}

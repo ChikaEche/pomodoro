@@ -24,7 +24,7 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles/main.scss"],
+            "styles": ["src/style.scss", "src/styles/main.scss"],
             "stylePreprocessorOptions": {
               "includePaths": ["src/styles"]
             },
@@ -86,7 +86,7 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles/main.scss"],
+            "styles": ["src/styles/main.scss", "src/style.scss"],
             "stylePreprocessorOptions": {
               "includePaths": ["src/styles"]
             },
@@ -119,5 +119,8 @@
       }
     }
   },
-  "defaultProject": "pomodoro"
+  "defaultProject": "pomodoro",
+  "cli": {
+    "analytics": "145b97c7-22c5-44be-9739-c609d6b6011f"
+  }
 }

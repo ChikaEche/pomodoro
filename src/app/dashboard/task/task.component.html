@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Hi, Create your task here</h1>
+<div mat-dialog-content>
+  <form [formGroup]="taskForm">
+    <div>
+      <mat-form-field>
+        <mat-label>Task</mat-label>
+        <input matInput formControlName="task" />
+        <mat-error>required</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Number of sessions</mat-label>
+        <input matInput formControlName="session" maxlength="2" />
+        <mat-error>Number is required</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button
+    color="primary"
+    [mat-dialog-close]="data.sessionNumber"
+    mat-raised-button
+    (click)="onClose()"
+    [disabled]="taskForm.invalid"
+  >
+    Ok
+  </button>
+</div>

@@ -1,0 +1,24 @@
+@import '~@angular/material/theming';
+@import './styles/themes/light';
+
+$custom-typography: mat-typography-config(
+  $font-family: 'Poppins',
+);
+
+@include mat-core($custom-typography);
+
+$pomodoro-app-primary: mat-palette($mat-primary);
+$pomodoro-app-accent: mat-palette($mat-accent);
+$pomodoro-app-warn: mat-palette($mat-warn);
+
+$pomodoro-app-theme: mat-light-theme(
+  $pomodoro-app-primary,
+  $pomodoro-app-accent,
+  $pomodoro-app-warn
+);
+
+@include angular-material-theme($pomodoro-app-theme);
+
+body {
+  margin: 0;
+}

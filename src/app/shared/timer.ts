@@ -1,37 +1,25 @@
-import { Observable, Subject, timer } from 'rxjs';
+import { Observable, Subject, timer, BehaviorSubject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 
 export class Timer {
   private countDownTimer$: Observable<number>;
-  private _countDownEnd$: Subject<void>;
+  countDownEnd$ = new Subject();
   private pause$: Subject<void>;
-  private seconds: number;
+  public seconds: number;
+  remainingSeconds$ = new BehaviorSubject(0);
 
-  public get countDownEnd$() {
-    return this._countDownEnd$;
-  }
-
-  public set coundDownEnd$(countDownEnd$: Subject<void>) {
-    if (!this._countDownEnd$) {
-      this._countDownEnd$ = countDownEnd$;
-    } else {
-      throw new Error('Unable to reinitialize this value');
-    }
-  }
-
-  constructor(readonly secs: number) {
-    this.seconds = secs;
-  }
+  constructor() {}
 
   start() {
     this.pause$ = new Subject<void>();
-    this.countDownTimer$ = timer(0, 1000).pipe(
+    this.countDownTimer$ = timer(1000, 1000).pipe(
       takeUntil(this.pause$),
       tap(() => {
         if (this.seconds === 0) {
-          stop();
+          this.stop();
         } else {
           this.seconds = this.seconds - 1;
+          this.remainingSeconds$.next(this.seconds);
         }
       })
     );
@@ -39,14 +27,22 @@ export class Timer {
   }
 
   pause() {
-    this.pause$.next();
-    this.pause$.complete();
+    if (this.pause$) {
+      this.pause$.next();
+      this.pause$.complete();
+    }
   }
 
   stop() {
-    this.countDownEnd$.next();
-    this.coundDownEnd$.complete();
     this.pause$.next();
     this.pause$.complete();
+    this.countDownEnd$.next();
+  }
+
+  onDestroy() {
+    if (this.pause$) {
+      this.pause$.next();
+      this.pause$.complete();
+    }
   }
 }

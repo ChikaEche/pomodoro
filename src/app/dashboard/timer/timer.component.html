@@ -1,0 +1,84 @@
+<div class="timer__container mat-subheading-1">
+  <ng-container
+    *ngTemplateOutlet="(breakPoint$ | async) ? noShrink : shrink"
+  ></ng-container>
+
+  <ng-template #shrink>
+    <div class="task">
+      <button mat-raised-button color="accent" (click)="openDiaglog()">
+        <mat-icon>add</mat-icon>
+        Create new Task
+      </button>
+    </div>
+  </ng-template>
+
+  <ng-template #noShrink>
+    <div class="task small">
+      <button mat-raised-button color="accent" (click)="openDiaglog()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </ng-template>
+
+  <button
+    class="toogle-button"
+    mat-raised-button
+    color="accent"
+    (click)="toogleCard()"
+    *ngIf="cardToggle === false && (breakPoint$ | async) === true"
+  >
+    Show Daily stats
+  </button>
+
+  <div
+    class="card"
+    *ngIf="cardToggle === true || (breakPoint$ | async) === false"
+  >
+    <mat-card>
+      <mat-icon
+        class="close"
+        (click)="toogleCard()"
+        *ngIf="breakPoint$ | async"
+      >
+        clear
+      </mat-icon>
+      <mat-card-title color="accent">Daily Statistics</mat-card-title>
+      <mat-card-content>
+        <p>Hey,</p>
+        <p>You have completed {{ sessionCount }} sessions</p>
+        <p>You had {{ breakCount }} breaks</p>
+        <ng-container
+          *ngTemplateOutlet="currentTask === '' ? noTask : task"
+        ></ng-container>
+        <ng-template #task>
+          <p>Current task: {{ currentTask }}</p>
+        </ng-template>
+        <ng-template #noTask>
+          <p>You don't have a task</p>
+          <p>Click on create new task</p>
+        </ng-template>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="time">
+    {{ timeTrackerService.timerClass.seconds | convertToMinutes }}
+    <h2 [ngStyle]="{ animation: animations.animation }">:</h2>
+    {{ timeTrackerService.timerClass.seconds | convertToSeconds }}
+  </div>
+  <div class="icon__wrap">
+    <div>
+      <ng-container
+        *ngTemplateOutlet="toggle ? startToggle : pauseToggle"
+      ></ng-container>
+    </div>
+    <mat-icon class="icon" (click)="restart()">replay</mat-icon>
+  </div>
+
+  <ng-template #startToggle>
+    <mat-icon class="icon" (click)="start()">play_circle_filled</mat-icon>
+  </ng-template>
+  <ng-template #pauseToggle>
+    <mat-icon class="icon" (click)="pause()">pause_circle_filled</mat-icon>
+  </ng-template>
+</div>
