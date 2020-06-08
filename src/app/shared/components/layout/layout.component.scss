@@ -52,7 +52,30 @@ img {
   float: right;
 }
 
-a {
+.logout {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+
+.profile-picture {
+  border-color: 'green';
+  border-image: none;
+  border-radius: 50% 50% 50% 50%;
+  border-width: 25px;
+  overflow: hidden;
+  width: 40px;
+  padding: 10px;
+}
+
+.profile,
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav a {
   text-decoration: none;
   color: white;
 }

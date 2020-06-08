@@ -19,6 +19,13 @@ export class LoginPageComponent implements OnInit {
 
   constructor(private route: Router, private authService: AuthService) {
     this.state = this.route.getCurrentNavigation().extras.state;
+    if (this.state === 'login') {
+      this.state = 'login';
+    } else if (this.state === 'sign up') {
+      this.state = 'sign up';
+    } else {
+      this.state = 'login';
+    }
   }
 
   ngOnInit(): void {}

@@ -3,10 +3,20 @@
     <mat-icon class="icon" (click)="sidenav.close()">clear</mat-icon>
     <div class="nav-content">
       <ul class="nav-list">
-        <li><a [routerLink]="['login']" state="login">Login</a></li>
-        <li><a [routerLink]="['/login']" state="sign up">Sign Up</a></li>
-        <li>Features</li>
-        <li>Learn about About Pomodoro</li>
+        <ng-container
+          *ngTemplateOutlet="(afAuth.user | async) ? navProfile : navNoUser"
+        ></ng-container>
+
+        <ng-template #navProfile>
+          <li><p (click)="logOut()">Logout</p></li>
+        </ng-template>
+
+        <ng-template #navNoUser>
+          <li><a [routerLink]="['login']" state="login">Login</a></li>
+          <li><a [routerLink]="['/login']" state="sign up">Sign Up</a></li>
+          <li>Features</li>
+          <li>Learn about About Pomodoro</li>
+        </ng-template>
       </ul>
     </div>
   </mat-sidenav>
@@ -21,7 +31,21 @@
       <div routerLink="/" class="logo">
         <img src="../assets/logo.svg" />
       </div>
-      <div class="nav__container">
+
+      <div *ngIf="afAuth.user | async as user" class="profile">
+        <div class="picture-container">
+          <img class="profile-picture" [src]="user.photoURL" />
+        </div>
+        <a
+          class="logout"
+          *ngIf="(breakPoint$ | async) === false"
+          (click)="logOut()"
+        >
+          Log out</a
+        >
+      </div>
+
+      <div *ngIf="(afAuth.user | async) === null" class="nav__container">
         <ul class="nav" *ngIf="(breakPoint$ | async) === false">
           <li>
             <a [routerLink]="['login']" state="login">Login</a>
