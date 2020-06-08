@@ -1,0 +1,36 @@
+.login__container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login__wrap {
+  padding: 10px;
+  border: solid;
+  border-radius: 10px;
+  display: inherit;
+  flex-direction: inherit;
+}
+
+.form-field {
+  width: 25vw;
+}
+
+.google-login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.google {
+  background-color: green;
+}
+
+a {
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer;
+}

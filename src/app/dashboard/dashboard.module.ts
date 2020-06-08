@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { TaskComponent } from './task/task.component';
 import { TimerConfigModule } from '../timer-config/timer-config.module';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { TimerConfigModule } from '../timer-config/timer-config.module';
     DashboardComponent,
     StatisticsComponent,
     TaskComponent,
+    ProfileComponent,
   ],
   imports: [DashboardRoutingModule, SharedModule, TimerConfigModule],
 })

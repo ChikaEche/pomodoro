@@ -1,0 +1,43 @@
+<div class="login__container">
+  <div class="login__wrap">
+    <form [formGroup]="login">
+      <div class="fullname" *ngIf="state === 'sign up'">
+        <p class="form-name">Full name</p>
+        <mat-form-field class="form-field" appearance="outline">
+          <input matInput formControlName="fullName" />
+          <mat-error>Name is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="email">
+        <p class="form-name">Email</p>
+        <mat-form-field class="form-field" appearance="outline">
+          <input type="email" matInput formControlName="email" />
+          <mat-error>Valid Email is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="password">
+        <p class="form-name">Password</p>
+        <mat-form-field class="form-field" appearance="outline">
+          <input matInput formControlName="password" />
+          <mat-error>
+            Password is required and must be at least six characters
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </form>
+    <p (click)="stateToggle('sign up')" *ngIf="state === 'login'">
+      Don't have an accoutn? <a>Sign up now</a>
+    </p>
+
+    <p (click)="stateToggle('login')" *ngIf="state === 'sign up'">
+      Already have an account? <a>Login</a>
+    </p>
+    <div class="google-login">
+      <div class="google">
+        <p>Sign In with Google</p>
+      </div>
+    </div>
+  </div>
+</div>

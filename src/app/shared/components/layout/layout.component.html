@@ -3,8 +3,8 @@
     <mat-icon class="icon" (click)="sidenav.close()">clear</mat-icon>
     <div class="nav-content">
       <ul class="nav-list">
-        <li>Login</li>
-        <li>Sign Up</li>
+        <li><a [routerLink]="['login']" state="login">Login</a></li>
+        <li><a [routerLink]="['/login']" state="sign up">Sign Up</a></li>
         <li>Features</li>
         <li>Learn about About Pomodoro</li>
       </ul>
@@ -24,10 +24,10 @@
       <div class="nav__container">
         <ul class="nav" *ngIf="(breakPoint$ | async) === false">
           <li>
-            Login
+            <a [routerLink]="['login']" state="login">Login</a>
           </li>
           <li>
-            Sign Up
+            <a [routerLink]="['/login']" state="sign up">Sign Up</a>
           </li>
           <li>
             Features
