@@ -39,7 +39,7 @@ export class AuthService {
       await resp.user.updateProfile({ displayName: `${name}` });
       this.refreshUserData(resp.user);
       const uid = resp.user.uid;
-      this.router.navigate([`/profile/${uid}`]);
+      this.router.navigate([`/dashboard/${uid}`]);
     } catch (error) {
       console.log(error.message);
     }
@@ -51,7 +51,7 @@ export class AuthService {
       resp = await this.afAuth.signInWithEmailAndPassword(email, password);
       const uid = resp.user.uid;
       this.refreshUserData(resp.user);
-      this.router.navigate([`/profile/${uid}`]);
+      this.router.navigate([`/dashboard/${uid}`]);
     } catch (error) {
       console.log(error.message);
     }
@@ -61,7 +61,7 @@ export class AuthService {
     from(this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider()))
       .pipe(
         switchMap(({ user }) => {
-          this.router.navigate([`/profile/${user.uid}`]);
+          this.router.navigate([`/dashboard/${user.uid}`]);
           return this.refreshUserData(user);
         })
       )

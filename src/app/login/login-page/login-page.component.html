@@ -33,7 +33,7 @@
       mat-raised-button
       color="accent"
       (click)="userLogin()"
-      [disabled]="login.invalid"
+      [disabled]="login.get('email').invalid"
     >
       Login
     </button>
