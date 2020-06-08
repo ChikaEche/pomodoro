@@ -27,6 +27,27 @@
         </mat-form-field>
       </div>
     </form>
+
+    <button
+      *ngIf="state === 'login'"
+      mat-raised-button
+      color="accent"
+      (click)="userLogin()"
+      [disabled]="login.invalid"
+    >
+      Login
+    </button>
+
+    <button
+      *ngIf="state === 'sign up'"
+      mat-raised-button
+      color="accent"
+      (click)="emailAndPasswordSignUp()"
+      [disabled]="login.invalid"
+    >
+      Sign Up
+    </button>
+
     <p (click)="stateToggle('sign up')" *ngIf="state === 'login'">
       Don't have an accoutn? <a>Sign up now</a>
     </p>
@@ -34,7 +55,7 @@
     <p (click)="stateToggle('login')" *ngIf="state === 'sign up'">
       Already have an account? <a>Login</a>
     </p>
-    <div class="google-login">
+    <div (click)="googleLogin()" class="google-login">
       <div class="google">
         <p>Sign In with Google</p>
       </div>
