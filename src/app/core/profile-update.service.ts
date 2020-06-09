@@ -25,8 +25,18 @@ export class ProfileUpdateService {
       .currentUser.updateProfile({
         displayName: userName,
       })
-      .then(() => alert('Name updated successfully'))
+      .then(() => '')
       .catch((error) => console.log('cannot update name'));
+    const uid = firebase.auth().currentUser.uid;
+
+    this.afs
+      .collection('users')
+      .doc(uid)
+      .update({
+        displayName: userName,
+      })
+      .then(() => alert('your name has been successfully updated'))
+      .catch((error) => console.log('cannot upadte name'));
   }
 
   passwordResetEmail(email: string) {

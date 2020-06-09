@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { tap } from 'rxjs/operators';
 import { User } from 'src/app/shared/interfaces/user.interface';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ProfileUpdateService } from 'src/app/core/profile-update.service';
 
 @Component({
   selector: 'app-profile',
@@ -24,7 +25,10 @@ export class ProfileComponent implements OnInit {
     email: new FormControl('', [Validators.required]),
   });
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private profileUpdateService: ProfileUpdateService
+  ) {}
 
   ngOnInit(): void {
     this.authService.user$
@@ -46,5 +50,9 @@ export class ProfileComponent implements OnInit {
     } else if (state === 'password-change') {
       this.profileState = 'password-change';
     }
+  }
+
+  updateName() {
+    this.profileUpdateService.nameUpadate(this.profile.get('name').value);
   }
 }

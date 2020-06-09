@@ -68,7 +68,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   passwordResetToggle() {
-    this.passwordLoginToggle = false;
+    this.passwordLoginToggle = !this.passwordLoginToggle;
   }
 
   stateToggle(state: string) {

@@ -8,9 +8,6 @@
       <p (click)="profileStateToggle('manage-account')" class="manage-account">
         Manage my account
       </p>
-      <p (click)="profileStateToggle('password-change')" class="manage-account">
-        Change my password
-      </p>
       <p class="manage-account">Delete my account</p>
     </div>
   </div>
@@ -34,30 +31,9 @@
           </mat-form-field>
         </div>
       </form>
-      <button mat-button color="primary">Update account</button>
-    </div>
-    <div *ngIf="profileState === 'password-change'" class="password-change">
-      <form [formGroup]="password">
-        <div class="name form-content">
-          <p class="form-name">Current password</p>
-          <mat-form-field class="form" appearance="outline">
-            <input matInput type="password" formControlName="currentPassword" />
-          </mat-form-field>
-        </div>
-        <div class="new-password form-content">
-          <p class="form-name">New password</p>
-          <mat-form-field class="form" appearance="outline">
-            <input matInput type="password" formControlName="newPassword" />
-          </mat-form-field>
-        </div>
-        <div class="retype-password form-content">
-          <p class="form-name">New password</p>
-          <mat-form-field class="form" appearance="outline">
-            <input matInput type="password" formControlName="retypePassword" />
-          </mat-form-field>
-        </div>
-      </form>
-      <button mat-button color="primary">Change password</button>
+      <button (click)="updateName()" mat-button color="primary">
+        Update account
+      </button>
     </div>
   </div>
 </div>
