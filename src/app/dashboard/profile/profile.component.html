@@ -8,7 +8,9 @@
       <p (click)="profileStateToggle('manage-account')" class="manage-account">
         Manage my account
       </p>
-      <p class="manage-account">Delete my account</p>
+      <p (click)="profileStateToggle('delete')" class="manage-account">
+        Delete my account
+      </p>
     </div>
   </div>
   <div class="option__wrapper">
@@ -34,6 +36,34 @@
       <button (click)="updateName()" mat-button color="primary">
         Update account
       </button>
+    </div>
+    <div *ngIf="profileState === 'delete'" class="profile">
+      <form [formGroup]="userDelete">
+        <div class="name form-content">
+          <p class="form-name">Reason</p>
+          <mat-form-field class="form" appearance="outline">
+            <input matInput formControlName="reason" />
+            <mat-error>Reason is required</mat-error>
+          </mat-form-field>
+        </div>
+      </form>
+      <div class="delete">
+        <button
+          [disabled]="userDelete.invalid"
+          (click)="deleteUser()"
+          mat-raised-button
+          color="primary"
+        >
+          Delete
+        </button>
+        <button
+          (click)="profileStateToggle('manage-account')"
+          mat-raised-button
+          color="primary"
+        >
+          Cancel
+        </button>
+      </div>
     </div>
   </div>
 </div>

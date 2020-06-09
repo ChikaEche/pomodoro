@@ -4,6 +4,7 @@ import { tap } from 'rxjs/operators';
 import { User } from 'src/app/shared/interfaces/user.interface';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProfileUpdateService } from 'src/app/core/profile-update.service';
+import { DeleteUserService } from 'src/app/core/delete-user.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,10 +15,8 @@ export class ProfileComponent implements OnInit {
   userProfile: User;
   profileState = 'manage-account';
 
-  password = new FormGroup({
-    currentPassword: new FormControl('', [Validators.required]),
-    newPassword: new FormControl('', [Validators.required]),
-    retypePassword: new FormControl('', [Validators.required]),
+  userDelete = new FormGroup({
+    reason: new FormControl('', [Validators.required]),
   });
 
   profile = new FormGroup({
@@ -27,7 +26,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private profileUpdateService: ProfileUpdateService
+    private profileUpdateService: ProfileUpdateService,
+    private deleteUserService: DeleteUserService
   ) {}
 
   ngOnInit(): void {
@@ -47,12 +47,16 @@ export class ProfileComponent implements OnInit {
   profileStateToggle(state: string) {
     if (state === 'manage-account') {
       this.profileState = 'manage-account';
-    } else if (state === 'password-change') {
-      this.profileState = 'password-change';
+    } else if (state === 'delete') {
+      this.profileState = 'delete';
     }
   }
 
   updateName() {
     this.profileUpdateService.nameUpadate(this.profile.get('name').value);
+  }
+
+  deleteUser() {
+    this.deleteUserService.deletUser();
   }
 }
