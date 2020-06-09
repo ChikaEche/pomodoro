@@ -1,1 +1,63 @@
-<p>profile works!</p>
+<div class="profile__container">
+  <div class="account__wrapper">
+    <div class="profile-picture">
+      <img class="picture" [src]="userProfile.photoURL" />
+    </div>
+    <p>{{ userProfile.displayName }}</p>
+    <div class="account-reference">
+      <p (click)="profileStateToggle('manage-account')" class="manage-account">
+        Manage my account
+      </p>
+      <p (click)="profileStateToggle('password-change')" class="manage-account">
+        Change my password
+      </p>
+      <p class="manage-account">Delete my account</p>
+    </div>
+  </div>
+  <div class="option__wrapper">
+    <div *ngIf="profileState === 'manage-account'" class="profile">
+      <form [formGroup]="profile">
+        <div class="name form-content">
+          <p class="form-name">Name</p>
+          <mat-form-field class="form" appearance="outline">
+            <input
+              matInput
+              formControlName="name"
+              [value]="userProfile.displayName"
+            />
+          </mat-form-field>
+        </div>
+        <div class="email form-content">
+          <p class="form-name">Email</p>
+          <mat-form-field class="form" appearance="outline">
+            <input matInput type="email" formControlName="email" />
+          </mat-form-field>
+        </div>
+      </form>
+      <button mat-button color="primary">Update account</button>
+    </div>
+    <div *ngIf="profileState === 'password-change'" class="password-change">
+      <form [formGroup]="password">
+        <div class="name form-content">
+          <p class="form-name">Current password</p>
+          <mat-form-field class="form" appearance="outline">
+            <input matInput type="password" formControlName="currentPassword" />
+          </mat-form-field>
+        </div>
+        <div class="new-password form-content">
+          <p class="form-name">New password</p>
+          <mat-form-field class="form" appearance="outline">
+            <input matInput type="password" formControlName="newPassword" />
+          </mat-form-field>
+        </div>
+        <div class="retype-password form-content">
+          <p class="form-name">New password</p>
+          <mat-form-field class="form" appearance="outline">
+            <input matInput type="password" formControlName="retypePassword" />
+          </mat-form-field>
+        </div>
+      </form>
+      <button mat-button color="primary">Change password</button>
+    </div>
+  </div>
+</div>
