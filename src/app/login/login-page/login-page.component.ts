@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { BreakpointService } from 'src/app/core/services/breakpoint.service';
+import { Observable, Subject } from 'rxjs';
+import { tap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-page',
@@ -10,6 +13,10 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class LoginPageComponent implements OnInit {
   state;
+  isSmall = false;
+  formField = 'form-field';
+  formFieldSmall = '';
+  destroy$ = new Subject<void>();
 
   login = new FormGroup({
     fullName: new FormControl('', [Validators.required]),
@@ -17,7 +24,20 @@ export class LoginPageComponent implements OnInit {
     password: new FormControl('', [Validators.required]),
   });
 
-  constructor(private route: Router, private authService: AuthService) {
+  constructor(
+    private route: Router,
+    private authService: AuthService,
+    private breakPointService: BreakpointService
+  ) {
+    this.breakPointService.isPalm$
+      .pipe(
+        takeUntil(this.destroy$),
+        tap((x) => {
+          this.isSmall = x;
+          this.onScreenResize();
+        })
+      )
+      .subscribe({ error: (err) => console.warn('on screen resize error') });
     this.state = this.route.getCurrentNavigation().extras.state;
     if (this.state === 'login') {
       this.state = 'login';
@@ -29,6 +49,16 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  onScreenResize() {
+    if (this.isSmall) {
+      this.formFieldSmall = 'form-field-small';
+      this.formField = '';
+    } else {
+      this.formField = 'form-field';
+      this.formFieldSmall = '';
+    }
+  }
 
   stateToggle(state: string) {
     if (state === 'login') {

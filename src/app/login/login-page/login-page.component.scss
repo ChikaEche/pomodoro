@@ -7,6 +7,7 @@
 }
 
 .login__wrap {
+  margin-top: 20px;
   padding: 10px;
   border: solid;
   border-radius: 10px;
@@ -15,7 +16,11 @@
 }
 
 .form-field {
-  width: 25vw;
+  width: 40vw;
+}
+
+.form-field-small {
+  width: 100%;
 }
 
 .google-login {

@@ -3,7 +3,10 @@
     <form [formGroup]="login">
       <div class="fullname" *ngIf="state === 'sign up'">
         <p class="form-name">Full name</p>
-        <mat-form-field class="form-field" appearance="outline">
+        <mat-form-field
+          [ngClass]="[formField, formFieldSmall]"
+          appearance="outline"
+        >
           <input matInput formControlName="fullName" />
           <mat-error>Name is required</mat-error>
         </mat-form-field>
@@ -11,15 +14,21 @@
 
       <div class="email">
         <p class="form-name">Email</p>
-        <mat-form-field class="form-field" appearance="outline">
-          <input type="email" matInput formControlName="email" />
+        <mat-form-field
+          [ngClass]="[formField, formFieldSmall]"
+          appearance="outline"
+        >
+          <input type="email" class="input" matInput formControlName="email" />
           <mat-error>Valid Email is required</mat-error>
         </mat-form-field>
       </div>
 
       <div class="password">
         <p class="form-name">Password</p>
-        <mat-form-field class="form-field" appearance="outline">
+        <mat-form-field
+          [ngClass]="[formField, formFieldSmall]"
+          appearance="outline"
+        >
           <input matInput formControlName="password" />
           <mat-error>
             Password is required and must be at least six characters
