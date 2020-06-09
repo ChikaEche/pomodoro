@@ -1,5 +1,25 @@
 <div class="login__container">
-  <div class="login__wrap">
+  <div class="password-reset" *ngIf="passwordLoginToggle === false">
+    <form [formGroup]="pswd">
+      <p class="form-name">Email</p>
+      <mat-form-field
+        [ngClass]="[formField, formFieldSmall]"
+        appearance="outline"
+      >
+        <input type="email" matInput formControlName="email" />
+        <mat-error>Email is required</mat-error>
+      </mat-form-field>
+    </form>
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="resetPassword()"
+      [disabled]="pswd.get('email').invalid"
+    >
+      Reset
+    </button>
+  </div>
+  <div class="login__wrap" *ngIf="passwordLoginToggle === true">
     <form [formGroup]="login">
       <div class="fullname" *ngIf="state === 'sign up'">
         <p class="form-name">Full name</p>
@@ -59,6 +79,9 @@
 
     <p (click)="stateToggle('sign up')" *ngIf="state === 'login'">
       Don't have an accoutn? <a>Sign up now</a>
+    </p>
+    <p>
+      Forgot password? <a (click)="passwordResetToggle()">Reset password</a>
     </p>
 
     <p (click)="stateToggle('login')" *ngIf="state === 'sign up'">

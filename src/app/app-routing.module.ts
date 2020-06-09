@@ -6,6 +6,7 @@ import {
   canActivate,
 } from '@angular/fire/auth-guard';
 import { map } from 'rxjs/operators';
+import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['/login']);
 const redirectToProfile = () =>
@@ -30,6 +31,10 @@ const routes: Routes = [
     data: {
       authGuardPipe: redirectToProfile,
     },
+  },
+  {
+    path: 'password-reset',
+    component: PasswordResetComponent,
   },
 ];
 

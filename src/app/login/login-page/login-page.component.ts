@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { BreakpointService } from 'src/app/core/services/breakpoint.service';
 import { Observable, Subject } from 'rxjs';
 import { tap, takeUntil } from 'rxjs/operators';
+import { ProfileUpdateService } from 'src/app/core/profile-update.service';
 
 @Component({
   selector: 'app-login-page',
@@ -12,11 +13,16 @@ import { tap, takeUntil } from 'rxjs/operators';
   styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent implements OnInit {
+  passwordLoginToggle = true;
   state;
   isSmall = false;
   formField = 'form-field';
   formFieldSmall = '';
   destroy$ = new Subject<void>();
+
+  pswd = new FormGroup({
+    email: new FormControl('', [Validators.required]),
+  });
 
   login = new FormGroup({
     fullName: new FormControl('', [Validators.required]),
@@ -27,7 +33,8 @@ export class LoginPageComponent implements OnInit {
   constructor(
     private route: Router,
     private authService: AuthService,
-    private breakPointService: BreakpointService
+    private breakPointService: BreakpointService,
+    private profileUpdateService: ProfileUpdateService
   ) {
     this.breakPointService.isPalm$
       .pipe(
@@ -60,6 +67,10 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
+  passwordResetToggle() {
+    this.passwordLoginToggle = false;
+  }
+
   stateToggle(state: string) {
     if (state === 'login') {
       this.state = 'login';
@@ -89,5 +100,10 @@ export class LoginPageComponent implements OnInit {
       this.login.get('email').value,
       this.login.get('password').value
     );
+  }
+
+  resetPassword() {
+    this.profileUpdateService.passwordResetEmail(this.pswd.get('email').value);
+    this.passwordLoginToggle = true;
   }
 }

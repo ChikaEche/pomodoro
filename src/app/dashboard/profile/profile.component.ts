@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { tap } from 'rxjs/operators';
 import { User } from 'src/app/shared/interfaces/user.interface';
@@ -26,11 +24,7 @@ export class ProfileComponent implements OnInit {
     email: new FormControl('', [Validators.required]),
   });
 
-  constructor(
-    private afAuth: AngularFireAuth,
-    private afs: AngularFirestore,
-    private authService: AuthService
-  ) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.authService.user$

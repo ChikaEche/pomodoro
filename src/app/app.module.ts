@@ -9,9 +9,10 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
+import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, PasswordResetComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
