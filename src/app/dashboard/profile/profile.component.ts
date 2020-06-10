@@ -3,8 +3,8 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { tap } from 'rxjs/operators';
 import { User } from 'src/app/shared/interfaces/user.interface';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ProfileUpdateService } from 'src/app/core/profile-update.service';
-import { DeleteUserService } from 'src/app/core/delete-user.service';
+import { ProfileUpdateService } from 'src/app/core/services/profile-update.service';
+import { DeleteUserService } from 'src/app/core/services/delete-user.service';
 
 @Component({
   selector: 'app-profile',

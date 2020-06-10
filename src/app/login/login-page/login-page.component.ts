@@ -5,7 +5,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { BreakpointService } from 'src/app/core/services/breakpoint.service';
 import { Observable, Subject } from 'rxjs';
 import { tap, takeUntil } from 'rxjs/operators';
-import { ProfileUpdateService } from 'src/app/core/profile-update.service';
+import { ProfileUpdateService } from 'src/app/core/services/profile-update.service';
 
 @Component({
   selector: 'app-login-page',

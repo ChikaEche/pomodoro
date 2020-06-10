@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Observable, of, from } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap, first } from 'rxjs/operators';
 import { User } from 'src/app/shared/interfaces/user.interface';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {
@@ -10,6 +10,7 @@ import {
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
 import { UserRole } from 'src/app/shared/enums/user-role.enum';
+import { CreateConfigService } from './create-config.service';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,8 @@ export class AuthService {
     private readonly router: Router,
     private readonly ngZone: NgZone, // TODO -> call ngZone later to remove console warnings
     public readonly afAuth: AngularFireAuth,
-    private readonly afStore: AngularFirestore
+    private readonly afStore: AngularFirestore,
+    private readonly createConfigService: CreateConfigService
   ) {
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
@@ -32,6 +34,10 @@ export class AuthService {
     );
   }
 
+  getCurrentUser(): Promise<User> {
+    return this.user$.pipe(first()).toPromise();
+  }
+
   async emailAndPasswordSignUp(email: string, name: string, password: string) {
     try {
       let resp;
@@ -39,6 +45,7 @@ export class AuthService {
       await resp.user.updateProfile({ displayName: `${name}` });
       this.refreshUserData(resp.user);
       const uid = resp.user.uid;
+      this.createConfigService.createConfig(uid);
       this.router.navigate(['/dashboard']);
     } catch (error) {
       console.log(error.message);
@@ -50,6 +57,7 @@ export class AuthService {
       let resp;
       resp = await this.afAuth.signInWithEmailAndPassword(email, password);
       const uid = resp.user.uid;
+      this.createConfigService.checkExistingConfig(uid);
       this.refreshUserData(resp.user);
       this.router.navigate(['/dashboard']);
     } catch (error) {
@@ -61,6 +69,7 @@ export class AuthService {
     from(this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider()))
       .pipe(
         switchMap(({ user }) => {
+          this.createConfigService.checkExistingConfig(user.uid);
           this.router.navigate(['/dashboard']);
           return this.refreshUserData(user);
         })

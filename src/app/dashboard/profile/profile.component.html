@@ -1,7 +1,12 @@
 <div class="profile__container">
   <div class="account__wrapper">
     <div class="profile-picture">
-      <img class="picture" [src]="userProfile.photoURL" />
+      <img
+        *ngIf="userProfile.photoURL"
+        class="picture"
+        [src]="userProfile.photoURL"
+        onerror="this.src='../assets/contact.PNG'"
+      />
     </div>
     <p>{{ userProfile.displayName }}</p>
     <div class="account-reference">
@@ -40,7 +45,12 @@
     <div *ngIf="profileState === 'delete'" class="profile">
       <form [formGroup]="userDelete">
         <div class="name form-content">
-          <p class="form-name">Reason</p>
+          <p>Hi, {{ userProfile.displayName }}</p>
+          <p>Thank you for using Pomodoro. It's sad saying goodbye</p>
+          <p>
+            Please tell us the reason why you want to delete your accout to help
+            improve Pomodoro
+          </p>
           <mat-form-field class="form" appearance="outline">
             <input matInput formControlName="reason" />
             <mat-error>Reason is required</mat-error>
@@ -54,7 +64,7 @@
           mat-raised-button
           color="primary"
         >
-          Delete
+          Delete account
         </button>
         <button
           (click)="profileStateToggle('manage-account')"

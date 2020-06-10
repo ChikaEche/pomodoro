@@ -36,6 +36,7 @@
       <div *ngIf="afAuth.user | async as user" class="profile">
         <div class="picture-container">
           <img
+            routerLink="/dashboard"
             class="profile-picture"
             [src]="user.photoURL"
             onerror="this.src='../assets/contact.PNG'"

@@ -26,6 +26,7 @@ export class HomePageComponent implements OnInit {
         })
       )
       .subscribe();
+    window.localStorage.setItem('email', 'chiks');
   }
 
   onScreenResize() {

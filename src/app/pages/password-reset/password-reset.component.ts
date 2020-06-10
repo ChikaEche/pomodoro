@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { ProfileUpdateService } from 'src/app/core/profile-update.service';
+import { ProfileUpdateService } from 'src/app/core/services/profile-update.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({

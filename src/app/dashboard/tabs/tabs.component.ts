@@ -5,6 +5,11 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss'],
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   constructor() {}
+
+  ngOnInit() {
+    const storage = window.localStorage.getItem('email');
+    console.log(storage);
+  }
 }
