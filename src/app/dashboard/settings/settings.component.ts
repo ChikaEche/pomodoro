@@ -29,9 +29,9 @@ export class SettingsComponent implements OnInit {
   });
 
   constructor(
-    private timeTrackerService: TimeTrackerService,
     private readonly afs: AngularFirestore,
-    private readonly createConfigService: CreateConfigService
+    private readonly createConfigService: CreateConfigService,
+    private readonly timeTrackerService: TimeTrackerService
   ) {
     this.createConfigService.config$
       .pipe(
@@ -52,13 +52,6 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {}
 
   apply() {
-    this.timeTrackerService.configChange(
-      this.settings.get('sessionLength').value * 60,
-      this.settings.get('breakLength').value * 60,
-      this.settings.get('additionalBreak').value * 60,
-      this.settings.get('longBreakInterval').value,
-      this.defaultConfig.autoplay
-    );
     this.configUpdate = {
       sessionTime: this.settings.get('sessionLength').value * 60,
       breakTime: this.settings.get('breakLength').value * 60,
@@ -67,5 +60,6 @@ export class SettingsComponent implements OnInit {
       additionalBreakTime: this.settings.get('additionalBreak').value * 60,
     };
     this.afs.doc(`configuration/${this.uid}`).set(this.configUpdate);
+    this.timeTrackerService.configChange();
   }
 }

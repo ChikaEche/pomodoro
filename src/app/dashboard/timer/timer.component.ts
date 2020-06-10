@@ -46,7 +46,7 @@ export class TimerComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
         tap(() => {
           this.currentTask = this.taskDialogService.task;
-          if (!this.timeTrackerService.configuration.autoPlay) {
+          if (!this.timeTrackerService.userConfig.autoplay) {
             this.toggle = true;
             this.animations.animation = `blink ${0}s infinite alternate`;
           }

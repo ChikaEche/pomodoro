@@ -45,8 +45,8 @@
       <mat-card-title color="accent">Daily Statistics</mat-card-title>
       <mat-card-content>
         <p>Hey,</p>
-        <p>You have completed {{ sessionCount }} sessions</p>
-        <p>You had {{ breakCount }} breaks</p>
+        <p>You have completed {{ timeTrackerService.sessionCount }} sessions</p>
+        <p>You had {{ timeTrackerService.breakCount }} breaks</p>
         <ng-container
           *ngTemplateOutlet="currentTask === '' ? noTask : task"
         ></ng-container>

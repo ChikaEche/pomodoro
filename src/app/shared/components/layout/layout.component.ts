@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointService } from '../../../core/services/breakpoint.service';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { tap, switchMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -26,6 +25,7 @@ export class LayoutComponent implements OnInit {
 
   logOut() {
     this.authService.logout();
+    setTimeout(() => window.location.reload(), 500);
   }
 
   ngOnInit(): void {}
