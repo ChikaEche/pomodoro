@@ -15,7 +15,6 @@ import { tap } from 'rxjs/operators';
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
-  Userconfig: Configuration;
   configUpdate: Configuration;
   uid = firebase.auth().currentUser.uid;
   defaultConfig = defaultConfiguration;
@@ -23,22 +22,10 @@ export class SettingsComponent implements OnInit {
 
   validation = [Validators.required, Validators.pattern('^[1-9][0-9]*$')];
   settings = new FormGroup({
-    sessionLength: new FormControl(
-      this.defaultConfig.sessionTime / 60,
-      this.validation
-    ),
-    breakLength: new FormControl(
-      this.defaultConfig.breakTime / 60,
-      this.validation
-    ),
-    additionalBreak: new FormControl(
-      this.defaultConfig.additionalBreakTime / 60,
-      this.validation
-    ),
-    longBreakInterval: new FormControl(
-      this.defaultConfig.longBreakInterval,
-      this.validation
-    ),
+    sessionLength: new FormControl('', this.validation),
+    breakLength: new FormControl('', this.validation),
+    additionalBreak: new FormControl('', this.validation),
+    longBreakInterval: new FormControl('', this.validation),
   });
 
   constructor(
@@ -50,7 +37,13 @@ export class SettingsComponent implements OnInit {
       .pipe(
         tap((config) => {
           console.log(config);
-          this.Userconfig = config;
+          this.settings.setValue({
+            sessionLength: config.sessionTime / 60,
+            breakLength: config.breakTime / 60,
+            additionalBreak: config.additionalBreakTime / 60,
+            longBreakInterval: config.longBreakInterval,
+          });
+          this.autoPlay = config.autoplay;
         })
       )
       .subscribe({ error: (err) => console.log('cannot get config') });
