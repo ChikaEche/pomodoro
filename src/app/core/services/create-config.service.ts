@@ -1,13 +1,27 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import defaultConfiguration from 'src/app/timer-config/default-config';
-import { map, take } from 'rxjs/operators';
-
+import { map, take, switchMap } from 'rxjs/operators';
+import { Configuration } from 'src/app/shared/interfaces/configuration';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class CreateConfigService {
-  constructor(private readonly afs: AngularFirestore) {}
+  config$: Observable<Configuration>;
+  constructor(
+    private readonly afs: AngularFirestore,
+    private readonly afAuth: AngularFireAuth
+  ) {
+    this.config$ = this.afAuth.authState.pipe(
+      switchMap((user) => {
+        return this.afs
+          .doc<Configuration>(`configuration/${user.uid}`)
+          .valueChanges();
+      })
+    );
+  }
 
   async createConfig(uid: string) {
     try {
@@ -24,7 +38,9 @@ export class CreateConfigService {
       .pipe(
         take(1),
         map((res) => {
+          console.log(res);
           if (!res) {
+            console.log('no res');
             this.createConfig(uid);
           }
         })
