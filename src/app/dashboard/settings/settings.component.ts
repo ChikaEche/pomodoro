@@ -59,6 +59,5 @@ export class SettingsComponent implements OnInit {
       additionalBreakTime: this.settings.get('additionalBreak').value * 60,
     };
     this.afs.doc(`configuration/${this.uid}`).set(this.configUpdate);
-    this.timeTrackerService.configChange();
   }
 }
