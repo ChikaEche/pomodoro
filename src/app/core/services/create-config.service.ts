@@ -38,13 +38,11 @@ export class CreateConfigService {
       .pipe(
         take(1),
         map((res) => {
-          console.log(res);
           if (!res) {
-            console.log('no res');
             this.createConfig(uid);
           }
         })
       )
-      .subscribe();
+      .subscribe({ error: (err) => console.log('cannot check for config') });
   }
 }

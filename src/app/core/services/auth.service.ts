@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
 import { UserRole } from 'src/app/shared/enums/user-role.enum';
 import { CreateConfigService } from './create-config.service';
+import { SessionUpdateService } from './session-update.service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,8 @@ export class AuthService {
     private readonly ngZone: NgZone, // TODO -> call ngZone later to remove console warnings
     public readonly afAuth: AngularFireAuth,
     private readonly afStore: AngularFirestore,
-    private readonly createConfigService: CreateConfigService
+    private readonly createConfigService: CreateConfigService,
+    private readonly sessionUpdateService: SessionUpdateService
   ) {
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
@@ -46,6 +48,7 @@ export class AuthService {
       this.refreshUserData(resp.user);
       const uid = resp.user.uid;
       this.createConfigService.createConfig(uid);
+      this.sessionUpdateService.createSession(uid);
       this.router.navigate(['/dashboard']);
     } catch (error) {
       console.log(error.message);
@@ -57,7 +60,6 @@ export class AuthService {
       let resp;
       resp = await this.afAuth.signInWithEmailAndPassword(email, password);
       const uid = resp.user.uid;
-      this.createConfigService.checkExistingConfig(uid);
       this.refreshUserData(resp.user);
       this.router.navigate(['/dashboard']);
     } catch (error) {
@@ -70,7 +72,9 @@ export class AuthService {
       .pipe(
         switchMap(({ user }) => {
           this.createConfigService.checkExistingConfig(user.uid);
+          this.sessionUpdateService.checkExistingSession(user.uid);
           this.router.navigate(['/dashboard']);
+          setTimeout(() => window.location.reload(), 500);
           return this.refreshUserData(user);
         })
       )

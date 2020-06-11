@@ -36,7 +36,6 @@ export class SettingsComponent implements OnInit {
     this.createConfigService.config$
       .pipe(
         tap((config) => {
-          console.log(config);
           this.settings.setValue({
             sessionLength: config.sessionTime / 60,
             breakLength: config.breakTime / 60,

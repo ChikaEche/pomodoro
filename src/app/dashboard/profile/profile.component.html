@@ -1,8 +1,7 @@
-<div class="profile__container">
+<div *ngIf="userProfile" class="profile__container">
   <div class="account__wrapper">
     <div class="profile-picture">
       <img
-        *ngIf="userProfile.photoURL"
         class="picture"
         [src]="userProfile.photoURL"
         onerror="this.src='../assets/contact.PNG'"
