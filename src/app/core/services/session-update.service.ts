@@ -5,7 +5,6 @@ import {
   weeklySessionData,
   daysOfTheWeek,
   monthsOfTheYear,
-  montlySessionData,
 } from 'src/app/shared/lib/sessionData';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';

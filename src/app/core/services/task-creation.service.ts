@@ -4,7 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from './auth.service';
 import { Observable, of } from 'rxjs';
 import { TaskData } from 'src/app/shared/interfaces/task-data';
-import { tap, map, switchMap, take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -85,16 +85,6 @@ export class TaskCreationService {
       )
       .subscribe({ error: (err) => console.log('cannot get current task') });
   }
-
-  /**taskSessionTracker(task: string, sessionCount: number) {
-      sessionCount = sessionCount / 2;
-      sessionCount = Math.floor(sessionCount);
-      if(sessionCount === 0) {
-        sessionCount = sessionCount + 1;
-      }
-      this.updateTask(task, sessionCount);
-  }
-  **/
 
   async updateTask(task: string) {
     console.log(this.currentTask);

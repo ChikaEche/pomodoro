@@ -1,12 +1,36 @@
-<div class="bar-chart__container">
-  <div class="chart">
+<div class="statistics__container">
+  <div class="bar-chart__container">
+    <div class="chart">
+      <canvas
+        baseChart
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [legend]="barChartLegend"
+        [chartType]="barChartType"
+        [options]="barChartOptions"
+      >
+      </canvas>
+    </div>
+  </div>
+  <div class="line-chart__container">
     <canvas
       baseChart
-      [datasets]="barChartData"
-      [labels]="barChartLabels"
-      [legend]="barChartLegend"
-      [chartType]="barChartType"
-      [options]="barChartOptions"
+      [datasets]="lineChartData"
+      [labels]="lineChartLabels"
+      [legend]="lineChartLegend"
+      [chartType]="lineChartType"
+      [options]="lineChartOptions"
+    >
+    </canvas>
+  </div>
+  <div class="pie-chart__container">
+    <canvas
+      baseChart
+      [datasets]="dougnnutChartData"
+      [labels]="doughnutChartLabels"
+      [legend]="dougnnutChartLegend"
+      [chartType]="dougnnutChartType"
+      [options]="dougnnutChartOptions"
     >
     </canvas>
   </div>

@@ -1,5 +1,12 @@
-.bar-chart__container {
+.statistics__container {
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 80vh;
+}
+
+.bar-chart__container,
+.line-chart__container {
+  padding: 10px;
 }
