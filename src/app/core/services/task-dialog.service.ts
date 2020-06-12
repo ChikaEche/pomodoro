@@ -23,18 +23,12 @@ export class TaskDialogService {
           if (this.task !== '') {
             if (this.timeTrackerService.sessionCount % +this.session === 0) {
               const sessionCompleted = this.timeTrackerService.sessionCount;
-              this.taskCreationService.updateTask(
-                this.task,
-                this.timeTrackerService.sessionCount
-              );
+              this.taskCreationService.updateTask(this.task);
               this.session = 0;
               this.task = '';
               this.taskStop(sessionCompleted);
             } else {
-              this.taskCreationService.updateTask(
-                this.task,
-                this.timeTrackerService.sessionCount
-              );
+              this.taskCreationService.updateTask(this.task);
             }
           }
         })
@@ -58,7 +52,7 @@ export class TaskDialogService {
             this.session = result[1];
             this.taskPropagation$.next();
             this.timeTrackerService.onDialogOpen();
-            this.taskCreationService.createTask(this.task);
+            this.taskCreationService.checkExistingTask(this.task);
           }
         })
       )

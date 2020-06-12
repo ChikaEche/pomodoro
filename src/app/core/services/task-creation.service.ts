@@ -28,8 +28,9 @@ export class TaskCreationService {
   async createTask(task: string) {
     this.newTask[`${task}`] = {
       task: `${task}`,
+      userId: `${this.userId}`,
+      sessionsCompleted: 0,
     };
-    console.log(this.newTask);
     try {
       this.afs
         .collection('user-tasks')
@@ -38,6 +39,7 @@ export class TaskCreationService {
     } catch (error) {
       console.log('cannot create task', error);
     }
+    this.getCurrentTask(task);
   }
 
   async getUserId() {
@@ -45,19 +47,75 @@ export class TaskCreationService {
     this.userId = uid;
   }
 
-  async updateTask(task: string, sessionCount: number) {
-    console.log(task);
+  checkExistingTask(task: string) {
+    this.afs
+      .collection('user-tasks', (ref) =>
+        ref
+          .where(`${task}.userId`, '==', `${this.userId}`)
+          .where(`${task}.task`, '==', `${task}`)
+      )
+      .valueChanges()
+      .pipe(
+        take(1),
+        map((resp) => {
+          if (resp.length === 0) {
+            this.createTask(task);
+          } else {
+            this.getCurrentTask(task);
+          }
+        })
+      )
+      .subscribe({ error: (err) => console.log('cannot get current task') });
+  }
+
+  getCurrentTask(task: string) {
+    this.afs
+      .collection('user-tasks', (ref) =>
+        ref
+          .where(`${task}.userId`, '==', `${this.userId}`)
+          .where(`${task}.task`, '==', `${task}`)
+      )
+      .valueChanges()
+      .pipe(
+        take(1),
+        map((resp) => {
+          console.log(resp);
+          this.currentTask = resp;
+        })
+      )
+      .subscribe({ error: (err) => console.log('cannot get current task') });
+  }
+
+  /**taskSessionTracker(task: string, sessionCount: number) {
+      sessionCount = sessionCount / 2;
+      sessionCount = Math.floor(sessionCount);
+      if(sessionCount === 0) {
+        sessionCount = sessionCount + 1;
+      }
+      this.updateTask(task, sessionCount);
+  }
+  **/
+
+  async updateTask(task: string) {
+    console.log(this.currentTask);
+    this.addedTask = this.currentTask[0];
+    console.log(this.addedTask);
     try {
-      this.newTask[`${task}`]['sessionsCompleted'] = sessionCount;
+      if (!this.addedTask[`${task}`]['sessionsCompleted']) {
+        this.addedTask[`${task}`]['sessionsCompleted'] = 1;
+        console.log(this.addedTask[`${task}`]['sessionsCompleted']);
+      } else if (this.addedTask[`${task}`]['sessionsCompleted']) {
+        this.addedTask[`${task}`]['sessionsCompleted'] = ++this.addedTask[
+          `${task}`
+        ]['sessionsCompleted'];
+        console.log(this.addedTask[`${task}`]['sessionsCompleted']);
+      }
       this.afs
         .doc(`user-tasks/${this.userId}`)
-        .set(this.newTask, { merge: true });
-      console.log(this.newTask);
-      this.newTask[`${task}`] = {
-        task: `${task}`,
-      };
+        .set(this.addedTask, { merge: true });
+      console.log(this.addedTask);
     } catch {
-      console.log('cannot update task', this.newTask);
+      console.log('cannot update task', this.addedTask);
     }
   }
 }
