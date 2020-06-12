@@ -4,6 +4,7 @@ import { TaskComponent } from 'src/app/dashboard/task/task.component';
 import { map, takeUntil, tap } from 'rxjs/operators';
 import { TimeTrackerService } from './time-tracker.service';
 import { Subject } from 'rxjs';
+import { TaskCreationService } from './task-creation.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -12,22 +13,35 @@ export class TaskDialogService {
   destroy$ = new Subject<void>();
   constructor(
     public dialog: MatDialog,
-    public timeTrackerService: TimeTrackerService
+    public timeTrackerService: TimeTrackerService,
+    public readonly taskCreationService: TaskCreationService
   ) {
     this.timeTrackerService.timerClass.countDownEnd$
       .pipe(
         takeUntil(this.destroy$),
         tap(() => {
-          if (this.timeTrackerService.sessionCount % +this.session === 0) {
-            this.session = 0;
-            this.task = '';
-            this.taskStop();
+          if (this.task !== '') {
+            if (this.timeTrackerService.sessionCount % +this.session === 0) {
+              const sessionCompleted = this.timeTrackerService.sessionCount;
+              this.taskCreationService.updateTask(
+                this.task,
+                this.timeTrackerService.sessionCount
+              );
+              this.session = 0;
+              this.task = '';
+              this.taskStop(sessionCompleted);
+            } else {
+              this.taskCreationService.updateTask(
+                this.task,
+                this.timeTrackerService.sessionCount
+              );
+            }
           }
         })
       )
       .subscribe({ error: (err) => console.error('error occured') });
   }
-  task: string;
+  task = '';
   session: number;
 
   openDialog(): void {
@@ -43,13 +57,15 @@ export class TaskDialogService {
             this.task = result[0];
             this.session = result[1];
             this.taskPropagation$.next();
+            this.timeTrackerService.onDialogOpen();
+            this.taskCreationService.createTask(this.task);
           }
         })
       )
       .subscribe();
   }
 
-  taskStop() {
+  taskStop(sessionCompleted: number) {
     this.timeTrackerService.timerPause();
   }
 }

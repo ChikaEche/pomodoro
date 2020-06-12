@@ -108,6 +108,17 @@ export class TimeTrackerService {
     this.timerRestart();
   }
 
+  onDialogOpen() {
+    if (this.currentState === 'break') {
+      this.currentState = 'session';
+    }
+    this.timer = this.userConfig.sessionTime;
+    this.timerClass.seconds = this.timer;
+    this.sessionCount = 0;
+    this.breakCount = 0;
+    this.timerPause();
+  }
+
   onDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
