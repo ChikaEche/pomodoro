@@ -89,7 +89,6 @@ export class TimeTrackerService {
   }
 
   configChange() {
-    console.log(this.currentState);
     if (this.currentState === 'break') {
       if (this.sessionCount === 0) {
         this.timer = this.userConfig.breakTime;
@@ -100,9 +99,7 @@ export class TimeTrackerService {
         this.timer = this.userConfig.breakTime;
       }
     } else if (this.currentState === 'session') {
-      console.log(this.userConfig.sessionTime);
       this.timer = this.userConfig.sessionTime;
-      console.log(this.timer);
     }
     this.configurationChange$.next();
     this.timerRestart();

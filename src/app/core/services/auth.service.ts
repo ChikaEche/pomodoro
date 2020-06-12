@@ -50,6 +50,7 @@ export class AuthService {
       this.createConfigService.createConfig(uid);
       this.sessionUpdateService.createSession(uid);
       this.router.navigate(['/dashboard']);
+      setTimeout(() => window.location.reload(), 1000);
     } catch (error) {
       console.log(error.message);
     }
@@ -62,6 +63,7 @@ export class AuthService {
       const uid = resp.user.uid;
       this.refreshUserData(resp.user);
       this.router.navigate(['/dashboard']);
+      setTimeout(() => window.location.reload(), 1000);
     } catch (error) {
       console.log(error.message);
     }
@@ -74,7 +76,7 @@ export class AuthService {
           this.createConfigService.checkExistingConfig(user.uid);
           this.sessionUpdateService.checkExistingSession(user.uid);
           this.router.navigate(['/dashboard']);
-          setTimeout(() => window.location.reload(), 500);
+          setTimeout(() => window.location.reload(), 1000);
           return this.refreshUserData(user);
         })
       )

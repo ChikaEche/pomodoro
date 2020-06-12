@@ -27,8 +27,13 @@ export class SessionUpdateService {
         return this.afs.doc(`user-sessions/${user.uid}`).valueChanges();
       })
     );
+
     this.session$
-      .pipe(tap((session) => (this.userSession = session)))
+      .pipe(
+        tap((session) => {
+          this.userSession = session;
+        })
+      )
       .subscribe({ error: (err) => console.log('cannot get session') });
   }
 

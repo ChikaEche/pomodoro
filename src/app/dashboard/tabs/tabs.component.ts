@@ -10,7 +10,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const storage = window.localStorage.getItem('email');
-    console.log(storage);
   }
 
   ngOnDestroy() {}

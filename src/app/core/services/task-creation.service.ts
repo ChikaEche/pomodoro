@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from './auth.service';
 import { Observable, of } from 'rxjs';
 import { TaskData } from 'src/app/shared/interfaces/task-data';
@@ -19,13 +18,13 @@ export class TaskCreationService {
   currentTask;
   constructor(
     private readonly afs: AngularFirestore,
-    private readonly afAuth: AngularFireAuth,
     private readonly authService: AuthService
   ) {
     this.getUserId();
   }
 
   async createTask(task: string) {
+    this.newTask = {};
     this.newTask[`${task}`] = {
       task: `${task}`,
       userId: `${this.userId}`,
@@ -79,7 +78,6 @@ export class TaskCreationService {
       .pipe(
         take(1),
         map((resp) => {
-          console.log(resp);
           this.currentTask = resp;
         })
       )
@@ -87,23 +85,19 @@ export class TaskCreationService {
   }
 
   async updateTask(task: string) {
-    console.log(this.currentTask);
     this.addedTask = this.currentTask[0];
-    console.log(this.addedTask);
     try {
       if (!this.addedTask[`${task}`]['sessionsCompleted']) {
         this.addedTask[`${task}`]['sessionsCompleted'] = 1;
-        console.log(this.addedTask[`${task}`]['sessionsCompleted']);
       } else if (this.addedTask[`${task}`]['sessionsCompleted']) {
         this.addedTask[`${task}`]['sessionsCompleted'] = ++this.addedTask[
           `${task}`
         ]['sessionsCompleted'];
-        console.log(this.addedTask[`${task}`]['sessionsCompleted']);
       }
+
       this.afs
         .doc(`user-tasks/${this.userId}`)
         .set(this.addedTask, { merge: true });
-      console.log(this.addedTask);
     } catch {
       console.log('cannot update task', this.addedTask);
     }
