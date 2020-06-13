@@ -42,6 +42,8 @@ export class AuthService {
     return this.user$.pipe(first()).toPromise();
   }
 
+  sendEmailVaerification() {}
+
   async emailAndPasswordSignUp(email: string, name: string, password: string) {
     try {
       let resp;
@@ -54,6 +56,7 @@ export class AuthService {
       this.router.navigate(['/dashboard']);
       setTimeout(() => window.location.reload(), 1000);
     } catch (error) {
+      this.errorMessageService.errorMessage(error.message);
       console.log(error.message);
     }
   }

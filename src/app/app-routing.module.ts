@@ -9,8 +9,7 @@ import { map } from 'rxjs/operators';
 import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['/login']);
-const redirectToProfile = () =>
-  map((user) => (user ? ['dashboard', (user as any).uid] : true));
+const redirectToProfile = () => map((user) => (user ? ['dashboard'] : true));
 
 const routes: Routes = [
   {
@@ -35,6 +34,10 @@ const routes: Routes = [
   {
     path: 'password-reset',
     component: PasswordResetComponent,
+  },
+  {
+    path: '**',
+    redirectTo: '',
   },
 ];
 
