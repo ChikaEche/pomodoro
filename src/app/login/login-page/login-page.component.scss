@@ -17,11 +17,11 @@
 }
 
 .login__wrap {
-  width: 70%;
+  width: 50%;
 }
 
 .form-field {
-  width: 40vw;
+  width: 100%;
 }
 
 .form-field-small {
@@ -48,4 +48,8 @@
 
 a {
   text-decoration: underline;
+}
+
+button {
+  margin-right: 10px;
 }
