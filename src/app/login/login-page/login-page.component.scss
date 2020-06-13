@@ -6,13 +6,18 @@
   align-items: center;
 }
 
-.login__wrap {
+.login__wrap,
+.login__wrap-small {
   margin-top: 20px;
   padding: 10px;
   border: solid;
   border-radius: 10px;
   display: inherit;
   flex-direction: inherit;
+}
+
+.login__wrap {
+  width: 70%;
 }
 
 .form-field {

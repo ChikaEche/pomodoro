@@ -20,7 +20,10 @@
     </button>
     <a (click)="passwordResetToggle()"> Back to login</a>
   </div>
-  <div class="login__wrap" *ngIf="passwordLoginToggle === true">
+  <div
+    [ngClass]="[loginWrapNormal, loginWrapSmall]"
+    *ngIf="passwordLoginToggle === true"
+  >
     <form [formGroup]="login">
       <div class="fullname" *ngIf="state === 'sign up'">
         <p class="form-name">Full name</p>

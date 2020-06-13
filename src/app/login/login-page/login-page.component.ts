@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { BreakpointService } from 'src/app/core/services/breakpoint.service';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { tap, takeUntil } from 'rxjs/operators';
 import { ProfileUpdateService } from 'src/app/core/services/profile-update.service';
 
@@ -12,12 +12,14 @@ import { ProfileUpdateService } from 'src/app/core/services/profile-update.servi
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss'],
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent {
   passwordLoginToggle = true;
   state;
   isSmall = false;
   formField = 'form-field';
   formFieldSmall = '';
+  loginWrapNormal = 'login__wrap';
+  loginWrapSmall = '';
   destroy$ = new Subject<void>();
 
   pswd = new FormGroup({
@@ -55,15 +57,17 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
-
   onScreenResize() {
     if (this.isSmall) {
       this.formFieldSmall = 'form-field-small';
       this.formField = '';
+      this.loginWrapNormal = '';
+      this.loginWrapSmall = 'login__wrap-small';
     } else {
       this.formField = 'form-field';
       this.formFieldSmall = '';
+      this.loginWrapNormal = 'login__wrap';
+      this.loginWrapSmall = '';
     }
   }
 
