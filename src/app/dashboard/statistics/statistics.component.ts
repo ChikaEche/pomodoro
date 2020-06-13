@@ -27,6 +27,56 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   taskChartLabel = [];
   destroy$ = new Subject<void>();
 
+  barChartOptions = {
+    scaleVerticalLines: false,
+    responsive: true,
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            suggestedMin: 0,
+          },
+        },
+      ],
+    },
+  };
+
+  barChartLabels = [];
+  barChartType = 'bar';
+  barChartLegend = true;
+  barChartData = [
+    {
+      data: [],
+      label: 'weekly session statistics',
+    },
+  ];
+
+  lineChartData = [
+    {
+      data: [],
+      label: 'Monthly session statistics',
+    },
+  ];
+  lineChartType = 'line';
+  lineChartLegend = true;
+  lineChartLabels = [];
+  lineChartOptions = {
+    responsive: true,
+  };
+
+  dougnnutChartData = [
+    {
+      data: [],
+      label: 'Top 10 tasks',
+    },
+  ];
+  doughnutChartLabels = [];
+  dougnnutChartLegend = true;
+  dougnnutChartType = 'doughnut';
+  dougnnutChartOptions = {
+    responsive: true,
+  };
+
   constructor(
     private readonly statisticsDisplayService: StatisticsDisplayService,
     private readonly sessionUpdateService: SessionUpdateService,
@@ -122,57 +172,6 @@ export class StatisticsComponent implements OnInit, OnDestroy {
     this.taskChartData = [];
     this.taskChartLabel = [];
   }
-
-  // tslint:disable-next-line: member-ordering
-  barChartOptions = {
-    scaleVerticalLines: false,
-    responsive: true,
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            suggestedMin: 0,
-          },
-        },
-      ],
-    },
-  };
-
-  barChartLabels = [];
-  barChartType = 'bar';
-  barChartLegend = true;
-  barChartData = [
-    {
-      data: [],
-      label: 'weekly session statistics',
-    },
-  ];
-
-  lineChartData = [
-    {
-      data: [],
-      label: 'Monthly session statistics',
-    },
-  ];
-  lineChartType = 'line';
-  lineChartLegend = true;
-  lineChartLabels = [];
-  lineChartOptions = {
-    responsive: true,
-  };
-
-  dougnnutChartData = [
-    {
-      data: [],
-      label: 'Top 10 tasks',
-    },
-  ];
-  doughnutChartLabels = [];
-  dougnnutChartLegend = true;
-  dougnnutChartType = 'doughnut';
-  dougnnutChartOptions = {
-    responsive: true,
-  };
 
   ngOnDestroy() {
     this.destroy$.next();
