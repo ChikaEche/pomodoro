@@ -27,7 +27,7 @@
     (click)="toogleCard()"
     *ngIf="cardToggle === false && (breakPoint$ | async) === true"
   >
-    Show Daily stats
+    Show Current stats
   </button>
 
   <div
@@ -42,7 +42,7 @@
       >
         clear
       </mat-icon>
-      <mat-card-title color="accent">Daily Statistics</mat-card-title>
+      <mat-card-title color="accent">Current Statistics</mat-card-title>
       <mat-card-content>
         <p>Hey,</p>
         <p>You have completed {{ timeTrackerService.sessionCount }} sessions</p>

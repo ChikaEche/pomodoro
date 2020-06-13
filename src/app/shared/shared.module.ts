@@ -18,6 +18,7 @@ import { SecondsConverterPipe } from 'src/app/shared/pipes/seconds-converter.pip
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from './components/footer/footer.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const modules = [
   CommonModule,
@@ -35,6 +36,7 @@ const modules = [
   MatDialogModule,
   MatSidenavModule,
   RouterModule,
+  MatSnackBarModule,
 ];
 
 const declarations = [

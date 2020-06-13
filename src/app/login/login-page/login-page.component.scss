@@ -14,10 +14,11 @@
   border-radius: 10px;
   display: inherit;
   flex-direction: inherit;
+  width: 40vw;
 }
 
-.login__wrap {
-  width: 50%;
+.login__wrap-small {
+  width: 80%;
 }
 
 .form-field {
@@ -52,4 +53,10 @@ a {
 
 button {
   margin-right: 10px;
+}
+
+@media screen and (min-width: 1020px) and (max-width: 1050px) {
+  .login__wrap {
+    width: 70%;
+  }
 }

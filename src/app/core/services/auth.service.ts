@@ -12,6 +12,7 @@ import * as firebase from 'firebase/app';
 import { UserRole } from 'src/app/shared/enums/user-role.enum';
 import { CreateConfigService } from './create-config.service';
 import { SessionUpdateService } from './session-update.service';
+import { ErrorMessagesService } from './error-messages.service';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +26,8 @@ export class AuthService {
     public readonly afAuth: AngularFireAuth,
     private readonly afStore: AngularFirestore,
     private readonly createConfigService: CreateConfigService,
-    private readonly sessionUpdateService: SessionUpdateService
+    private readonly sessionUpdateService: SessionUpdateService,
+    private readonly errorMessageService: ErrorMessagesService
   ) {
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
@@ -66,6 +68,7 @@ export class AuthService {
       setTimeout(() => window.location.reload(), 1000);
     } catch (error) {
       console.log(error.message);
+      this.errorMessageService.errorMessage('Incorrect password or email');
     }
   }
 
@@ -81,7 +84,11 @@ export class AuthService {
           return this.refreshUserData(user);
         })
       )
-      .subscribe({ error: (err) => console.error(err) });
+      .subscribe({
+        error: (err) => {
+          this.errorMessageService.errorMessage(err);
+        },
+      });
   }
 
   logout() {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -6,13 +6,18 @@ import { BreakpointService } from 'src/app/core/services/breakpoint.service';
 import { Subject } from 'rxjs';
 import { tap, takeUntil } from 'rxjs/operators';
 import { ProfileUpdateService } from 'src/app/core/services/profile-update.service';
+import { ErrorMessagesService } from 'src/app/core/services/error-messages.service';
+import {
+  MatSnackBar,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss'],
 })
-export class LoginPageComponent {
+export class LoginPageComponent implements OnInit {
   passwordLoginToggle = true;
   state;
   isSmall = false;
@@ -21,6 +26,8 @@ export class LoginPageComponent {
   loginWrapNormal = 'login__wrap';
   loginWrapSmall = '';
   destroy$ = new Subject<void>();
+  errorMessage = '';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   pswd = new FormGroup({
     email: new FormControl('', [Validators.required]),
@@ -36,7 +43,9 @@ export class LoginPageComponent {
     private route: Router,
     private authService: AuthService,
     private breakPointService: BreakpointService,
-    private profileUpdateService: ProfileUpdateService
+    private profileUpdateService: ProfileUpdateService,
+    private readonly errorMessageService: ErrorMessagesService,
+    private _snackBar: MatSnackBar
   ) {
     this.breakPointService.isPalm$
       .pipe(
@@ -55,6 +64,24 @@ export class LoginPageComponent {
     } else {
       this.state = 'login';
     }
+  }
+
+  ngOnInit() {
+    this.errorMessageService.error$
+      .pipe(
+        tap((message) => {
+          this.errorMessage = message;
+          this.openSnackBar(message);
+        })
+      )
+      .subscribe({ error: (err) => console.log(err) });
+  }
+
+  openSnackBar(message: string) {
+    this._snackBar.open(message, 'close', {
+      duration: 4000,
+      verticalPosition: this.verticalPosition,
+    });
   }
 
   onScreenResize() {
@@ -108,6 +135,7 @@ export class LoginPageComponent {
 
   resetPassword() {
     this.profileUpdateService.passwordResetEmail(this.pswd.get('email').value);
+    this.openSnackBar('A reset link has been sent to this email');
     this.passwordLoginToggle = true;
   }
 }
