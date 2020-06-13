@@ -142,14 +142,20 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   getWeeklySessionData() {
     const weeklySessionLabel = Object.keys(this.userSession.weeklySession);
     this.barChartLabels = [...weeklySessionLabel];
-    const weeklySessionData = Object.values(this.userSession.weeklySession);
+    let weeklySessionData = Object.values(this.userSession.weeklySession);
+    weeklySessionData = weeklySessionData.map((eachData: number) =>
+      Math.round(eachData / 2)
+    );
     this.barChartData[0].data = [...weeklySessionData];
   }
 
   getMontlySessionData() {
     const monthlySessionLabel = Object.keys(this.userSession.monthlySession);
     this.lineChartLabels = [...monthlySessionLabel];
-    const monthlySessionData = Object.values(this.userSession.monthlySession);
+    let monthlySessionData = Object.values(this.userSession.monthlySession);
+    monthlySessionData = monthlySessionData.map((eachData: number) =>
+      Math.round(eachData / 2)
+    );
     this.lineChartData[0].data = [...monthlySessionData];
   }
 
