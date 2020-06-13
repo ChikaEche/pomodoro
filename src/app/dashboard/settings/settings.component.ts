@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import defaultConfiguration from '../../timer-config/default-config';
 import { TimeTrackerService } from 'src/app/core/services/time-tracker.service';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
@@ -7,18 +7,20 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import { CreateConfigService } from 'src/app/core/services/create-config.service';
-import { tap } from 'rxjs/operators';
+import { tap, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent implements OnInit, OnDestroy {
   configUpdate: Configuration;
   uid = firebase.auth().currentUser.uid;
   defaultConfig = defaultConfiguration;
   autoPlay = this.defaultConfig.autoplay;
+  destroy$ = new Subject<void>();
 
   validation = [Validators.required, Validators.pattern('^[1-9][0-9]*$')];
   settings = new FormGroup({
@@ -30,11 +32,13 @@ export class SettingsComponent implements OnInit {
 
   constructor(
     private readonly afs: AngularFirestore,
-    private readonly createConfigService: CreateConfigService,
-    private readonly timeTrackerService: TimeTrackerService
-  ) {
+    private readonly createConfigService: CreateConfigService
+  ) {}
+
+  ngOnInit() {
     this.createConfigService.config$
       .pipe(
+        takeUntil(this.destroy$),
         tap((config) => {
           this.settings.setValue({
             sessionLength: config.sessionTime / 60,
@@ -48,8 +52,6 @@ export class SettingsComponent implements OnInit {
       .subscribe({ error: (err) => console.log('cannot get config') });
   }
 
-  ngOnInit() {}
-
   apply() {
     this.configUpdate = {
       sessionTime: this.settings.get('sessionLength').value * 60,
@@ -59,5 +61,10 @@ export class SettingsComponent implements OnInit {
       additionalBreakTime: this.settings.get('additionalBreak').value * 60,
     };
     this.afs.doc(`configuration/${this.uid}`).set(this.configUpdate);
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
