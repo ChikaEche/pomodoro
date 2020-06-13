@@ -42,8 +42,6 @@ export class AuthService {
     return this.user$.pipe(first()).toPromise();
   }
 
-  sendEmailVaerification() {}
-
   async emailAndPasswordSignUp(email: string, name: string, password: string) {
     try {
       let resp;
@@ -53,6 +51,10 @@ export class AuthService {
       const uid = resp.user.uid;
       this.createConfigService.createConfig(uid);
       this.sessionUpdateService.createSession(uid);
+      (await this.afAuth.currentUser).sendEmailVerification();
+      this.errorMessageService.errorMessage(
+        'Email link for verification has been sent to this email'
+      );
       this.router.navigate(['/dashboard']);
       setTimeout(() => window.location.reload(), 1000);
     } catch (error) {
@@ -67,6 +69,8 @@ export class AuthService {
       resp = await this.afAuth.signInWithEmailAndPassword(email, password);
       const uid = resp.user.uid;
       this.refreshUserData(resp.user);
+      this.createConfigService.checkExistingConfig(uid);
+      this.sessionUpdateService.checkExistingSession(uid);
       this.router.navigate(['/dashboard']);
       setTimeout(() => window.location.reload(), 1000);
     } catch (error) {

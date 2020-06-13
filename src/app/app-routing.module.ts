@@ -5,6 +5,7 @@ import {
   redirectUnauthorizedTo,
   canActivate,
 } from '@angular/fire/auth-guard';
+import { AuthGuardGuard } from './core/guard/auth-guard.guard';
 import { map } from 'rxjs/operators';
 import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
 
@@ -21,6 +22,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
     ...canActivate(redirectToLogin),
+    canActivate: [AuthGuardGuard],
   },
   {
     path: 'login',

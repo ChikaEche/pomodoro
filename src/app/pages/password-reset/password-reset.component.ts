@@ -5,6 +5,7 @@ import { takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ProfileUpdateService } from 'src/app/core/services/profile-update.service';
 import { AngularFireAuth } from '@angular/fire/auth';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-password-reset',
@@ -13,6 +14,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class PasswordResetComponent implements OnInit, OnDestroy {
   code = '';
+  mode = '';
   passwordReset = new FormGroup({
     newPassword: new FormControl('', [
       Validators.required,
@@ -39,6 +41,7 @@ export class PasswordResetComponent implements OnInit, OnDestroy {
           if (!params.oobCode) {
             this.router.navigate(['']);
           }
+          this.mode = params.mode;
           this.code = params.oobCode;
         })
       )
@@ -53,6 +56,11 @@ export class PasswordResetComponent implements OnInit, OnDestroy {
       )
       .then(() => this.router.navigate(['login']))
       .catch((err) => console.log('cannot confirm password'));
+  }
+
+  confirmEmail() {
+    firebase.auth().applyActionCode(this.code);
+    this.router.navigate(['/login']);
   }
 
   ngOnDestroy() {
