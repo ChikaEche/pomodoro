@@ -8,15 +8,14 @@
         ></ng-container>
 
         <ng-template #navProfile>
-          <li><p (click)="logOut()">Logout</p></li>
-          <li routerLink="/dashboard">Dashboard</li>
+          <li><a (click)="logOut()">Logout</a></li>
+          <li><a routerLink="/dashboard">Dashboard</a></li>
         </ng-template>
 
         <ng-template #navNoUser>
           <li><a [routerLink]="['login']" state="login">Login</a></li>
           <li><a [routerLink]="['/login']" state="sign up">Sign Up</a></li>
-          <li>Features</li>
-          <li>Learn about About Pomodoro</li>
+          <li><a [routerLink]="['/about']">About Pomodoro</a></li>
         </ng-template>
       </ul>
     </div>
