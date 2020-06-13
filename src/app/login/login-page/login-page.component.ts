@@ -36,7 +36,10 @@ export class LoginPageComponent implements OnInit {
   login = new FormGroup({
     fullName: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
   });
 
   constructor(
@@ -69,6 +72,7 @@ export class LoginPageComponent implements OnInit {
   ngOnInit() {
     this.errorMessageService.error$
       .pipe(
+        takeUntil(this.destroy$),
         tap((message) => {
           this.errorMessage = message;
           this.openSnackBar(message);

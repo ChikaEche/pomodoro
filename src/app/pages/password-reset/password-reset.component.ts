@@ -14,8 +14,14 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class PasswordResetComponent implements OnInit, OnDestroy {
   code = '';
   passwordReset = new FormGroup({
-    newPassword: new FormControl('', [Validators.required]),
-    retypePassword: new FormControl('', [Validators.required]),
+    newPassword: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
+    retypePassword: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
   });
   destroy$ = new Subject<void>();
   constructor(

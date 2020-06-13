@@ -86,7 +86,9 @@ export class AuthService {
       )
       .subscribe({
         error: (err) => {
-          this.errorMessageService.errorMessage(err);
+          this.errorMessageService.errorMessage(
+            'There was an error signing in with google'
+          );
         },
       });
   }
