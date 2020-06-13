@@ -2,15 +2,13 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from './auth.service';
-import { tap } from 'rxjs/operators';
-import * as firebase from 'firebase/app';
-import { from } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProfileUpdateService {
+  userId = '';
   constructor(
     private afs: AngularFirestore,
     private afAuth: AngularFireAuth,

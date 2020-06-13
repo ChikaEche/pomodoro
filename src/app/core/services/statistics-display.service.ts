@@ -8,7 +8,6 @@ import { switchMap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class StatisticsDisplayService {
-  userId = '';
   tasks$: Observable<any>;
   constructor(
     private readonly afs: AngularFirestore,

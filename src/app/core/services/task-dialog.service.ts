@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TaskComponent } from 'src/app/dashboard/task/task.component';
-import { map, takeUntil, tap } from 'rxjs/operators';
+import { map, takeUntil, tap, take } from 'rxjs/operators';
 import { TimeTrackerService } from './time-tracker.service';
 import { Subject } from 'rxjs';
 import { TaskCreationService } from './task-creation.service';
@@ -46,6 +46,7 @@ export class TaskDialogService {
     dialogRef
       .afterClosed()
       .pipe(
+        take(1),
         map((result) => {
           if (result) {
             this.task = result[0];
