@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Observable, of, from } from 'rxjs';
-import { switchMap, tap, first } from 'rxjs/operators';
+import { switchMap, tap, first, take } from 'rxjs/operators';
 import { User } from 'src/app/shared/interfaces/user.interface';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {
@@ -72,6 +72,7 @@ export class AuthService {
   googleLogin() {
     from(this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider()))
       .pipe(
+        take(1),
         switchMap(({ user }) => {
           this.createConfigService.checkExistingConfig(user.uid);
           this.sessionUpdateService.checkExistingSession(user.uid);
