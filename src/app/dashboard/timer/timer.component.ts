@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { tap, takeUntil } from 'rxjs/operators';
 import { TaskDialogService } from 'src/app/core/services/task-dialog.service';
 import { BreakpointService } from 'src/app/core/services/breakpoint.service';
+import { Howl } from 'howler';
 
 @Component({
   selector: 'app-timer',
@@ -21,6 +22,13 @@ export class TimerComponent implements OnInit, OnDestroy {
   animations = {
     animation: `blink ${0}s infinte alternate`,
   };
+  startSound = new Howl({
+    src: ['assets/tick.wav'],
+  });
+
+  alarmSound = new Howl({
+    src: ['assets/alarm.mp3'],
+  });
 
   constructor(
     public timeTrackerService: TimeTrackerService,
@@ -47,6 +55,7 @@ export class TimerComponent implements OnInit, OnDestroy {
         tap(() => {
           this.currentTask = this.taskDialogService.task;
           if (!this.timeTrackerService.userConfig.autoplay) {
+            this.alarmSound.play();
             this.toggle = true;
             this.animations.animation = `blink ${0}s infinite alternate`;
           }
@@ -64,6 +73,7 @@ export class TimerComponent implements OnInit, OnDestroy {
   }
 
   start() {
+    this.startSound.play();
     this.animations.animation = `blink ${1}s infinite alternate`;
     this.toggle = false;
     this.timeTrackerService.timerStart();
