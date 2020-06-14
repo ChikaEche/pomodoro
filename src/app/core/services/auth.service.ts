@@ -55,8 +55,7 @@ export class AuthService {
       this.errorMessageService.errorMessage(
         'Email link for verification has been sent to this email'
       );
-      this.router.navigate(['/dashboard']);
-      setTimeout(() => window.location.reload(), 1000);
+      this.afAuth.signOut();
     } catch (error) {
       this.errorMessageService.errorMessage(error.message);
       console.log(error.message);
