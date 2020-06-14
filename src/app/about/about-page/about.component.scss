@@ -31,3 +31,41 @@ h3 {
 img {
   width: 100%;
 }
+
+.photos__container h2 {
+  text-decoration: underline;
+}
+
+.photos {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.chika p,
+.william p {
+  text-decoration: none;
+}
+
+.chika img,
+.william img {
+  border-image: none;
+  border-radius: 50% 50% 50% 50%;
+  border-width: 25px;
+  height: 150px;
+  width: 150px;
+  overflow: hidden;
+  margin: 50px 50px 10px 50px;
+}
+
+.photos__container {
+  text-align: center;
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 60px;
+}
