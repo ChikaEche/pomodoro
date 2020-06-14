@@ -54,8 +54,8 @@ export class TimerComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
         tap(() => {
           this.currentTask = this.taskDialogService.task;
+          this.alarmSound.play();
           if (!this.timeTrackerService.userConfig.autoplay) {
-            this.alarmSound.play();
             this.toggle = true;
             this.animations.animation = `blink ${0}s infinite alternate`;
           }
@@ -67,12 +67,15 @@ export class TimerComponent implements OnInit, OnDestroy {
   }
 
   pause() {
+    this.alarmSound.stop();
+    this.startSound.stop();
     this.animations.animation = `blink ${0}s infinite alternate`;
     this.toggle = true;
     this.timeTrackerService.timerPause();
   }
 
   start() {
+    this.alarmSound.stop();
     this.startSound.play();
     this.animations.animation = `blink ${1}s infinite alternate`;
     this.toggle = false;

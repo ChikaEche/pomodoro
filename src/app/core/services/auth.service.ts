@@ -53,9 +53,9 @@ export class AuthService {
       this.sessionUpdateService.createSession(uid);
       (await this.afAuth.currentUser).sendEmailVerification();
       this.errorMessageService.errorMessage(
-        'Email link for verification has been sent to this email'
+        'A verification link for has been sent to this email'
       );
-      this.afAuth.signOut();
+      setTimeout(() => this.afAuth.signOut(), 1000);
     } catch (error) {
       this.errorMessageService.errorMessage(error.message);
       console.log(error.message);

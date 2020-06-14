@@ -56,7 +56,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.configUpdate = {
       sessionTime: this.settings.get('sessionLength').value * 60,
       breakTime: this.settings.get('breakLength').value * 60,
-      longBreakInterval: this.settings.get('longBreakInterval').value,
+      longBreakInterval: +this.settings.get('longBreakInterval').value,
       autoplay: this.autoPlay,
       additionalBreakTime: this.settings.get('additionalBreak').value * 60,
     };
