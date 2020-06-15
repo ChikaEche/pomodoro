@@ -99,8 +99,8 @@ export class TaskCreationService {
       this.afs
         .doc(`user-tasks/${this.userId}`)
         .set(this.addedTask, { merge: true });
-    } catch {
-      console.log('cannot update task', this.addedTask);
+    } catch (error) {
+      console.log('cannot update task', error);
     }
   }
 }

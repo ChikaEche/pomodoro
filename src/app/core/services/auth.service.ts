@@ -70,8 +70,8 @@ export class AuthService {
       this.refreshUserData(resp.user);
       this.createConfigService.checkExistingConfig(uid);
       this.sessionUpdateService.checkExistingSession(uid);
-      this.router.navigate(['/dashboard']);
       setTimeout(() => window.location.reload(), 1000);
+      setTimeout(() => this.router.navigate(['/dashboard']), 3000);
     } catch (error) {
       console.log(error.message);
       this.errorMessageService.errorMessage('Incorrect password or email');
@@ -85,8 +85,8 @@ export class AuthService {
         switchMap(({ user }) => {
           this.createConfigService.checkExistingConfig(user.uid);
           this.sessionUpdateService.checkExistingSession(user.uid);
-          this.router.navigate(['/dashboard']);
           setTimeout(() => window.location.reload(), 1000);
+          setTimeout(() => this.router.navigate(['/dashboard']), 3000);
           return this.refreshUserData(user);
         })
       )

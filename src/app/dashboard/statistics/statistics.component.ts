@@ -161,6 +161,11 @@ export class StatisticsComponent implements OnInit, OnDestroy {
 
   getUserTasks() {
     const tasks: UserTask[] = Object.values(this.userTasks);
+    tasks.forEach((num, index) => {
+      if (typeof num === 'string') {
+        tasks.splice(index, 1);
+      }
+    });
     if (tasks.length > 20) {
       tasks.slice(0, 19);
     }
