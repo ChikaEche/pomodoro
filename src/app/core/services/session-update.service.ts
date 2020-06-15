@@ -52,13 +52,16 @@ export class SessionUpdateService {
     this.userSession.monthlySession[`${month}`] = ++this.userSession
       .monthlySession[`${month}`];
     try {
-      await this.afs.doc(`user-sessions/${this.userId}`).set(this.userSession);
+      await this.afs
+        .doc(`user-sessions/${this.userId}`)
+        .set(this.userSession, { merge: true });
     } catch (error) {
       console.log('cannot update session', error);
     }
   }
 
   async createSession(uid: string) {
+    weeklySessionData.userId = uid;
     try {
       await this.afs
         .doc(`user-sessions/${uid}`)

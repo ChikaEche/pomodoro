@@ -22,6 +22,7 @@ export const weeklySessionData = {
     November: 0,
     December: 0,
   },
+  userId: '',
 };
 
 export const daysOfTheWeek = [

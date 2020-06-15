@@ -4,4 +4,5 @@ export interface Configuration {
   longBreakInterval: number;
   autoplay: boolean;
   additionalBreakTime: number;
+  userId?: string;
 }

@@ -17,15 +17,17 @@ export class CreateConfigService {
     this.config$ = this.afAuth.authState.pipe(
       switchMap((user) => {
         return this.afs
-          .doc<Configuration>(`configuration/${user.uid}`)
+          .doc<Configuration>(`configurations/${user.uid}`)
           .valueChanges();
       })
     );
   }
 
   async createConfig(uid: string) {
+    const defaultConfig = defaultConfiguration;
+    defaultConfig.userId = uid;
     try {
-      await this.afs.doc(`configuration/${uid}`).set(defaultConfiguration);
+      await this.afs.doc(`configurations/${uid}`).set(defaultConfiguration);
     } catch {
       console.log('cannot create default config');
     }
@@ -33,7 +35,7 @@ export class CreateConfigService {
 
   checkExistingConfig(uid: string) {
     this.afs
-      .doc(`configuration/${uid}`)
+      .doc(`configurations/${uid}`)
       .valueChanges()
       .pipe(
         take(1),

@@ -60,7 +60,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
       autoplay: this.autoPlay,
       additionalBreakTime: this.settings.get('additionalBreak').value * 60,
     };
-    this.afs.doc(`configuration/${this.uid}`).set(this.configUpdate);
+    this.afs
+      .doc(`configurations/${this.uid}`)
+      .set(this.configUpdate, { merge: true });
   }
 
   ngOnDestroy() {

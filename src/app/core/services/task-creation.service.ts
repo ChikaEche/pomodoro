@@ -94,6 +94,7 @@ export class TaskCreationService {
           `${task}`
         ]['sessionsCompleted'];
       }
+      this.addedTask['userId'] = this.userId;
 
       this.afs
         .doc(`user-tasks/${this.userId}`)
