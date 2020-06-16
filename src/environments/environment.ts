@@ -5,14 +5,14 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyAkRZLbArC4u_BAF_7KUKMlaVHUVj-nBls',
-    authDomain: 'logintest-e3ef5.firebaseapp.com',
-    databaseURL: 'https://logintest-e3ef5.firebaseio.com',
-    projectId: 'logintest-e3ef5',
-    storageBucket: 'logintest-e3ef5.appspot.com',
-    messagingSenderId: '325045362145',
-    appId: '1:325045362145:web:81cd1d1118d6831d3fc6a0',
-    measurementId: 'G-TMMV4DJQCN',
+    apiKey: 'AIzaSyBLGnOC8CUQKhcc6BU-g0aYKqwe-auvq_A',
+    authDomain: 'pomodoro-test-a8884.firebaseapp.com',
+    databaseURL: 'https://pomodoro-test-a8884.firebaseio.com',
+    projectId: 'pomodoro-test-a8884',
+    storageBucket: 'pomodoro-test-a8884.appspot.com',
+    messagingSenderId: '910681681808',
+    appId: '1:910681681808:web:82043efac4b3639f95cd15',
+    measurementId: 'G-FN4J5RRQ90',
   },
 };
 
