@@ -7,72 +7,7 @@
         onerror="this.src='../assets/contact.PNG'"
       />
     </div>
-    <p>{{ userProfile.displayName }}</p>
-    <div class="account-reference">
-      <p (click)="profileStateToggle('manage-account')" class="manage-account">
-        Manage my account
-      </p>
-      <p (click)="profileStateToggle('delete')" class="manage-account">
-        Delete my account
-      </p>
-    </div>
-  </div>
-  <div class="option__wrapper">
-    <div *ngIf="profileState === 'manage-account'" class="profile">
-      <form [formGroup]="profile">
-        <div class="name form-content">
-          <p class="form-name">Name</p>
-          <mat-form-field class="form" appearance="outline">
-            <input
-              matInput
-              formControlName="name"
-              [value]="userProfile.displayName"
-            />
-          </mat-form-field>
-        </div>
-        <div class="email form-content">
-          <p class="form-name">Email</p>
-          <mat-form-field class="form" appearance="outline">
-            <input matInput type="email" formControlName="email" />
-          </mat-form-field>
-        </div>
-      </form>
-      <button (click)="updateName()" mat-button color="primary">
-        Update account
-      </button>
-    </div>
-    <div *ngIf="profileState === 'delete'" class="profile">
-      <form [formGroup]="userDelete">
-        <div class="name form-content">
-          <p>Hi, {{ userProfile.displayName }}</p>
-          <p>Thank you for using Pomodoro. It's sad saying goodbye</p>
-          <p>
-            Please tell us the reason why you want to delete your accout to help
-            improve Pomodoro
-          </p>
-          <mat-form-field class="form" appearance="outline">
-            <input matInput formControlName="reason" />
-            <mat-error>Reason is required</mat-error>
-          </mat-form-field>
-        </div>
-      </form>
-      <div class="delete">
-        <button
-          [disabled]="userDelete.invalid"
-          (click)="deleteUser()"
-          mat-raised-button
-          color="primary"
-        >
-          Delete account
-        </button>
-        <button
-          (click)="profileStateToggle('manage-account')"
-          mat-raised-button
-          color="primary"
-        >
-          Cancel
-        </button>
-      </div>
-    </div>
+    <h3>{{ userProfile.displayName }}</h3>
+    <h3>{{ userProfile.email }}</h3>
   </div>
 </div>
