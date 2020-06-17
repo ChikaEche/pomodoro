@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  OnDestroy,
+  ViewEncapsulation,
+} from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointService } from '../../../core/services/breakpoint.service';
 import { Observable, Subject } from 'rxjs';
@@ -52,7 +58,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   }
 
   openSnackBar(message: string) {
-    this._snackBar.open(message, 'close', {
+    this._snackBar.open(message, '', {
       duration: 4000,
       verticalPosition: this.verticalPosition,
     });

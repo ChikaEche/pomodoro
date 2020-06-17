@@ -19,6 +19,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from './components/footer/footer.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const modules = [
   CommonModule,
@@ -37,6 +38,7 @@ const modules = [
   MatSidenavModule,
   RouterModule,
   MatSnackBarModule,
+  MatTooltipModule,
 ];
 
 const declarations = [
