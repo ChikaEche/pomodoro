@@ -35,6 +35,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
         {
           ticks: {
             suggestedMin: 0,
+            stepSize: 100,
           },
         },
       ],
@@ -62,6 +63,16 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   lineChartLabels = [];
   lineChartOptions = {
     responsive: true,
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            suggestedMin: 0,
+            stepSize: 100,
+          },
+        },
+      ],
+    },
   };
 
   dougnnutChartData = [

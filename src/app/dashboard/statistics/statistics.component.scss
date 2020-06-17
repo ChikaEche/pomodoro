@@ -32,6 +32,10 @@
   padding: 15px;
 }
 
+.small-screen-chart {
+  height: 100%;
+}
+
 @media screen and (min-width: 1020px) and (max-width: 1050px) {
   .bar-chart__container,
   .line-chart__container {

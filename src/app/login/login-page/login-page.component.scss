@@ -1,9 +1,11 @@
 .login__container {
-  height: 100vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 
 .login__wrap,
@@ -15,6 +17,7 @@
   display: inherit;
   flex-direction: inherit;
   width: 40vw;
+  overflow: hidden;
 }
 
 .login__wrap-small {
@@ -27,6 +30,10 @@
 
 .form-field-small {
   width: 100%;
+}
+
+form {
+  margin: 5px;
 }
 
 .google-login {
@@ -61,7 +68,7 @@ a {
 }
 
 button {
-  margin-right: 5px;
+  margin: 5px;
 }
 
 @media screen and (min-width: 1020px) and (max-width: 1050px) {

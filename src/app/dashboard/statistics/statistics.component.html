@@ -2,6 +2,7 @@
   <div [ngClass]="[barChartSmall, barChartNormal]">
     <p>Weekly Sessions Statistics</p>
     <canvas
+      class="small-screen-chart"
       baseChart
       [datasets]="barChartData"
       [labels]="barChartLabels"
@@ -14,6 +15,7 @@
   <div [ngClass]="[lineChartSmall, lineChartNormal]">
     <p>Monthly Sessions Statistics</p>
     <canvas
+      class="small-screen-chart"
       baseChart
       [datasets]="lineChartData"
       [labels]="lineChartLabels"
@@ -27,6 +29,7 @@
     <p>Top 20 Tasks</p>
     <p>{{ taskExistence }}</p>
     <canvas
+      class="small-screen-chart"
       baseChart
       [datasets]="dougnnutChartData"
       [labels]="doughnutChartLabels"

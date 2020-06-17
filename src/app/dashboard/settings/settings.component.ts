@@ -1,14 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import defaultConfiguration from '../../timer-config/default-config';
-import { TimeTrackerService } from 'src/app/core/services/time-tracker.service';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { Configuration } from 'src/app/shared/interfaces/configuration';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import { CreateConfigService } from 'src/app/core/services/create-config.service';
 import { tap, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { ErrorMessagesService } from 'src/app/core/services/error-messages.service';
+import {
+  MatSnackBar,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-settings',
@@ -21,6 +24,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
   defaultConfig = defaultConfiguration;
   autoPlay = this.defaultConfig.autoplay;
   destroy$ = new Subject<void>();
+  errorMessage = '';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   validation = [Validators.required, Validators.pattern('^[1-9][0-9]*$')];
   settings = new FormGroup({
@@ -32,7 +37,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly afs: AngularFirestore,
-    private readonly createConfigService: CreateConfigService
+    private readonly createConfigService: CreateConfigService,
+    private readonly errorMessageService: ErrorMessagesService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -50,6 +57,23 @@ export class SettingsComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe({ error: (err) => console.log('cannot get config') });
+
+    this.errorMessageService.error$
+      .pipe(
+        takeUntil(this.destroy$),
+        tap((message) => {
+          this.errorMessage = message;
+          this.openSnackBar(message);
+        })
+      )
+      .subscribe({ error: (err) => console.log(err) });
+  }
+
+  openSnackBar(message: string) {
+    this._snackBar.open(message, 'close', {
+      duration: 4000,
+      verticalPosition: this.verticalPosition,
+    });
   }
 
   apply() {
@@ -63,6 +87,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.afs
       .doc(`configurations/${this.uid}`)
       .set(this.configUpdate, { merge: true });
+    this.errorMessageService.errorMessage('Changes saved');
   }
 
   ngOnDestroy() {
