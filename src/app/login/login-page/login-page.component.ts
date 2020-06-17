@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -7,17 +7,13 @@ import { Subject } from 'rxjs';
 import { tap, takeUntil } from 'rxjs/operators';
 import { ProfileUpdateService } from 'src/app/core/services/profile-update.service';
 import { ErrorMessagesService } from 'src/app/core/services/error-messages.service';
-import {
-  MatSnackBar,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss'],
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent implements OnInit, OnDestroy {
   passwordLoginToggle = true;
   state;
   isSmall = false;
@@ -26,8 +22,6 @@ export class LoginPageComponent implements OnInit {
   loginWrapNormal = 'login__wrap';
   loginWrapSmall = '';
   destroy$ = new Subject<void>();
-  errorMessage = '';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   pswd = new FormGroup({
     email: new FormControl('', [Validators.required]),
@@ -47,8 +41,7 @@ export class LoginPageComponent implements OnInit {
     private authService: AuthService,
     private breakPointService: BreakpointService,
     private profileUpdateService: ProfileUpdateService,
-    private readonly errorMessageService: ErrorMessagesService,
-    private _snackBar: MatSnackBar
+    private readonly errorMessageService: ErrorMessagesService
   ) {
     this.breakPointService.isPalm$
       .pipe(
@@ -69,24 +62,7 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-    this.errorMessageService.error$
-      .pipe(
-        takeUntil(this.destroy$),
-        tap((message) => {
-          this.errorMessage = message;
-          this.openSnackBar(message);
-        })
-      )
-      .subscribe({ error: (err) => console.log(err) });
-  }
-
-  openSnackBar(message: string) {
-    this._snackBar.open(message, 'close', {
-      duration: 4000,
-      verticalPosition: this.verticalPosition,
-    });
-  }
+  ngOnInit() {}
 
   onScreenResize() {
     if (this.isSmall) {
@@ -139,7 +115,14 @@ export class LoginPageComponent implements OnInit {
 
   resetPassword() {
     this.profileUpdateService.passwordResetEmail(this.pswd.get('email').value);
-    this.openSnackBar('A reset link has been sent to this email');
+    this.errorMessageService.errorMessage(
+      'A reset link has been sent to this email'
+    );
     this.passwordLoginToggle = true;
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

@@ -8,10 +8,6 @@ import { CreateConfigService } from 'src/app/core/services/create-config.service
 import { tap, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ErrorMessagesService } from 'src/app/core/services/error-messages.service';
-import {
-  MatSnackBar,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-settings',
@@ -24,8 +20,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
   defaultConfig = defaultConfiguration;
   autoPlay = this.defaultConfig.autoplay;
   destroy$ = new Subject<void>();
-  errorMessage = '';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   validation = [Validators.required, Validators.pattern('^[1-9][0-9]*$')];
   settings = new FormGroup({
@@ -38,8 +32,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   constructor(
     private readonly afs: AngularFirestore,
     private readonly createConfigService: CreateConfigService,
-    private readonly errorMessageService: ErrorMessagesService,
-    private _snackBar: MatSnackBar
+    private readonly errorMessageService: ErrorMessagesService
   ) {}
 
   ngOnInit() {
@@ -57,23 +50,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe({ error: (err) => console.log('cannot get config') });
-
-    this.errorMessageService.error$
-      .pipe(
-        takeUntil(this.destroy$),
-        tap((message) => {
-          this.errorMessage = message;
-          this.openSnackBar(message);
-        })
-      )
-      .subscribe({ error: (err) => console.log(err) });
-  }
-
-  openSnackBar(message: string) {
-    this._snackBar.open(message, 'close', {
-      duration: 4000,
-      verticalPosition: this.verticalPosition,
-    });
   }
 
   apply() {
