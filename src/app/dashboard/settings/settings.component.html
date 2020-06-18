@@ -2,16 +2,7 @@
   <form [formGroup]="settings">
     <h1>Settings</h1>
     <div class="session">
-      <p class="form_name">
-        Session length
-        <mat-icon
-          matTooltip="Time duration for each session"
-          matTooltipPosition="below"
-          matTooltipHideDelay="1000"
-          matTooltipClass="tool-tip"
-          >help_outline</mat-icon
-        >
-      </p>
+      <p class="form_name">Session length</p>
       <mat-form-field appearance="outline">
         <mat-label> Session length(minutes)</mat-label>
         <input matInput formControlName="sessionLength" maxlength="2" />
@@ -20,16 +11,7 @@
     </div>
 
     <div class="break">
-      <p class="form_name">
-        Break length
-        <mat-icon
-          matTooltip="Time duration for break time"
-          matTooltipPosition="below"
-          matTooltipHideDelay="1000"
-          matTooltipClass="tool-tip"
-          >help_outline</mat-icon
-        >
-      </p>
+      <p class="form_name">Break length</p>
       <mat-form-field appearance="outline" color="primary">
         <mat-label> Break length(minutes)</mat-label>
         <input matInput formControlName="breakLength" maxlength="2" />
@@ -38,16 +20,7 @@
     </div>
 
     <div class="additional_break">
-      <p class="form_name">
-        Additional break length
-        <mat-icon
-          matTooltip="Additional time added to the break time during long break"
-          matTooltipPosition="below"
-          matTooltipHideDelay="1000"
-          matTooltipClass="tool-tip"
-          >help_outline</mat-icon
-        >
-      </p>
+      <p class="form_name">Additional break length</p>
       <mat-form-field appearance="outline">
         <mat-label> Additional break length(minutes)</mat-label>
         <input matInput formControlName="additionalBreak" maxlength="2" />
@@ -56,16 +29,7 @@
     </div>
 
     <div class="long_break_interval">
-      <p class="form_name">
-        Long break interval
-        <mat-icon
-          matTooltip="Number of sessions before a long break"
-          matTooltipPosition="below"
-          matTooltipHideDelay="1000"
-          matTooltipClass="tool-tip"
-          >help_outline</mat-icon
-        >
-      </p>
+      <p class="form_name">Long break interval</p>
       <mat-form-field appearance="outline">
         <mat-label> Long break interval</mat-label>
         <input matInput formControlName="longBreakInterval" maxlength="1" />
@@ -74,16 +38,7 @@
     </div>
   </form>
   <div class="autoplay">
-    <p class="form_name">
-      Auto play
-      <mat-icon
-        matTooltip="This determines if the timer toggles between session and break time automatically"
-        matTooltipPosition="below"
-        matTooltipClass="tool-tip"
-        matTooltipHideDelay="1000"
-        >help_outline</mat-icon
-      >
-    </p>
+    <p class="form_name">Auto play</p>
     <mat-slide-toggle [(ngModel)]="autoPlay"></mat-slide-toggle>
   </div>
   <div>

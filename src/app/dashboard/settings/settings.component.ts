@@ -13,7 +13,6 @@ import { ErrorMessagesService } from 'src/app/core/services/error-messages.servi
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class SettingsComponent implements OnInit, OnDestroy {
   configUpdate: Configuration;

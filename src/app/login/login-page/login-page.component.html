@@ -82,7 +82,7 @@
     </button>
 
     <p (click)="stateToggle('sign up')" *ngIf="state === 'login'">
-      Don't have an accoutn? <a>Sign up now</a>
+      Don't have an account? <a>Sign up now</a>
     </p>
     <p *ngIf="state === 'login'">
       Forgot password? <a (click)="passwordResetToggle()">Reset password</a>
