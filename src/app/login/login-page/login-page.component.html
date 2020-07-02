@@ -1,0 +1,102 @@
+<div class="login__container">
+  <div class="password-reset" *ngIf="passwordLoginToggle === false">
+    <form [formGroup]="pswd">
+      <p class="form-name">Email</p>
+      <mat-form-field
+        [ngClass]="[formField, formFieldSmall]"
+        appearance="outline"
+      >
+        <input type="email" matInput formControlName="email" />
+        <mat-error>Email is required</mat-error>
+      </mat-form-field>
+    </form>
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="resetPassword()"
+      [disabled]="pswd.get('email').invalid"
+    >
+      Reset
+    </button>
+    <a (click)="passwordResetToggle()">Back to login</a>
+  </div>
+  <div
+    [ngClass]="[loginWrapNormal, loginWrapSmall]"
+    *ngIf="passwordLoginToggle === true"
+  >
+    <form [formGroup]="login">
+      <div class="fullname" *ngIf="state === 'sign up'">
+        <p class="form-name">Full name</p>
+        <mat-form-field
+          [ngClass]="[formField, formFieldSmall]"
+          appearance="outline"
+        >
+          <input matInput formControlName="fullName" />
+          <mat-error>Name is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="email">
+        <p class="form-name">Email</p>
+        <mat-form-field
+          [ngClass]="[formField, formFieldSmall]"
+          appearance="outline"
+        >
+          <input type="email" class="input" matInput formControlName="email" />
+          <mat-error>Valid Email is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="password">
+        <p class="form-name">Password</p>
+        <mat-form-field
+          [ngClass]="[formField, formFieldSmall]"
+          appearance="outline"
+        >
+          <input matInput type="password" formControlName="password" />
+          <mat-error>
+            Password is required and must be at least six characters
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </form>
+
+    <button
+      *ngIf="state === 'login'"
+      mat-raised-button
+      color="accent"
+      (click)="userLogin()"
+      [disabled]="login.get('email').invalid"
+    >
+      Login
+    </button>
+
+    <button
+      *ngIf="state === 'sign up'"
+      mat-raised-button
+      color="accent"
+      (click)="emailAndPasswordSignUp()"
+      [disabled]="login.invalid"
+    >
+      Sign Up
+    </button>
+
+    <p (click)="stateToggle('sign up')" *ngIf="state === 'login'">
+      Don't have an account? <a>Sign up now</a>
+    </p>
+    <p *ngIf="state === 'login'">
+      Forgot password? <a (click)="passwordResetToggle()">Reset password</a>
+    </p>
+
+    <p (click)="stateToggle('login')" *ngIf="state === 'sign up'">
+      Already have an account? <a>Login</a>
+    </p>
+    <div (click)="googleLogin()" class="google-login">
+      <div class="google">
+        <img src="../assets/google.svg" />
+        <p>Sign In with Google</p>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

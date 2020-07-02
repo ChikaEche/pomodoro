@@ -1,0 +1,66 @@
+.profile__container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 80vh;
+}
+
+.account__wrapper,
+.account-reference,
+.profile-picture {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.picture {
+  border-radius: 10px;
+  width: 50%;
+}
+
+.manage-account {
+  border: solid;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 1px;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.option__wrapper,
+.profile {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.option__wrapper {
+  width: 55%;
+}
+
+.account__wrapper {
+  width: 40;
+}
+
+.form {
+  width: 100%;
+}
+
+.form-content {
+  width: 50vw;
+}
+
+.delete {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  margin-right: 10px;
+}

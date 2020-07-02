@@ -7,6 +7,21 @@
 
 p {
   display: inline-block;
-  width: 200px;
-  padding: 30px;
+  width: 250px;
+  padding: 20px;
+}
+
+button {
+  margin-top: 40px !important;
+}
+
+mat-icon {
+  cursor: pointer;
+}
+
+.tool-tip {
+  height: auto;
+  line-height: 15px;
+  background-color: #e71d36;
+  width: auto;
 }

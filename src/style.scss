@@ -21,4 +21,10 @@ $pomodoro-app-theme: mat-light-theme(
 
 body {
   margin: 0;
+  line-height: 1px;
+}
+
+a {
+  color: #e71d36;
+  cursor: pointer;
 }

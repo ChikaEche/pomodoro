@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: 'AIzaSyBLGnOC8CUQKhcc6BU-g0aYKqwe-auvq_A',
+    authDomain: 'pomodoro-test-a8884.firebaseapp.com',
+    databaseURL: 'https://pomodoro-test-a8884.firebaseio.com',
+    projectId: 'pomodoro-test-a8884',
+    storageBucket: 'pomodoro-test-a8884.appspot.com',
+    messagingSenderId: '910681681808',
+    appId: '1:910681681808:web:82043efac4b3639f95cd15',
+    measurementId: 'G-FN4J5RRQ90',
+  },
 };
 
 /*

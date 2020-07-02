@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
+  templateUrl: './tabs.component.html',
+  styleUrls: ['./tabs.component.scss'],
 })
 export class DashboardComponent {
   constructor() {}

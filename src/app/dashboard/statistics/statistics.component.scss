@@ -1,5 +1,44 @@
-.bar-chart__container {
+.statistics__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 20px;
+}
+
+.bar-chart__container,
+.line-chart__container {
+  padding: 20px;
+  margin: 20px;
+  width: 40vw;
+  text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+
+.doughnut-chart__container {
+  width: 60vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.small-screen {
+  text-align: center;
+  width: 100%;
+  padding: 15px;
+}
+
+.small-screen-chart {
+  height: 100%;
+}
+
+@media screen and (min-width: 1020px) and (max-width: 1050px) {
+  .bar-chart__container,
+  .line-chart__container {
+    width: 100%;
+  }
 }

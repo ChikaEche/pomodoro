@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Timer } from 'src/app/shared/timer';
+import { Timer } from 'src/app/shared/lib/timer';
 import { tap, takeUntil } from 'rxjs/operators';
-import defaultConfiguration from 'src/app/configurations/default-config';
 import { Subject } from 'rxjs';
+import { CreateConfigService } from './create-config.service';
+import { Configuration } from 'src/app/shared/interfaces/configuration';
+import { SessionUpdateService } from './session-update.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,27 +14,40 @@ export class TimeTrackerService {
   statistics$ = new Subject<number[]>();
   destroy$ = new Subject<void>();
   configurationChange$ = new Subject<void>();
-  configuration = {
-    sessionDuration: defaultConfiguration.sessionTime,
-    breakDuration: defaultConfiguration.breakTime,
-    additionalBreak: defaultConfiguration.additionalBreakTime,
-    longBreakInterval: defaultConfiguration.longBreakInterval,
-    autoPlay: defaultConfiguration.autoplay,
-  };
+  userConfig: Configuration;
   sessionCount = 0;
   breakCount = 0;
   timer = 0;
   currentState = 'session';
+  initialAssignment = 'initial';
 
-  constructor() {
+  constructor(
+    private readonly sessionUpdateService: SessionUpdateService,
+    private readonly createConfigService: CreateConfigService
+  ) {
+    this.createConfigService.config$
+      .pipe(
+        tap((config) => {
+          this.userConfig = config;
+          if (this.initialAssignment === 'initial') {
+            this.timer = this.userConfig.sessionTime;
+            this.timerClass.seconds = this.timer;
+          }
+          this.initialAssignment = 'assigned';
+          this.configChange();
+        })
+      )
+      .subscribe({ error: (err) => console.log('cannot get config') });
+
     this.timerClass = new Timer();
-    this.timer = this.configuration.sessionDuration;
-    this.timerClass.seconds = this.timer;
     this.timerClass.countDownEnd$
       .pipe(
         takeUntil(this.destroy$),
-        tap(() => this.stateToggle()),
-        tap(() => this.statistics$.next([this.sessionCount, this.breakCount]))
+        tap(() => {
+          this.stateToggle();
+          this.statistics$.next([this.sessionCount, this.breakCount]);
+          this.sessionUpdateService.updateSession(this.sessionCount);
+        })
       )
       .subscribe({ error: (err) => console.error('error occured') });
   }
@@ -44,23 +59,23 @@ export class TimeTrackerService {
   stateToggle() {
     if (this.currentState === 'session') {
       ++this.sessionCount;
-      if (this.sessionCount % this.configuration.longBreakInterval === 0) {
+      if (this.sessionCount % this.userConfig.longBreakInterval === 0) {
         this.timer =
-          this.configuration.breakDuration + this.configuration.additionalBreak;
+          this.userConfig.breakTime + this.userConfig.additionalBreakTime;
         this.timerClass.seconds = this.timer;
       } else {
-        this.timer = this.configuration.breakDuration;
+        this.timer = this.userConfig.breakTime;
         this.timerClass.seconds = this.timer;
       }
       this.currentState = 'break';
     } else if (this.currentState === 'break') {
       ++this.breakCount;
-      this.timer = this.configuration.sessionDuration;
+      this.timer = this.userConfig.sessionTime;
       this.timerClass.seconds = this.timer;
       this.currentState = 'session';
     }
     // tslint:disable-next-line: no-unused-expression
-    this.configuration.autoPlay ? this.timerStart() : '';
+    this.userConfig.autoplay ? this.timerStart() : '';
   }
 
   timerPause() {
@@ -73,37 +88,32 @@ export class TimeTrackerService {
     this.timerPause();
   }
 
-  configChange(
-    session,
-    breakLength,
-    additionalBreak,
-    longBreakInterval,
-    autoPlay
-  ) {
-    this.configuration.sessionDuration = session;
-    this.configuration.breakDuration = breakLength;
-    this.configuration.additionalBreak = additionalBreak;
-    this.configuration.longBreakInterval = longBreakInterval;
-    this.configuration.autoPlay = autoPlay;
-
+  configChange() {
     if (this.currentState === 'break') {
       if (this.sessionCount === 0) {
-        this.timer = this.configuration.breakDuration;
-      } else if (
-        this.sessionCount % this.configuration.longBreakInterval ===
-        0
-      ) {
+        this.timer = this.userConfig.breakTime;
+      } else if (this.sessionCount % this.userConfig.longBreakInterval === 0) {
         this.timer =
-          +this.configuration.breakDuration +
-          +this.configuration.additionalBreak;
+          +this.userConfig.breakTime + +this.userConfig.additionalBreakTime;
       } else {
-        this.timer = this.configuration.breakDuration;
+        this.timer = this.userConfig.breakTime;
       }
     } else if (this.currentState === 'session') {
-      this.timer = this.configuration.sessionDuration;
+      this.timer = this.userConfig.sessionTime;
     }
     this.configurationChange$.next();
     this.timerRestart();
+  }
+
+  onDialogOpen() {
+    if (this.currentState === 'break') {
+      this.currentState = 'session';
+    }
+    this.timer = this.userConfig.sessionTime;
+    this.timerClass.seconds = this.timer;
+    this.sessionCount = 0;
+    this.breakCount = 0;
+    this.timerPause();
   }
 
   onDestroy() {

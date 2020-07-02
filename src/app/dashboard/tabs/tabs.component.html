@@ -1,4 +1,9 @@
-<mat-tab-group>
+<mat-tab-group backgroundColor="primary" color="accent">
+  <mat-tab label="Profile">
+    <ng-template matTabContent>
+      <app-profile></app-profile>
+    </ng-template>
+  </mat-tab>
   <mat-tab label="Pomodoro">
     <app-timer></app-timer>
   </mat-tab>

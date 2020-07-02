@@ -1,0 +1,13 @@
+<div *ngIf="userProfile" class="profile__container">
+  <div class="account__wrapper">
+    <div class="profile-picture">
+      <img
+        class="picture"
+        [src]="userProfile.photoURL"
+        onerror="this.src='../assets/contact.PNG'"
+      />
+    </div>
+    <h3>{{ userProfile.displayName }}</h3>
+    <h3>{{ userProfile.email }}</h3>
+  </div>
+</div>

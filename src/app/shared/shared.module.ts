@@ -13,6 +13,13 @@ import { MatCardModule } from '@angular/material/card';
 import { ChartsModule } from 'ng2-charts';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TaskDialogService } from '../core/services/task-dialog.service';
+import { MinutesConverterPipe } from '../shared/pipes/minutes-converter.pipe';
+import { SecondsConverterPipe } from 'src/app/shared/pipes/seconds-converter.pipe';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { RouterModule } from '@angular/router';
+import { FooterComponent } from './components/footer/footer.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const modules = [
   CommonModule,
@@ -28,12 +35,23 @@ const modules = [
   MatCardModule,
   ChartsModule,
   MatDialogModule,
+  MatSidenavModule,
+  RouterModule,
+  MatSnackBarModule,
+  MatTooltipModule,
+];
+
+const declarations = [
+  MinutesConverterPipe,
+  SecondsConverterPipe,
+  LayoutComponent,
+  FooterComponent,
 ];
 
 @NgModule({
-  declarations: [LayoutComponent],
+  declarations: [...declarations],
   imports: [...modules],
-  exports: [...modules],
+  exports: [...modules, ...declarations],
   providers: [TaskDialogService],
 })
 export class SharedModule {}

@@ -1,12 +1,6 @@
-export interface configuration {
-  sessionTime: number;
-  breakTime: number;
-  longBreakInterval: number;
-  autoplay: boolean;
-  additionalBreakTime: number;
-}
+import { Configuration } from 'src/app/shared/interfaces/configuration';
 
-const defaultConfiguration: configuration = {
+const defaultConfiguration: Configuration = {
   sessionTime: 1500,
   breakTime: 600,
   longBreakInterval: 4,

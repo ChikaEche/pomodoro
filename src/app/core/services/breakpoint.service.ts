@@ -16,7 +16,7 @@ export class BreakpointService {
 
   constructor(private readonly breakpointObserver: BreakpointObserver) {
     this.isPalm$ = this.breakpointObserver
-      .observe([Breakpoints.Handset, Breakpoints.Small])
+      .observe([Breakpoints.Handset, Breakpoints.Small, Breakpoints.Tablet])
       .pipe(
         map((state: BreakpointState) => state.matches),
         shareReplay()

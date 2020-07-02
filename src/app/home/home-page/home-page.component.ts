@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BreakpointService } from 'src/app/core/services/breakpoint.service';
-import { Observable } from 'rxjs';
-import { tap, map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 import { screenResize } from 'src/assets/screen-resize';
 
 @Component({
@@ -9,9 +9,10 @@ import { screenResize } from 'src/assets/screen-resize';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent implements OnInit, OnDestroy {
   constructor(private breakPoint: BreakpointService) {}
   breakpoint: Observable<boolean>;
+  destroy$ = new Subject<void>();
 
   isSmall = false;
   screen = { ...screenResize };
@@ -20,19 +21,18 @@ export class HomePageComponent implements OnInit {
     this.breakpoint = this.breakPoint.isPalm$;
     this.breakpoint
       .pipe(
+        takeUntil(this.destroy$),
         map((x) => {
-          console.log(x);
           this.isSmall = x;
           this.onScreenResize();
         })
       )
       .subscribe();
+    window.localStorage.setItem('email', 'chiks');
   }
 
   onScreenResize() {
-    console.log('en');
     if (this.isSmall) {
-      console.log('tr');
       this.screen.chartResize = 'chart-resize';
       this.screen.featureChartResize = 'feature-chart-resize';
       this.screen.featureChartDescResize = 'chart-desc';
@@ -53,5 +53,10 @@ export class HomePageComponent implements OnInit {
       this.screen.descriptionResize = '';
       this.screen.desktopResize = '';
     }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

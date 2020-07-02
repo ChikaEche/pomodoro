@@ -1,5 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {
+  AngularFireAuthGuard,
+  redirectUnauthorizedTo,
+  canActivate,
+} from '@angular/fire/auth-guard';
+import { AuthGuardGuard } from './core/guard/auth-guard.guard';
+import { map } from 'rxjs/operators';
+import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
+
+const redirectToLogin = () => redirectUnauthorizedTo(['/login']);
+const redirectToProfile = () => map((user) => (user ? ['dashboard'] : true));
 
 const routes: Routes = [
   {
@@ -10,6 +21,25 @@ const routes: Routes = [
     path: 'dashboard',
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+    ...canActivate(redirectToLogin),
+    canActivate: [AuthGuardGuard],
+  },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./login/login.module').then((m) => m.LoginModule),
+    canActivate: [AngularFireAuthGuard],
+    data: {
+      authGuardPipe: redirectToProfile,
+    },
+  },
+  {
+    path: 'password-reset',
+    component: PasswordResetComponent,
+  },
+  {
+    path: '**',
+    redirectTo: '',
   },
 ];
 

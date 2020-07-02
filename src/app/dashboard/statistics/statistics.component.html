@@ -1,12 +1,41 @@
-<div class="bar-chart__container">
-  <div class="chart">
+<div class="statistics__container">
+  <div [ngClass]="[barChartSmall, barChartNormal]">
+    <p>Weekly Sessions Statistics</p>
     <canvas
+      class="small-screen-chart"
       baseChart
       [datasets]="barChartData"
       [labels]="barChartLabels"
       [legend]="barChartLegend"
       [chartType]="barChartType"
       [options]="barChartOptions"
+    >
+    </canvas>
+  </div>
+  <div [ngClass]="[lineChartSmall, lineChartNormal]">
+    <p>Monthly Sessions Statistics</p>
+    <canvas
+      class="small-screen-chart"
+      baseChart
+      [datasets]="lineChartData"
+      [labels]="lineChartLabels"
+      [legend]="lineChartLegend"
+      [chartType]="lineChartType"
+      [options]="lineChartOptions"
+    >
+    </canvas>
+  </div>
+  <div [ngClass]="[doughnutSmall, doughnutNormal]">
+    <p>Top 20 Tasks</p>
+    <p>{{ taskExistence }}</p>
+    <canvas
+      class="small-screen-chart"
+      baseChart
+      [datasets]="dougnnutChartData"
+      [labels]="doughnutChartLabels"
+      [legend]="dougnnutChartLegend"
+      [chartType]="dougnnutChartType"
+      [options]="dougnnutChartOptions"
     >
     </canvas>
   </div>
